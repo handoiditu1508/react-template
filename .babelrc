@@ -1,6 +1,14 @@
 {
   "plugins": [
     [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src"
+        }
+      }
+    ],
+    [
       "babel-plugin-direct-import",
       {
         "modules": [
