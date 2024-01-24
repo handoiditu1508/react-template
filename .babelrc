@@ -5,7 +5,8 @@
       {
         "modules": [
           "@mui/material",
-          "@mui/icons-material"
+          "@mui/icons-material",
+          "@mui/lab"
         ]
       }
     ]
