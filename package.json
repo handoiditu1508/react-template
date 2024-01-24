@@ -59,6 +59,7 @@
     "customize-cra": "^1.0.0",
     "env-cmd": "^10.1.0",
     "react-app-rewired": "^2.2.1",
+    "redux-logger": "^3.0.6",
     "sass": "^1.70.0",
     "serve": "^14.2.1"
   }
