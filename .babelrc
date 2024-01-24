@@ -6,7 +6,8 @@
         "modules": [
           "@mui/material",
           "@mui/icons-material",
-          "@mui/lab"
+          "@mui/lab",
+          "@mui/x-data-grid"
         ]
       }
     ]
