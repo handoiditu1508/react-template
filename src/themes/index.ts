@@ -1,4 +1,4 @@
-import mainTheme from "./mainTheme";
+import { createMainTheme } from "./mainTheme";
 
-export { mainTheme };
+export { createMainTheme };
 
