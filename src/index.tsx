@@ -6,6 +6,7 @@ import App from "./App";
 import "./index.scss";
 import AppThemeProvider from "./providers/AppThemeProvider";
 import BreakpointsProvider from "./providers/BreakpointsProvider";
+import ConfirmationDialogProvider from "./providers/ConfirmationDialogProvider";
 import InfoProvider from "./providers/InfoProvider";
 import NotificationProvider from "./providers/NotificationProvider";
 import PaletteModeProvider from "./providers/PaletteModeProvider";
@@ -19,17 +20,19 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>{/* redux store */}
       <NotificationProvider>{/* control notification toasts */}
-        <InfoProvider>{/* info about style and environment changes */}
-          <PaletteModeProvider>{/* dark, light modes */}
-            <AppThemeProvider>{/* mui theme */}
-              <BreakpointsProvider>{/* breakpoints helper */}
-                <BrowserRouter>{/* react router */}
-                  <App />
-                </BrowserRouter>
-              </BreakpointsProvider>
-            </AppThemeProvider>
-          </PaletteModeProvider>
-        </InfoProvider>
+        <ConfirmationDialogProvider>{/* shared confirmation dialog */}
+          <InfoProvider>{/* info about style and environment changes */}
+            <PaletteModeProvider>{/* dark, light modes */}
+              <AppThemeProvider>{/* mui theme */}
+                <BreakpointsProvider>{/* breakpoints helper */}
+                  <BrowserRouter>{/* react router */}
+                    <App />
+                  </BrowserRouter>
+                </BreakpointsProvider>
+              </AppThemeProvider>
+            </PaletteModeProvider>
+          </InfoProvider>
+        </ConfirmationDialogProvider>
       </NotificationProvider>
     </Provider>
   </React.StrictMode>
