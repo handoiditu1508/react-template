@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.scss";
 import AppThemeProvider from "./providers/AppThemeProvider";
@@ -20,7 +21,9 @@ root.render(
         <PaletteModeProvider>{/* dark, light modes */}
           <AppThemeProvider>{/* mui theme */}
             <BreakpointsProvider>{/* breakpoints helper */}
-              <App />
+              <BrowserRouter>{/* react router */}
+                <App />
+              </BrowserRouter>
             </BreakpointsProvider>
           </AppThemeProvider>
         </PaletteModeProvider>
