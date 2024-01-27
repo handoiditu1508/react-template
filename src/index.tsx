@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import App from "./App";
 import "./index.scss";
 import AppThemeProvider from "./providers/AppThemeProvider";
+import BreakpointsProvider from "./providers/BreakpointsProvider";
 import PaletteModeProvider from "./providers/PaletteModeProvider";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
@@ -16,7 +17,9 @@ root.render(
     <Provider store={store}>{/* redux store */}
       <PaletteModeProvider>{/* dark, light modes */}
         <AppThemeProvider>{/* mui theme */}
-          <App />
+          <BreakpointsProvider>{/* breakpoints helper */}
+            <App />
+          </BreakpointsProvider>
         </AppThemeProvider>
       </PaletteModeProvider>
     </Provider>
