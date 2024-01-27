@@ -34,7 +34,7 @@
     "build": "env-cmd -f ./environments/production.env react-app-rewired build",
     "test": "env-cmd -f ./environments/test.env react-app-rewired test",
     "eject": "react-scripts eject",
-    "prod": "serve -s build",
+    "prod": "serve -s dist",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts src/",
     "lint:fix": "eslint --fix --ext .jsx,.js,.tsx,.ts src/"
   },
