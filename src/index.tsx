@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
 import "./index.scss";
+import PaletteModeProvider from "./providers/PaletteModeProvider";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import { mainTheme } from "./themes";
@@ -13,10 +14,12 @@ const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={mainTheme}>
-        <App />
-      </ThemeProvider>
+    <Provider store={store}>{/* redux store */}
+      <PaletteModeProvider>{/* dark, light modes */}
+        <ThemeProvider theme={mainTheme}>
+          <App />
+        </ThemeProvider>
+      </PaletteModeProvider>
     </Provider>
   </React.StrictMode>
 );
