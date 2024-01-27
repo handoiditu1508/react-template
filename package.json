@@ -40,12 +40,6 @@
     "lint": "eslint --ext .jsx,.js,.tsx,.ts src/",
     "lint:fix": "eslint --fix --ext .jsx,.js,.tsx,.ts src/"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
