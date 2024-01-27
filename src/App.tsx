@@ -1,4 +1,5 @@
 import "./App.scss";
+import { NotificationSnackbar } from "./providers/NotificationProvider";
 import AppRoutes from "./routes";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
       <AppRoutes />
+      <NotificationSnackbar />
     </>
   );
 }

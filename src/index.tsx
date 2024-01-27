@@ -7,6 +7,7 @@ import "./index.scss";
 import AppThemeProvider from "./providers/AppThemeProvider";
 import BreakpointsProvider from "./providers/BreakpointsProvider";
 import InfoProvider from "./providers/InfoProvider";
+import NotificationProvider from "./providers/NotificationProvider";
 import PaletteModeProvider from "./providers/PaletteModeProvider";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
@@ -17,17 +18,19 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>{/* redux store */}
-      <InfoProvider>{/* info about style and environment changes */}
-        <PaletteModeProvider>{/* dark, light modes */}
-          <AppThemeProvider>{/* mui theme */}
-            <BreakpointsProvider>{/* breakpoints helper */}
-              <BrowserRouter>{/* react router */}
-                <App />
-              </BrowserRouter>
-            </BreakpointsProvider>
-          </AppThemeProvider>
-        </PaletteModeProvider>
-      </InfoProvider>
+      <NotificationProvider>{/* control notification toasts */}
+        <InfoProvider>{/* info about style and environment changes */}
+          <PaletteModeProvider>{/* dark, light modes */}
+            <AppThemeProvider>{/* mui theme */}
+              <BreakpointsProvider>{/* breakpoints helper */}
+                <BrowserRouter>{/* react router */}
+                  <App />
+                </BrowserRouter>
+              </BreakpointsProvider>
+            </AppThemeProvider>
+          </PaletteModeProvider>
+        </InfoProvider>
+      </NotificationProvider>
     </Provider>
   </React.StrictMode>
 );
