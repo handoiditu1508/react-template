@@ -2,6 +2,7 @@ import { PaletteMode, Theme, ThemeOptions, alpha, createTheme } from "@mui/mater
 // When using TypeScript 4.x and above
 import type { } from "@mui/lab/themeAugmentation";
 // When using TypeScript 3.x and below
+import { smAndUpMediaQuery } from "@/common/BreakpointsHelpers";
 import ColorOption, { colorOptions } from "@/models/ColorOption";
 import "@mui/lab/themeAugmentation";
 import { grey } from "@mui/material/colors";
@@ -12,6 +13,12 @@ const normalGrey = grey[500];
 const darkGrey = grey[700];
 const scalingFactor = 8;
 const scrollbarSize = 10;
+const sidebarWidth = 260;
+const miniSidebarWidth = 80;
+const sidebarIconSize = 24;
+const sidebarLeftPadding = (miniSidebarWidth - sidebarIconSize) / 2;
+const headerHeight = 64;
+const xsHeaderHeight = 56;
 
 // default
 const defaultThemeOptions: ThemeOptions = {
@@ -34,6 +41,12 @@ const defaultThemeOptions: ThemeOptions = {
   constants: {
     scalingFactor,
     scrollbarSize,
+    sidebarWidth,
+    miniSidebarWidth,
+    sidebarIconSize,
+    sidebarLeftPadding,
+    headerHeight,
+    xsHeaderHeight,
   },
   mixins: {
     scrollbar: {
@@ -165,12 +178,63 @@ for (let paletteMode in themeOptionsDictionary) {
             elevation: 4,
           },
         },
+        styleOverrides: {
+          root: {
+            width: sidebarWidth,
+            whiteSpace: "nowrap",
+            boxSizing: "border-box",
+            overflowX: "hidden",
+          },
+          paper: {
+            width: sidebarWidth,
+            border: "none",
+            overflowX: "hidden",
+            ".MuiListItemButton-root": {
+              ".MuiListItemIcon-root:first-of-type": {
+                ".MuiSvgIcon-root": {
+                  fontSize: sidebarIconSize,
+                },
+              },
+            },
+            "> .MuiList-root": {
+              "> .MuiListItem-root": {
+                "> .MuiListItemButton-root": {
+                  paddingLeft: sidebarLeftPadding,
+                },
+              },
+            },
+            ".os-viewport": {
+              "> .MuiList-root": {
+                "> .MuiListItem-root": {
+                  "> .MuiListItemButton-root": {
+                    paddingLeft: sidebarLeftPadding,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       MuiSwipeableDrawer: {
         defaultProps: {
           PaperProps: {
             elevation: 4,
           },
+        },
+      },
+      MuiToolbar: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            minHeight: xsHeaderHeight,
+            [smAndUpMediaQuery(theme.breakpoints)]: {
+              minHeight: headerHeight,
+            },
+          }),
+        },
+      },
+      MuiListItem: {
+        defaultProps: {
+          disablePadding: true,
         },
       },
       MuiTextField: {

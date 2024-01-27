@@ -6,6 +6,12 @@ import "@mui/system/createTheme";
 export interface ThemeConstants {
   scalingFactor: number;
   scrollbarSize: number;
+  sidebarWidth: number;
+  miniSidebarWidth: number;
+  sidebarIconSize: number;
+  sidebarLeftPadding: number;
+  headerHeight: number;
+  xsHeaderHeight: number;
 }
 
 declare module "@mui/material/styles" {
