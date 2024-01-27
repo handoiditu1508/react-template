@@ -5,6 +5,7 @@ import App from "./App";
 import "./index.scss";
 import AppThemeProvider from "./providers/AppThemeProvider";
 import BreakpointsProvider from "./providers/BreakpointsProvider";
+import InfoProvider from "./providers/InfoProvider";
 import PaletteModeProvider from "./providers/PaletteModeProvider";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
@@ -15,13 +16,15 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>{/* redux store */}
-      <PaletteModeProvider>{/* dark, light modes */}
-        <AppThemeProvider>{/* mui theme */}
-          <BreakpointsProvider>{/* breakpoints helper */}
-            <App />
-          </BreakpointsProvider>
-        </AppThemeProvider>
-      </PaletteModeProvider>
+      <InfoProvider>{/* info about style and environment changes */}
+        <PaletteModeProvider>{/* dark, light modes */}
+          <AppThemeProvider>{/* mui theme */}
+            <BreakpointsProvider>{/* breakpoints helper */}
+              <App />
+            </BreakpointsProvider>
+          </AppThemeProvider>
+        </PaletteModeProvider>
+      </InfoProvider>
     </Provider>
   </React.StrictMode>
 );
