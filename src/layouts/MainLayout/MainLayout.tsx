@@ -9,7 +9,7 @@ import Sidebar, { SidebarContext, withSidebarProvider } from "./Sidebar";
 
 function MainLayout() {
   const { sidebarState, miniSidebarTransition, permanentSidebarTransition } = useContext(SidebarContext);
-  const { smAndDown, mdAndUp } = useContext(BreakpointsContext);
+  const { smAndDown } = useContext(BreakpointsContext);
   const theme = useTheme();
 
   return (
@@ -38,7 +38,7 @@ function MainLayout() {
             justifyContent: "flex-start",
             minHeight: "calc(100vh - var(--header-client-height))",
           }}>{/* spacing between sidebar & header */}
-          <Container disableGutters maxWidth={mdAndUp ? "lg" : false} sx={{
+          <Container disableGutters maxWidth="lg" sx={{
             padding: { md: 4 },
             flexGrow: 1,
             display: { md: "flex" },

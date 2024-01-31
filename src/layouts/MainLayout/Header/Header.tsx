@@ -12,7 +12,7 @@ import { SidebarContext } from "../Sidebar";
 const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
   const theme = useTheme();
   const { sidebarOpen, setSidebarOpen, sidebarState, miniSidebarTransition, permanentSidebarTransition } = useContext(SidebarContext);
-  const { smAndDown, mdAndUp } = useContext(BreakpointsContext);
+  const { smAndDown } = useContext(BreakpointsContext);
   const { mobile } = useContext(InfoContext);
   const hideHeaderTrigger = useScrollTrigger({ threshold: 250 });
   const shadowHeaderTrigger = useScrollTrigger({ threshold: 0, disableHysteresis: true });
@@ -46,7 +46,7 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
           }),
           zIndex: theme.zIndex.appBar,
         }}>
-        <Container disableGutters maxWidth={mdAndUp ? "lg" : false} sx={{
+        <Container disableGutters maxWidth="lg" sx={{
           paddingTop: "var(--header-top-spacing)",
           paddingX: { md: 4 },
         }}>
