@@ -5,3 +5,4 @@
 
 - internationalization
 - redux toolkit query
+- add MainModule to MainRoute
