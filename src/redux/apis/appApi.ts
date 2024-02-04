@@ -1,4 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import axiosBaseQuery from "./axiosBaseQuery";
 
 export type Post = {
   id: number;
@@ -7,7 +8,7 @@ export type Post = {
 
 const appApi = createApi({
   reducerPath: "appApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api/" }),
+  baseQuery: axiosBaseQuery({ baseUrl: "/api/" }),
   tagTypes: ["Post"],
   endpoints: ((builder) => ({
     getPost: builder.query<Post, number>({
