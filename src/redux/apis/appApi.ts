@@ -1,5 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./axiosBaseQuery";
+import reauthBaseQueryWrapper from "./reauthBaseQueryWrapper";
 
 export type Post = {
   id: number;
@@ -8,7 +9,7 @@ export type Post = {
 
 const appApi = createApi({
   reducerPath: "appApi",
-  baseQuery: axiosBaseQuery({ baseUrl: "/api/" }),
+  baseQuery: reauthBaseQueryWrapper(axiosBaseQuery({ baseUrl: "/api/" })),
   tagTypes: ["Post"],
   endpoints: ((builder) => ({
     getPost: builder.query<Post, number>({

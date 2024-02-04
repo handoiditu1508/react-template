@@ -8,7 +8,7 @@ const axiosBaseQuery = (
     url: string;
   },
   unknown,
-  unknown
+  { status: number | "UNKNOWN_ERROR"; }
 > => async (arg) => {
   try {
     const result = typeof arg === "string"
@@ -25,7 +25,7 @@ const axiosBaseQuery = (
     const err = axiosError as AxiosError;
     return {
       error: {
-        status: err.response ? err.response.status : undefined,
+        status: err.response ? err.response.status : "UNKNOWN_ERROR",
         data: err.response ? err.response.data : err.message,
       },
     };
