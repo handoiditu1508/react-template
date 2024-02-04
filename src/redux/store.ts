@@ -1,5 +1,5 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./slices/counterSlice";
+import counterSlice from "./slices/counterSlice";
 
 // development environment only
 // const reduxLogger = require("redux-logger");
@@ -7,7 +7,7 @@ import counterReducer from "./slices/counterSlice";
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    [counterSlice.name]: counterSlice.reducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
