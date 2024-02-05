@@ -1,8 +1,8 @@
 import SignInResponse from "@/models/apis/SignInResponse";
 import { QueryReturnValue } from "@reduxjs/toolkit/dist/query/baseQueryTypes";
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { FetchBaseQueryError, createApi } from "@reduxjs/toolkit/query/react";
 import { clearAuthState, setAuthState } from "../slices/authenticationSlice";
-import axiosBaseQuery, { AxiosBaseQueryError } from "./axiosBaseQuery";
+import axiosBaseQuery from "./axiosBaseQuery";
 import reauthBaseQueryWrapper from "./reauthBaseQueryWrapper";
 
 export type Post = {
@@ -59,7 +59,7 @@ const appApi = createApi({
           url: "refreshToken",
           method: "POST",
           body: arg,
-        }) as QueryReturnValue<SignInResponse, AxiosBaseQueryError>;
+        }) as QueryReturnValue<SignInResponse, FetchBaseQueryError>;
 
         if (res.data) {
           api.dispatch(setAuthState(res.data));
@@ -67,7 +67,7 @@ const appApi = createApi({
           api.dispatch(clearAuthState());
         }
 
-        return res;
+        return res as QueryReturnValue<SignInResponse, any>;
       },
     }),
   })),
