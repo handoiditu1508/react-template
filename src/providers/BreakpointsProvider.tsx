@@ -1,4 +1,4 @@
-import { mdAndDownMediaQuery, mdAndUpMediaQuery, mdMediaQuery, smAndDownMediaQuery, smAndUpMediaQuery, smMediaQuery, xsAndUpMediaQuery, xsMediaQuery } from "@/common/BreakpointsHelpers2";
+import { mdAndDownMediaQuery, mdAndUpMediaQuery, mdMediaQuery, smAndDownMediaQuery, smAndUpMediaQuery, smMediaQuery, xsAndUpMediaQuery, xsMediaQuery } from "@/common/breakpointsHelpers";
 import { useMediaQuery, useTheme } from "@mui/material";
 import React, { ProviderProps } from "react";
 
