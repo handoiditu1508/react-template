@@ -1,32 +1,32 @@
 import SignInResponse from "@/models/apis/SignInResponse";
 import User from "@/models/entities/User";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import appApi from "../apis/appApi";
+import authApi from "../apis/authApi";
 import { RootState } from "../store";
 
-export type AuthenticationState = {
+export type AuthState = {
   expirationTime: number | null;// miliseconds
   user: User | null;
 }
 
 export const expirationTimeStorageKey = "expirationTime";
 
-const initialState: AuthenticationState = {
+const initialState: AuthState = {
   expirationTime: null,
   user: null,
 };
 
 export const loadAuthStateFromLocalAsync = createAsyncThunk(
-  "authentication/loadAuthStateFromLocalAsync",
+  "auth/loadAuthStateFromLocalAsync",
   async (_arg, thunkApi) => {
-    const { authentication: state } = thunkApi.getState() as RootState;
+    const { auth: state } = thunkApi.getState() as RootState;
 
     state.expirationTime = Number(localStorage.getItem(expirationTimeStorageKey));
 
     // check token expired
     if (isNaN(state.expirationTime) || state.expirationTime <= Date.now()) {
       // call refresh token api
-      const refreshTokenPromise = thunkApi.dispatch(appApi.endpoints.refreshToken.initiate());
+      const refreshTokenPromise = thunkApi.dispatch(authApi.endpoints.refreshToken.initiate());
       await refreshTokenPromise;
       refreshTokenPromise.reset();
     } else if (!state.user) {
@@ -35,8 +35,8 @@ export const loadAuthStateFromLocalAsync = createAsyncThunk(
   }
 );
 
-const authenticationSlice = createSlice({
-  name: "authentication",
+const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
     setAuthState: (state, action: PayloadAction<SignInResponse>) => {
@@ -53,11 +53,11 @@ const authenticationSlice = createSlice({
 export const {
   setAuthState,
   clearAuthState,
-} = authenticationSlice.actions;
+} = authSlice.actions;
 
-export const selectIsSignedIn = (state: RootState): boolean => !!state.authentication.expirationTime;
-export const selectIsTokenExpired = (state: RootState): boolean => !!state.authentication.expirationTime && state.authentication.expirationTime <= Date.now();
-export const selectExpirationTime = (state: RootState) => state.authentication.expirationTime;
-export const selectAuthUser = (state: RootState) => state.authentication.user;
+export const selectIsSignedIn = (state: RootState): boolean => !!state.auth.expirationTime;
+export const selectIsTokenExpired = (state: RootState): boolean => !!state.auth.expirationTime && state.auth.expirationTime <= Date.now();
+export const selectExpirationTime = (state: RootState) => state.auth.expirationTime;
+export const selectAuthUser = (state: RootState) => state.auth.user;
 
-export default authenticationSlice;
+export default authSlice;

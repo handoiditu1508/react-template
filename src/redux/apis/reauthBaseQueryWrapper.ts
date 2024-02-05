@@ -1,7 +1,7 @@
 import SignInResponse from "@/models/apis/SignInResponse";
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
-import { clearAuthState, expirationTimeStorageKey, setAuthState } from "../slices/authenticationSlice";
+import { clearAuthState, expirationTimeStorageKey, setAuthState } from "../slices/authSlice";
 
 const mutex = new Mutex();
 
