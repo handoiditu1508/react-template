@@ -1,6 +1,9 @@
 import SignInResponse from "@/models/apis/SignInResponse";
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
-import { clearAuthState, setAuthState } from "../slices/authenticationSlice";
+import { Mutex } from "async-mutex";
+import { clearAuthState, expirationTimeStorageKey, setAuthState } from "../slices/authenticationSlice";
+
+const mutex = new Mutex();
 
 /**
  * Wrap `baseQuery` to automatically request for new token when current token is expired.
@@ -13,18 +16,34 @@ const reauthBaseQueryWrapper = <F extends BaseQueryFn<
   { status: number | string; }
 >>(baseQuery: F): F => {
   const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
+    // wait until the mutex is available without locking it
+    await mutex.waitForUnlock();
     let result = await baseQuery(args, api, extraOptions);
-    if (result.error && result.error.status === 401) {
-      const refreshResult = await baseQuery({ url: "refreshToken", method: "POST" }, api, extraOptions);
+    if (result.error && result.error.status === 401 && localStorage.getItem(expirationTimeStorageKey)) {
+      // checking whether the mutex is locked
+      if (!mutex.isLocked()) {
+        const release = await mutex.acquire();
+        const refreshResult = await baseQuery({ url: "refreshToken", method: "POST" }, api, extraOptions);
 
-      if (refreshResult.data) {
-        // store the new token info into store and local storage
-        api.dispatch(setAuthState(refreshResult.data as SignInResponse));
+        if (refreshResult.data) {
+          // store the new token info into store and local storage
+          api.dispatch(setAuthState(refreshResult.data as SignInResponse));
 
-        // retry the initial query
-        result = await baseQuery(args, api, extraOptions);
+          // retry the initial query
+          result = await baseQuery(args, api, extraOptions);
+        } else {
+          api.dispatch(clearAuthState());
+        }
+        // release must be called once the mutex should be released again.
+        release();
       } else {
-        api.dispatch(clearAuthState());
+        // wait until the mutex is available without locking it
+        await mutex.waitForUnlock();
+        // check expiration time to know if user token is stored in cookie or not
+        if (localStorage.getItem(expirationTimeStorageKey)) {
+          // retry the initial query
+          result = await baseQuery(args, api, extraOptions);
+        }
       }
     }
     return result;
