@@ -4,8 +4,9 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 const axiosBaseQuery = (
   { baseUrl }: { baseUrl: string } = { baseUrl: "" }
 ): BaseQueryFn<
-  string | Pick<AxiosRequestConfig, "method" | "data" | "params" | "headers"> & {
+  string | Pick<AxiosRequestConfig, "method" | "params" | "headers"> & {
     url: string;
+    body?: AxiosRequestConfig["data"];
   },
   unknown,
   { status: number | "UNKNOWN_ERROR"; }
@@ -16,7 +17,7 @@ const axiosBaseQuery = (
       : await axios({
         url: baseUrl + arg.url,
         method: arg.method,
-        data: arg.data,
+        data: arg.body,
         params: arg.params,
         headers: arg.params,
       });
