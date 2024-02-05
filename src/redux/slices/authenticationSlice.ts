@@ -55,7 +55,7 @@ export const {
   clearAuthState,
 } = authenticationSlice.actions;
 
-export const selectIsSignedIn = (state: RootState): boolean => !!state.authentication.user && !selectIsTokenExpired(state);
+export const selectIsSignedIn = (state: RootState): boolean => !!state.authentication.expirationTime;
 export const selectIsTokenExpired = (state: RootState): boolean => !!state.authentication.expirationTime && state.authentication.expirationTime <= Date.now();
 export const selectExpirationTime = (state: RootState) => state.authentication.expirationTime;
 export const selectAuthUser = (state: RootState) => state.authentication.user;
