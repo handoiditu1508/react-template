@@ -1,6 +1,11 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query/react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
+export type AxiosBaseQueryError = {
+  status: number | "UNKNOWN_ERROR";
+  data?: any;
+}
+
 const axiosBaseQuery = (
   { baseUrl }: { baseUrl: string } = { baseUrl: "" }
 ): BaseQueryFn<
@@ -9,7 +14,7 @@ const axiosBaseQuery = (
     body?: AxiosRequestConfig["data"];
   },
   unknown,
-  { status: number | "UNKNOWN_ERROR"; }
+  AxiosBaseQueryError
 > => async (arg) => {
   try {
     const result = typeof arg === "string"

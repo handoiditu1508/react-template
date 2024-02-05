@@ -1,5 +1,8 @@
+import SignInResponse from "@/models/apis/SignInResponse";
+import { QueryReturnValue } from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import axiosBaseQuery from "./axiosBaseQuery";
+import { clearAuthState, setAuthState } from "../slices/authenticationSlice";
+import axiosBaseQuery, { AxiosBaseQueryError } from "./axiosBaseQuery";
 import reauthBaseQueryWrapper from "./reauthBaseQueryWrapper";
 
 export type Post = {
@@ -50,6 +53,23 @@ const appApi = createApi({
       }),
       invalidatesTags: (_result, _error, id) => [{ type: "Post", id }],
     }),
+    refreshToken: builder.mutation<SignInResponse, void>({
+      queryFn: async (arg, api, _extraOptions, baseQuery) => {
+        const res = await baseQuery({
+          url: "refreshToken",
+          method: "POST",
+          body: arg,
+        }) as QueryReturnValue<SignInResponse, AxiosBaseQueryError>;
+
+        if (res.data) {
+          api.dispatch(setAuthState(res.data));
+        } else if (res.error.status === 401) {
+          api.dispatch(clearAuthState());
+        }
+
+        return res;
+      },
+    }),
   })),
 });
 
@@ -61,4 +81,5 @@ export const {
   useAddPostMutation,
   useUpdatePostMutation,
   useDeletePostMutation,
+  useRefreshTokenMutation,
 } = appApi;

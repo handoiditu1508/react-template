@@ -1,6 +1,7 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import appApi from "./apis/appApi";
+import authenticationSlice from "./slices/authenticationSlice";
 import counterSlice from "./slices/counterSlice";
 
 // development environment only
@@ -9,6 +10,7 @@ import counterSlice from "./slices/counterSlice";
 
 const store = configureStore({
   reducer: {
+    [authenticationSlice.name]: authenticationSlice.reducer,
     [counterSlice.name]: counterSlice.reducer,
     [appApi.reducerPath]: appApi.reducer,
   },

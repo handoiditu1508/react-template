@@ -1,7 +1,14 @@
+import SignInResponse from "@/models/apis/SignInResponse";
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
+import { clearAuthState, setAuthState } from "../slices/authenticationSlice";
 
+/**
+ * Wrap `baseQuery` to automatically request for new token when current token is expired.
+ * @param baseQuery `baseQuery` to be wrappped.
+ * @returns Wrapped `baseQuery`.
+ */
 const reauthBaseQueryWrapper = <F extends BaseQueryFn<
-  string | { url: string, method?: string },
+  string | { url: string; method?: string; body?: any; },
   unknown,
   { status: number | string; }
 >>(baseQuery: F): F => {
@@ -11,12 +18,13 @@ const reauthBaseQueryWrapper = <F extends BaseQueryFn<
       const refreshResult = await baseQuery({ url: "refreshToken", method: "POST" }, api, extraOptions);
 
       if (refreshResult.data) {
-        // todo: store the new token info if any (expire time)
+        // store the new token info into store and local storage
+        api.dispatch(setAuthState(refreshResult.data as SignInResponse));
 
         // retry the initial query
         result = await baseQuery(args, api, extraOptions);
       } else {
-        // todo: handle logging out
+        api.dispatch(clearAuthState());
       }
     }
     return result;
