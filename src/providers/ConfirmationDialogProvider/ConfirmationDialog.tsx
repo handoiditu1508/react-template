@@ -18,16 +18,16 @@ function ConfirmationDialog(props: Omit<DialogProps, "open">) {
     closeDialog,
   } = useContext(ConfirmationDialogContext);
 
-  const handleConfirm: React.MouseEventHandler<HTMLButtonElement> = () => {
-    onConfirm();
+  const handleConfirm: React.MouseEventHandler<HTMLButtonElement> = async () => {
+    await onConfirm();
     if (!preventCloseOnConfirm) {
       closeDialog();
     }
   };
 
-  const handleCancel = (_: {}, reason: CancelReason) => {
+  const handleCancel = async (_: {}, reason: CancelReason) => {
     if (!loading) {
-      onCancel(reason);
+      await onCancel(reason);
       closeDialog();
     }
   };
