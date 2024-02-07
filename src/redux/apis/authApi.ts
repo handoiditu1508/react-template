@@ -20,7 +20,7 @@ const authApi = appApi.injectEndpoints({
           api.dispatch(clearAuthState());
         }
 
-        return res as QueryReturnValue<SignInResponse, any>;
+        return res;
       },
     }),
   }),

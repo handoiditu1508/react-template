@@ -4,8 +4,4 @@
 - command used to init eslint: npm init @eslint/config
 
 - internationalization
-- redux toolkit query
-  + https://redux-toolkit.js.org/rtk-query/usage/customizing-queries#axios-basequery
-  + https://redux-toolkit.js.org/rtk-query/usage/customizing-queries#automatic-re-authorization-by-extending-fetchbasequery
-  + https://redux-toolkit.js.org/rtk-query/usage/code-splitting
 - add MainModule to MainRoute
