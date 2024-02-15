@@ -79,12 +79,12 @@ const Footer = styled((props: BoxProps) => {
               {smAndUp && <Grid item sm={6} />}
               <Grid item xs={12} sm={6}>
                 <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                  {navigatesList.slice(0, smAndUp ? (navigatesList.length / 2 + 1) : undefined).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{nav.text}</CustomLink>)}
+                  {navigatesList.slice(0, smAndUp ? (navigatesList.length / 2 + 1) : undefined).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
                 </Stack>
               </Grid>
               {smAndUp && <Grid item sm={6}>
                 <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                  {navigatesList.slice(navigatesList.length / 2 + 1).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{nav.text}</CustomLink>)}
+                  {navigatesList.slice(navigatesList.length / 2 + 1).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
                 </Stack>
               </Grid>}
             </Grid>
