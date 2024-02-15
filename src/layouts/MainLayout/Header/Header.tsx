@@ -7,9 +7,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { AppBar, Box, Container, IconButton, Slide, Toolbar, Typography, useScrollTrigger, useTheme } from "@mui/material";
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { SidebarContext } from "../Sidebar";
 
 const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const { sidebarOpen, setSidebarOpen, sidebarState, miniSidebarTransition, permanentSidebarTransition } = useContext(SidebarContext);
   const { smAndDown } = useContext(BreakpointsContext);
@@ -72,7 +74,7 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
                   },
                 },
               }}>
-                <CustomLink to="/privacy-policy">Privacy Policy</CustomLink>
+                <CustomLink to="/privacy-policy">{t("Privacy Policy")}</CustomLink>
               </Box>}
               <Box display="flex" justifyContent="flex-end" flexGrow={1}>
                 <IconButton color="primary" edge="end" aria-label="settings" onClick={() => setSettingsDrawerOpen(!settingsDrawerOpen)}><SettingsIcon /></IconButton>
