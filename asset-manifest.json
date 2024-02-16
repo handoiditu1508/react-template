@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-template/static/css/main.d981da99.css",
-    "main.js": "/react-template/static/js/main.e33cae42.js",
+    "main.js": "/react-template/static/js/main.47f7d51d.js",
     "static/js/751.f0ee5648.chunk.js": "/react-template/static/js/751.f0ee5648.chunk.js",
     "static/js/423.3fc01c0f.chunk.js": "/react-template/static/js/423.3fc01c0f.chunk.js",
     "static/js/787.32e0067b.chunk.js": "/react-template/static/js/787.32e0067b.chunk.js",
@@ -65,13 +65,13 @@
     "index.html": "/react-template/index.html",
     "static/media/getFetch.cjs": "/react-template/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.d981da99.css.map": "/react-template/static/css/main.d981da99.css.map",
-    "main.e33cae42.js.map": "/react-template/static/js/main.e33cae42.js.map",
+    "main.47f7d51d.js.map": "/react-template/static/js/main.47f7d51d.js.map",
     "751.f0ee5648.chunk.js.map": "/react-template/static/js/751.f0ee5648.chunk.js.map",
     "423.3fc01c0f.chunk.js.map": "/react-template/static/js/423.3fc01c0f.chunk.js.map",
     "787.32e0067b.chunk.js.map": "/react-template/static/js/787.32e0067b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d981da99.css",
-    "static/js/main.e33cae42.js"
+    "static/js/main.47f7d51d.js"
   ]
 }
