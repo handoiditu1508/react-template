@@ -1,5 +1,5 @@
-import { stopBubbling } from "@/common/EventHelpers";
-import { loadFileFromUrl } from "@/common/FileHelpers";
+import { stopBubbling } from "@/common/eventHelpers";
+import { loadFileFromUrl } from "@/common/fileHelpers";
 import ForwardIcon from "@mui/icons-material/Forward";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { Box, Button, CircularProgress, IconButton, InputAdornment, Stack, StackProps, styled, TextField, Typography } from "@mui/material";

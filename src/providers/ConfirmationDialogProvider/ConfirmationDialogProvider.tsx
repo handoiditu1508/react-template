@@ -6,8 +6,8 @@ export type ConfirmationDialogOptions = {
   cancelButtonText?: string;
   confirmButtonText?: string;
   hideCancelButton?: boolean;
-  onCancel?: () => void;
-  onConfirm?: () => void;
+  onCancel?: () => void | Promise<void>;
+  onConfirm?: () => void | Promise<void>;
   preventCloseOnConfirm?: boolean;
 }
 
@@ -24,8 +24,8 @@ type ConfirmationDialogContextType = {
   cancelButtonText: string;
   confirmButtonText: string;
   hideCancelButton: boolean;
-  onCancel: (reason: CancelReason) => void;
-  onConfirm: () => void;
+  onCancel: (reason: CancelReason) => void | Promise<void>;
+  onConfirm: () => void | Promise<void>;
   preventCloseOnConfirm: boolean;
 }
 
@@ -41,8 +41,8 @@ function ConfirmationDialogProvider(props: ConfirmationDialogProviderProps) {
   const [cancelButtonText, setCancelButtonText] = useState<string>("Cancel");
   const [confirmButtonText, setConfirmButtonText] = useState<string>("Confirm");
   const [hideCancelButton, setHideCancelButton] = useState<boolean>(false);
-  const onCancel = useRef<() => void>(CONFIG.EMPTY_FUNCTION);
-  const onConfirm = useRef<() => void>(CONFIG.EMPTY_FUNCTION);
+  const onCancel = useRef<() => void | Promise<void>>(CONFIG.EMPTY_FUNCTION);
+  const onConfirm = useRef<() => void | Promise<void>>(CONFIG.EMPTY_FUNCTION);
   const [preventCloseOnConfirm, setPreventCloseOnConfirm] = useState<boolean>(false);
 
   const openDialog = (title: string, options?: ConfirmationDialogOptions) => {

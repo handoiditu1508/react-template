@@ -1,4 +1,4 @@
-import { stopBubbling } from "@/common/EventHelpers";
+import { stopBubbling } from "@/common/eventHelpers";
 import CloseIcon from "@mui/icons-material/Close";
 import { Badge, BadgeProps, styled } from "@mui/material";
 

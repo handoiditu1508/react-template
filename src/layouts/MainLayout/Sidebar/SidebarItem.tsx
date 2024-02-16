@@ -1,6 +1,7 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText, useTheme } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, To, useMatch, useResolvedPath } from "react-router-dom";
 
 export type SidebarTab = {
@@ -16,6 +17,7 @@ type SidebarItemProps = {
 };
 
 export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: SidebarItemProps) {
+  const { t } = useTranslation();
   const theme = useTheme();
   const [leftPadding] = useState<number>(theme.constants.sidebarLeftPadding || 0);
   const resolved = useResolvedPath(sidebarTab.to);
@@ -40,7 +42,7 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
           {sidebarTab.icon && <ListItemIcon>
             {sidebarTab.icon}
           </ListItemIcon>}
-          <ListItemText primary={sidebarTab.title} />
+          <ListItemText primary={t(sidebarTab.title)} />
           {sidebarTab.childs && sidebarTab.childs.length !== 0 && <ExpandMoreIcon sx={{
             transform: open ? "rotate(180deg)" : undefined,
             transition: theme.transitions.create("transform", {
@@ -48,7 +50,7 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
               easing: theme.transitions.easing.sharp,
             }),
             "&:hover": {
-              color: theme.palette.error.main,
+              color: theme.palette.primary.main,
             },
           }} onClick={handleClickExpandIcon} />}
         </ListItemButton>

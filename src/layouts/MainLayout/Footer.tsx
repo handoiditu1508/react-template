@@ -6,6 +6,7 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 import EmailIcon from "@mui/icons-material/Email";
 import { Box, BoxProps, Breadcrumbs, Divider, Grid, Link, Paper, Stack, Typography, styled } from "@mui/material";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 const navigatesList: { text: string; link: string; }[] = [
   {
@@ -47,6 +48,7 @@ const navigatesList: { text: string; link: string; }[] = [
 ];
 
 const Footer = styled((props: BoxProps) => {
+  const { t } = useTranslation();
   const { xs, smAndUp } = useContext(BreakpointsContext);
   const year = new Date().getFullYear();
 
@@ -60,11 +62,11 @@ const Footer = styled((props: BoxProps) => {
                 <img src={logo} alt="logo" width={100} height={100} />
               </Box>
               <Box>
-                <Typography className="title" variant="h5">About Us</Typography>
+                <Typography className="title" variant="h5">{t("About Us")}</Typography>
                 <Typography variant="body1">
-                  Lorem ipsum {CONFIG.APP_NAME} sit amet, consectetur adipiscing elit.<br />
-                  Aliquam non euismod nibh, nec viverra lacus. Vivamus porta, elementum gravida lorem justo eget justo.<br />
-                  Praesent maximus dui nec diam luctus, non dictum lectus cursus. Etiam vitae aliquet sapien.
+                  {t("aboutUsLine1", { appName: CONFIG.APP_NAME })}<br />
+                  {t("aboutUsLine2")}<br />
+                  {t("aboutUsLine3")}
                 </Typography>
               </Box>
             </Stack>
@@ -72,17 +74,17 @@ const Footer = styled((props: BoxProps) => {
           <Grid item xs={12} md={8}>
             <Grid container>
               <Grid item xs={12} sm={6}>
-                <Typography className="title" variant="h5" textAlign={{ xs: "center", md: "start" }}>Navigates</Typography>
+                <Typography className="title" variant="h5" textAlign={{ xs: "center", md: "start" }}>{t("Navigates")}</Typography>
               </Grid>
               {smAndUp && <Grid item sm={6} />}
               <Grid item xs={12} sm={6}>
                 <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                  {navigatesList.slice(0, smAndUp ? (navigatesList.length / 2 + 1) : undefined).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{nav.text}</CustomLink>)}
+                  {navigatesList.slice(0, smAndUp ? (navigatesList.length / 2 + 1) : undefined).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
                 </Stack>
               </Grid>
               {smAndUp && <Grid item sm={6}>
                 <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                  {navigatesList.slice(navigatesList.length / 2 + 1).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{nav.text}</CustomLink>)}
+                  {navigatesList.slice(navigatesList.length / 2 + 1).map(nav => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
                 </Stack>
               </Grid>}
             </Grid>
@@ -96,14 +98,14 @@ const Footer = styled((props: BoxProps) => {
               <CopyrightIcon />
               Copyright {year}, {window.location.host}
             </Typography>
-            <CustomLink to="/privacy-policy" underline="hover" variant="subtitle2">Privacy Policy</CustomLink>
+            <CustomLink to="/privacy-policy" underline="hover" variant="subtitle2">{t("Privacy Policy")}</CustomLink>
           </Breadcrumbs>}
           {xs && <Stack alignItems="center">
             <Typography className="copyright-text" variant="subtitle2" textAlign="center">
               <CopyrightIcon />
               Copyright {year}, {window.location.host}
             </Typography>
-            <CustomLink to="/privacy-policy" underline="hover" variant="subtitle2">Privacy Policy</CustomLink>
+            <CustomLink to="/privacy-policy" underline="hover" variant="subtitle2">{t("Privacy Policy")}</CustomLink>
           </Stack>}
           <Box flexGrow={1} />
           <Link href="mailto:handoiditu1508@gmail.com">

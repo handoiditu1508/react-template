@@ -1,5 +1,8 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./slices/counterSlice";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import appApi from "./apis/appApi";
+import authSlice from "./slices/authSlice";
+import counterSlice from "./slices/counterSlice";
 
 // development environment only
 // const reduxLogger = require("redux-logger");
@@ -7,10 +10,18 @@ import counterReducer from "./slices/counterSlice";
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    [authSlice.name]: authSlice.reducer,
+    [counterSlice.name]: counterSlice.reducer,
+    [appApi.reducerPath]: appApi.reducer,
   },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+    appApi.middleware,
+    // logger,
+  ),
 });
+
+setupListeners(store.dispatch);
+
 export default store;
 
 export type AppDispatch = typeof store.dispatch;

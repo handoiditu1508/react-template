@@ -1,10 +1,11 @@
-import { PaletteMode, Theme, ThemeOptions, alpha, createTheme } from "@mui/material";
 // When using TypeScript 4.x and above
 import type { } from "@mui/lab/themeAugmentation";
 // When using TypeScript 3.x and below
-import { smAndUpMediaQuery } from "@/common/BreakpointsHelpers";
+// import "@mui/lab/themeAugmentation";
+
+import { smAndUpMediaQuery } from "@/common/breakpointsHelpers";
 import ColorOption, { colorOptions } from "@/models/ColorOption";
-import "@mui/lab/themeAugmentation";
+import { PaletteMode, Theme, ThemeOptions, alpha, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { deepmerge } from "@mui/utils";
 
