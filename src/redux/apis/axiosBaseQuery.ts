@@ -21,9 +21,11 @@ const axiosBaseQuery = (
         params: arg.params,
         headers: arg.params,
       });
+
     return { data: result.data };
   } catch (axiosError) {
     const err = axiosError as AxiosError;
+
     return {
       error: err.response ? {
         status: err.response.status,

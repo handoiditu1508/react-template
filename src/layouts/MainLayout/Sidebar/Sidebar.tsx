@@ -43,6 +43,7 @@ const Sidebar = () => {
     duration: theme.transitions.duration.shorter,
     easing: theme.transitions.easing.easeOut,
   });
+
   return (
     <SwipeableDrawer
       open={sidebarOpen}

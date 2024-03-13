@@ -42,11 +42,13 @@ function InfoProvider(props: InfoProviderProps) {
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
+
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
+
     return () => window.removeEventListener("scroll", onScroll);
   });
 

@@ -175,6 +175,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
     if (!fileList.length) {
       hiddenFileInputRef.current.value = "";
       setStatus("idle");
+
       return;
     }
 

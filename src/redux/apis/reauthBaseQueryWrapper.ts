@@ -46,8 +46,10 @@ const reauthBaseQueryWrapper = <F extends BaseQueryFn<
         }
       }
     }
+
     return result;
   };
+
   return baseQueryWithReauth as F;
 };
 
