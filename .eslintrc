@@ -48,6 +48,15 @@
       {
         "additionalHooks": "useUpdateEffect"
       }
-    ]
+    ],
+    "padding-line-between-statements": [
+      "warn",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      }
+    ],
+    "import/newline-after-import": "warn"
   }
 }
