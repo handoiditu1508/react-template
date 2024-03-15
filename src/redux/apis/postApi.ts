@@ -53,4 +53,3 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
 } = postApi;
-
