@@ -65,6 +65,20 @@
         "maxEOF": 0
       }
     ],
-    "import/newline-after-import": "warn"
+    "import/newline-after-import": "warn",
+    "jsx-quotes": [
+      "warn",
+      "prefer-double"
+    ],
+    "react/jsx-tag-spacing": [
+      "warn",
+      {
+        "closingSlash": "never",
+        "beforeSelfClosing": "always",
+        "afterOpening": "never",
+        "beforeClosing": "never"
+      }
+    ],
+    "no-multi-spaces": "warn"
   }
 }
