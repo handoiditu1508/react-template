@@ -1,0 +1,108 @@
+> assets
+  - (images used in components)
+  - background.jpg
+  - logo.svg
+
+> common
+  - (helpers)
+  - breakpointsHelpers.ts
+  - fileHelpers.ts
+  - formats.ts
+
+> components
+  - (reusable components that are meant to be used anywhere across the app)
+  > DraggableList
+    - DraggableList.tsx
+    - DraggableListItem.tsx
+    - index.ts
+  - FileInput.tsx
+
+> configs
+  - (hold configs from environment or static configs)
+
+> hocs
+  - (reusable higher order components that are meant to be used anywhere across the app)
+
+> hooks
+  - (reusable hooks that are meant to be used anywhere across the app.)
+  - index.ts
+  - useAppDispatch.ts
+  - useAppSelector.ts
+
+> layouts
+  > MainLayout
+    > Header
+      - index.ts
+      - Header.tsx
+      - HeaderCustomButton.tsx
+    - index.ts
+    - Footer.tsx
+    - MainLayout.tsx
+  - EmptyLayout.tsx
+
+> models
+  - (reusable types or interfaces that are meant to be used anywhere across the app)
+
+> modules
+  - (divide app into separated modules)
+  > Main
+    > components
+      - (reusable components that are meant to be used anywhere across Main module)
+      - PreviewCard.tsx
+      - RateableCard.tsx
+    > hocs
+      - (reusable higher order components that are meant to be used anywhere across Main module)
+    > models
+      - (reusable types or interfaces that are meant to be used anywhere across Main module)
+    > pages
+      - (page components should suffix with "Page")
+      > HomePage
+        - index.ts
+        - HomePage.tsx
+        - Chart.tsx
+      - AboutPage.tsx
+    - index.ts
+    - MainModule.tsx
+  > Auth
+    > pages
+      - LoginPage.tsx
+      - RegisterPage.tsx
+    - index.ts
+    - AuthModule.tsx
+
+> providers
+  - (global providers to use in index.tsx or reusable providers that are meant to be used anywhere across the app)
+  > NotificationProvider
+    - index.ts
+    - NotificationProvider.tsx
+    - NotificationSnackbar.tsx
+  - PaletteModeProvider.tsx
+
+> redux
+  - (redux related files)
+  > apis
+    - appApi.ts
+    - authApi.ts
+    - productApi.ts
+  > slices
+    - authSlice.ts
+    - cartSlice.ts
+  - store.ts
+
+> routes
+  - (splitted react router configs)
+  - index.ts
+  - AppRoutes.tsx
+  - MainRoute.tsx
+  - AuthRoute.tsx
+
+> themes
+  - (mui themes configs)
+  - index.ts
+  - mainTheme.ts
+
+> styles
+  - (css variables declaration or custom scss styles for 3rd party libraries which are @use in index.scss)
+  - _overlayscrollbars.scss
+  - _prismjs.scss
+  - _variables.scss
