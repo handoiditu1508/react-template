@@ -4,7 +4,7 @@ import { AccordionSummary, AccordionSummaryProps, styled } from "@mui/material";
 
 type OwnProps = {
   onClose?: React.MouseEventHandler<SVGSVGElement>;
-}
+};
 
 type ClosableAccordionSummaryProps = OwnProps & Omit<AccordionSummaryProps, keyof OwnProps>;
 

@@ -3,8 +3,9 @@ import { ListItemIcon, ListItemText, MenuItem, MenuItemProps, Typography, useThe
 
 type OwnProps = {
   supportAction: SupportAction;
-}
-type SupportActionMenuItemProps = OwnProps & Omit<MenuItemProps, keyof OwnProps>
+};
+
+type SupportActionMenuItemProps = OwnProps & Omit<MenuItemProps, keyof OwnProps>;
 
 function SupportActionMenuItem({ supportAction, ...props }: SupportActionMenuItemProps) {
   const theme = useTheme();

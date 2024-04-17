@@ -11,7 +11,7 @@ i18n
     // lng: "en",// do not define this line if you're using a language detector
     fallbackLng: "en-US",
     interpolation: {
-      escapeValue: false,// react already safes from xss
+      escapeValue: false, // react already safes from xss
     },
   });
 

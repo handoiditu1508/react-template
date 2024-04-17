@@ -74,6 +74,7 @@ const StyledStack = styled(Stack, { shouldForwardProp: prop => !(["status", "err
 }));
 
 type FileInputStatus = "idle" | "dragover" | "loading" | "uploaded";
+
 type OwnProps = {
   files?: File[];
   inputProps?: Omit<React.ComponentProps<"input">, "type" | "hidden">;
@@ -82,8 +83,8 @@ type OwnProps = {
   error?: string;
   onFilesChange?: (files: File[], source: "browse" | "drop" | "url" | "clipboard" | "reset") => void;
   onChangeInput?: () => void;
-}
-export type FileInputProps = OwnProps & Omit<StackProps, keyof OwnProps>
+};
+export type FileInputProps = OwnProps & Omit<StackProps, keyof OwnProps>;
 
 function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, error, onFilesChange, onChangeInput, ...props }: FileInputProps) {
   const [status, setStatus] = useState<FileInputStatus>();

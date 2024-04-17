@@ -9,7 +9,7 @@ export type ConfirmationDialogOptions = {
   onCancel?: () => void | Promise<void>;
   onConfirm?: () => void | Promise<void>;
   preventCloseOnConfirm?: boolean;
-}
+};
 
 export type CancelReason = "backdropClick" | "escapeKeyDown" | "cancelButton";
 
@@ -27,7 +27,7 @@ type ConfirmationDialogContextType = {
   onCancel: (reason: CancelReason) => void | Promise<void>;
   onConfirm: () => void | Promise<void>;
   preventCloseOnConfirm: boolean;
-}
+};
 
 type ConfirmationDialogProviderProps = Omit<ProviderProps<ConfirmationDialogContextType>, "value">;
 

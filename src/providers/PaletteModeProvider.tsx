@@ -5,7 +5,7 @@ type PaletteModeContextType = {
   currentPaletteMode: PaletteMode;
   paletteMode: PaletteMode | "system";
   setPaletteMode: (mode: PaletteMode | "system") => void;
-}
+};
 
 type PaletteModeProviderProps = Omit<ProviderProps<PaletteModeContextType>, "value">;
 

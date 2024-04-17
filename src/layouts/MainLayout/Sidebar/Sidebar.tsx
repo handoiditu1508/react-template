@@ -53,7 +53,7 @@ const Sidebar = () => {
       disableDiscovery={iOS}
       variant={sidebarVariant}
       ModalProps={{
-        keepMounted: true,// Better open performance on mobile
+        keepMounted: true, // Better open performance on mobile
       }}
       sx={{
         width: sidebarState === "mini" ? miniSidebarWidth : undefined,

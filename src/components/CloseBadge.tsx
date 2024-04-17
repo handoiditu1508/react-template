@@ -5,7 +5,7 @@ import { Badge, BadgeProps, styled } from "@mui/material";
 type OwnProps = {
   hidden?: boolean;
   onClose?: React.MouseEventHandler<HTMLSpanElement>;
-}
+};
 
 type CloseBadgeProps = OwnProps & Omit<BadgeProps, keyof OwnProps>;
 

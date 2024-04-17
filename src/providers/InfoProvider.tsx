@@ -8,7 +8,7 @@ type InfoContextType = {
   windowHeight: number;
   windowScrollX: number;
   windowScrollY: number;
-}
+};
 
 type InfoProviderProps = Omit<ProviderProps<InfoContextType>, "value">;
 

@@ -16,7 +16,7 @@ type BreakpointsContextType = {
   // lgAndUp: boolean;
   // xl: boolean;
   // xlAndUp: boolean;
-}
+};
 
 export const BreakpointsContext = React.createContext<BreakpointsContextType>({} as BreakpointsContextType);
 

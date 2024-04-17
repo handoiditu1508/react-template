@@ -8,14 +8,14 @@ export type NotificationMessage = {
   id?: string | number;
   severity?: AlertColor;
   text: string;
-}
+};
 
 export type NotificationContextType = {
   notifications: NotificationMessage[];
   currentNotification?: NotificationMessage;
   pushNotification: (notification: NotificationMessage) => void;
   nextNotification: () => void;
-}
+};
 
 type NotificationProviderProps = Omit<ProviderProps<NotificationContextType>, "value">;
 

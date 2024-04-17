@@ -5,7 +5,8 @@ import SupportActionMenuItem from "./SupportActionMenuItem";
 type OwnProps = {
   supportActions: SupportAction[];
   menuItemProps?: MenuItemProps;
-}
+};
+
 type SupportActionMenuProps = OwnProps & Omit<MenuProps, keyof OwnProps>;
 
 function SupportActionMenu({ supportActions, menuItemProps, ...props }: SupportActionMenuProps) {

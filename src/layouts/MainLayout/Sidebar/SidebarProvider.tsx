@@ -16,6 +16,7 @@ import React, { ProviderProps, useContext, useEffect, useState } from "react";
 import { SidebarTab } from "./SidebarItem";
 
 type SidebarState = "hidden" | "temporary" | "mini" | "permanent" | "miniHovered";
+
 type CustomTransition = (...props: string[]) => React.CSSProperties["transition"];
 const sidebarTabs: SidebarTab[][] = [
   [

@@ -2,7 +2,7 @@ import { BaseQueryFn, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const axiosBaseQuery = (
-  { baseUrl }: { baseUrl: string } = { baseUrl: "" }
+  { baseUrl }: { baseUrl: string; } = { baseUrl: "" }
 ): BaseQueryFn<
   string | Pick<AxiosRequestConfig, "method" | "params" | "headers"> & {
     url: string;
