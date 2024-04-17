@@ -17,6 +17,78 @@
     "react"
   ],
   "rules": {
+    "linebreak-style": [
+      "warn",
+      "windows"
+    ],
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 1,
+        "maxBOF": 0,
+        "maxEOF": 0
+      }
+    ],
+    "no-multi-spaces": "warn",
+    "no-trailing-spaces": "warn",
+    "array-bracket-spacing": [
+      "warn",
+      "never"
+    ],
+    "space-in-parens": [
+      "warn",
+      "never"
+    ],
+    "arrow-spacing": [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "semi": [
+      "off",
+      "always"
+    ],
+    "@typescript-eslint/semi": [
+      "warn",
+      "always"
+    ],
+    "object-curly-spacing": [
+      "off",
+      "always"
+    ],
+    "@typescript-eslint/object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "comma-spacing": [
+      "off",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "@typescript-eslint/comma-spacing": [
+      "warn",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "space-infix-ops": "off",
+    "@typescript-eslint/space-infix-ops": "warn",
+    "space-before-function-paren": "off",
+    "@typescript-eslint/space-before-function-paren": [
+      "warn",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "space-before-blocks": "off",
+    "@typescript-eslint/space-before-blocks": "warn",
     "indent": [
       "warn",
       2,
@@ -29,20 +101,28 @@
         }
       }
     ],
-    "linebreak-style": [
-      "warn",
-      "windows"
+    "@typescript-eslint/indent": [
+      "off",
+      2,
+      {
+        "SwitchCase": 1,
+        "VariableDeclarator": {
+          "var": 2,
+          "let": 2,
+          "const": 3
+        }
+      }
     ],
     "quotes": [
+      "off",
+      "double"
+    ],
+    "@typescript-eslint/quotes": [
       "warn",
       "double"
     ],
-    "semi": [
-      "warn",
-      "always"
-    ],
     "comma-dangle": [
-      "warn",
+      "off",
       {
         "arrays": "always-multiline",
         "objects": "always-multiline",
@@ -51,32 +131,76 @@
         "functions": "only-multiline"
       }
     ],
-    "react-hooks/exhaustive-deps": [
+    "@typescript-eslint/comma-dangle": [
       "warn",
       {
-        "additionalHooks": "useUpdateEffect"
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "only-multiline",
+        "functions": "only-multiline",
+        "enums": "only-multiline",
+        "generics": "ignore",
+        "tuples": "only-multiline"
       }
     ],
     "padding-line-between-statements": [
-      "warn",
+      "off",
       {
         "blankLine": "always",
         "prev": "*",
         "next": "return"
       }
     ],
-    "no-multiple-empty-lines": [
+    "@typescript-eslint/padding-line-between-statements": [
       "warn",
       {
-        "max": 1,
-        "maxBOF": 0,
-        "maxEOF": 0
+        "blankLine": "always",
+        "prev": "*",
+        "next": [
+          "return",
+          "interface",
+          "type"
+        ]
       }
     ],
-    "import/newline-after-import": "warn",
+    "keyword-spacing": [
+      "off",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "@typescript-eslint/keyword-spacing": [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "@typescript-eslint/type-annotation-spacing": "warn",
+    "@typescript-eslint/member-delimiter-style": [
+      "warn",
+      {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": true
+        }
+      }
+    ],
     "jsx-quotes": [
       "warn",
       "prefer-double"
+    ],
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "useUpdateEffect"
+      }
     ],
     "react/jsx-tag-spacing": [
       "warn",
@@ -87,7 +211,6 @@
         "beforeClosing": "never"
       }
     ],
-    "no-multi-spaces": "warn",
-    "space-infix-ops": "warn"
+    "import/newline-after-import": "warn"
   }
 }
