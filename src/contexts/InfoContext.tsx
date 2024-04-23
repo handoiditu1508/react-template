@@ -12,13 +12,15 @@ type InfoContextType = {
 
 type InfoProviderProps = Omit<ProviderProps<InfoContextType>, "value">;
 
-export const InfoContext = React.createContext<InfoContextType>({} as InfoContextType);
+const InfoContext = React.createContext<InfoContextType>({} as InfoContextType);
+
+export default InfoContext;
 
 const isIOS = () => /iPad|iPhone|iPod/i.test(navigator.userAgent);
 const isMobile = () => /iPad|iPhone|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini|X11/i.test(navigator.userAgent);
 const isMac = () => navigator.userAgent.includes("Mac");
 
-function InfoProvider(props: InfoProviderProps) {
+export function InfoProvider(props: InfoProviderProps) {
   const [iOS, setIOS] = useState<boolean>(isIOS());
   const [mobile, setMobile] = useState<boolean>(isMobile());
   const [mac, setMac] = useState<boolean>(isMac());
@@ -54,5 +56,3 @@ function InfoProvider(props: InfoProviderProps) {
 
   return <InfoContext.Provider value={{ iOS, mobile, mac, windowWidth, windowHeight, windowScrollX, windowScrollY }} {...props} />;
 }
-
-export default InfoProvider;

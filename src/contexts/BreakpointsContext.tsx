@@ -18,11 +18,13 @@ type BreakpointsContextType = {
   // xlAndUp: boolean;
 };
 
-export const BreakpointsContext = React.createContext<BreakpointsContextType>({} as BreakpointsContextType);
+const BreakpointsContext = React.createContext<BreakpointsContextType>({} as BreakpointsContextType);
+
+export default BreakpointsContext;
 
 type BreakpointsProviderProps = Omit<ProviderProps<BreakpointsContextType>, "value">;
 
-function BreakpointsProvider(props: BreakpointsProviderProps) {
+export function BreakpointsProvider(props: BreakpointsProviderProps) {
   const theme = useTheme();
 
   return <BreakpointsContext.Provider value={{
@@ -41,5 +43,3 @@ function BreakpointsProvider(props: BreakpointsProviderProps) {
     // xlAndUp: useMediaQuery(xlAndUpMediaQuery(theme.breakpoints)),
   }} {...props} />;
 }
-
-export default BreakpointsProvider;

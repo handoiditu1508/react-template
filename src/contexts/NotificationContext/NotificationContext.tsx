@@ -19,9 +19,11 @@ export type NotificationContextType = {
 
 type NotificationProviderProps = Omit<ProviderProps<NotificationContextType>, "value">;
 
-export const NotificationContext = React.createContext<NotificationContextType>({} as NotificationContextType);
+const NotificationContext = React.createContext<NotificationContextType>({} as NotificationContextType);
 
-function NotificationProvider(props: NotificationProviderProps) {
+export default NotificationContext;
+
+export function NotificationProvider(props: NotificationProviderProps) {
   const [notifications, setNotifications] = useState<NotificationMessage[]>([]);
   const timeout = useRef<NodeJS.Timeout>();
   const [shouldSetTimeout, setShouldSetTimeout] = useState<boolean>(true);
@@ -55,5 +57,3 @@ function NotificationProvider(props: NotificationProviderProps) {
     nextNotification,
   }} {...props} />;
 }
-
-export default NotificationProvider;

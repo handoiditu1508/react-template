@@ -31,9 +31,11 @@ type ConfirmationDialogContextType = {
 
 type ConfirmationDialogProviderProps = Omit<ProviderProps<ConfirmationDialogContextType>, "value">;
 
-export const ConfirmationDialogContext = React.createContext<ConfirmationDialogContextType>({} as ConfirmationDialogContextType);
+const ConfirmationDialogContext = React.createContext<ConfirmationDialogContextType>({} as ConfirmationDialogContextType);
 
-function ConfirmationDialogProvider(props: ConfirmationDialogProviderProps) {
+export default ConfirmationDialogContext;
+
+export function ConfirmationDialogProvider(props: ConfirmationDialogProviderProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
@@ -87,5 +89,3 @@ function ConfirmationDialogProvider(props: ConfirmationDialogProviderProps) {
     preventCloseOnConfirm,
   }} {...props} />;
 }
-
-export default ConfirmationDialogProvider;

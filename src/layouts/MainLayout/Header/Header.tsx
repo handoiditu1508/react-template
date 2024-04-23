@@ -1,9 +1,9 @@
 import logo from "@/assets/logo.svg";
 import CustomLink from "@/components/CustomLink";
 import CONFIG from "@/configs";
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
-import { InfoContext } from "@/providers/InfoProvider";
-import { PaletteModeContext } from "@/providers/PaletteModeProvider";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
+import InfoContext from "@/contexts/InfoContext";
+import PaletteModeContext from "@/contexts/PaletteModeContext";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu";

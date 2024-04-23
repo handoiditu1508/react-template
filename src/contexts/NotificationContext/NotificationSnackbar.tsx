@@ -1,7 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Alert, IconButton, Snackbar } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { NotificationContext, notificationMessageTimeout } from "./NotificationProvider";
+import NotificationContext, { notificationMessageTimeout } from "./NotificationContext";
 
 function NotificationSnackbar() {
   const { currentNotification, nextNotification } = useContext(NotificationContext);

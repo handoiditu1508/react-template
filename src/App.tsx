@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import "./App.scss";
+import { ConfirmationDialog } from "./contexts/ConfirmationDialogContext";
+import { NotificationSnackbar } from "./contexts/NotificationContext";
 import { useAppDispatch } from "./hooks";
-import { ConfirmationDialog } from "./providers/ConfirmationDialogProvider";
-import { NotificationSnackbar } from "./providers/NotificationProvider";
 import { loadAuthStateFromLocalAsync } from "./redux/slices/authSlice";
 import AppRoutes from "./routes";
 

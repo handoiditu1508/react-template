@@ -1,5 +1,5 @@
 import Suspense from "@/components/Suspense";
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
 import { Box, Paper, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
