@@ -11,7 +11,6 @@ import { PaletteModeProvider } from "./contexts/PaletteModeContext";
 import "./i18n";
 import "./index.scss";
 import store from "./redux/store";
-import reportWebVitals from "./reportWebVitals";
 import AppThemeProvider from "./themes/AppThemeProvider";
 
 const container = document.getElementById("root")!;
@@ -38,8 +37,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

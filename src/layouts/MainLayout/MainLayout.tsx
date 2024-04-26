@@ -8,7 +8,7 @@ import Header, { withHeaderProvider } from "./Header";
 import LayoutContainer from "./LayoutContainer";
 import Sidebar, { SidebarContext, withSidebarProvider } from "./Sidebar";
 
-function MainLayout() {
+function InnerMainLayout() {
   const { sidebarState, miniSidebarTransition, permanentSidebarTransition } = useContext(SidebarContext);
   const { smAndDown } = useContext(BreakpointsContext);
   const theme = useTheme();
@@ -61,4 +61,6 @@ function MainLayout() {
   );
 }
 
-export default withHeaderProvider(withSidebarProvider(MainLayout));
+const MainLayout = withHeaderProvider(withSidebarProvider(InnerMainLayout));
+
+export default MainLayout;

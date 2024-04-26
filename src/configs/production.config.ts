@@ -1,4 +1,4 @@
-import ConfigType from "./models/ConfigType";
+import ConfigType from "./ConfigType";
 
 const config: Partial<ConfigType> = {
 };
