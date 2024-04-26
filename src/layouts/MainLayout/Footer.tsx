@@ -1,7 +1,7 @@
 import logo from "@/assets/logo.svg";
 import CustomLink from "@/components/CustomLink";
 import CONFIG from "@/configs";
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import EmailIcon from "@mui/icons-material/Email";
 import { Box, BoxProps, Breadcrumbs, Divider, Grid, Link, Paper, Stack, Typography, styled } from "@mui/material";

@@ -7,6 +7,6 @@ type SupportAction = {
   bottomDivider?: boolean;
   secondaryText?: string;
   actionHandler?: () => void;
-}
+};
 
 export default SupportAction;

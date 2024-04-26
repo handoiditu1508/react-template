@@ -10,6 +10,7 @@ export type SidebarTab = {
   icon?: JSX.Element;
   childs?: SidebarTab[];
 };
+
 type SidebarItemProps = {
   sidebarTab: SidebarTab;
   level?: number;

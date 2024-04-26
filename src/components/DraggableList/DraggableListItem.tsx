@@ -8,7 +8,8 @@ type OwnProps = {
   text?: string | number;
   onRemove?: React.MouseEventHandler<HTMLButtonElement>;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-}
+};
+
 type DraggableListItemProps = OwnProps & Omit<ListItemProps, keyof OwnProps>;
 
 const DraggableListItem = styled(({ dragging, selected, disableHoverEffect, text, onRemove, onClick, ...props }: DraggableListItemProps) => {

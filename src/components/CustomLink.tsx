@@ -3,7 +3,7 @@ import { Link as RouterLink, LinkProps as RouterLinkProps } from "react-router-d
 
 export type CustomLinkProps = Omit<RouterLinkProps, keyof LinkProps> & Omit<LinkProps, "href" | "component"> & {
   disabled?: boolean;
-}
+};
 
 const CustomLink = styled(({
   disabled,
@@ -20,7 +20,7 @@ const CustomLink = styled(({
     disabled ? <Link
       {...props}
       href={undefined}
-      underline='none'
+      underline="none"
     /> : <Link
       component={RouterLink}
       to={to}

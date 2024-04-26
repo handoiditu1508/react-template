@@ -5,7 +5,7 @@ type OwnProps = {
   idleIcon: JSX.Element;
   activeIcon?: JSX.Element;
   customColor?: string;
-}
+};
 
 type TogglingIconButtonProps = OwnProps & Omit<IconButtonProps, keyof OwnProps>;
 

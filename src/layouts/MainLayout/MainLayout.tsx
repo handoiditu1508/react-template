@@ -1,13 +1,14 @@
 import Suspense from "@/components/Suspense";
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
-import { Box, Container, Paper, useTheme } from "@mui/material";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
+import { Box, Paper, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header, { withHeaderProvider } from "./Header";
+import LayoutContainer from "./LayoutContainer";
 import Sidebar, { SidebarContext, withSidebarProvider } from "./Sidebar";
 
-function MainLayout() {
+function InnerMainLayout() {
   const { sidebarState, miniSidebarTransition, permanentSidebarTransition } = useContext(SidebarContext);
   const { smAndDown } = useContext(BreakpointsContext);
   const theme = useTheme();
@@ -38,8 +39,8 @@ function MainLayout() {
             justifyContent: "flex-start",
             minHeight: "calc(100vh - var(--header-client-height))",
           }}>{/* spacing between sidebar & header */}
-          <Container disableGutters maxWidth="lg" sx={{
-            padding: { md: 4 },
+          <LayoutContainer sx={{
+            paddingY: { md: 4 },
             flexGrow: 1,
             display: { md: "flex" },
           }}>{/* center content & limit content size */}
@@ -51,7 +52,7 @@ function MainLayout() {
                 <Outlet />
               </Suspense>
             </Paper>
-          </Container>
+          </LayoutContainer>
           <Footer />
         </Box>
       </Paper>
@@ -60,4 +61,6 @@ function MainLayout() {
   );
 }
 
-export default withHeaderProvider(withSidebarProvider(MainLayout));
+const MainLayout = withHeaderProvider(withSidebarProvider(InnerMainLayout));
+
+export default MainLayout;

@@ -1,4 +1,4 @@
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
 import { useTheme } from "@mui/material";
 import React, { ProviderProps, useContext, useEffect, useState } from "react";
 

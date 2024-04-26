@@ -5,15 +5,17 @@ type PaletteModeContextType = {
   currentPaletteMode: PaletteMode;
   paletteMode: PaletteMode | "system";
   setPaletteMode: (mode: PaletteMode | "system") => void;
-}
+};
 
 type PaletteModeProviderProps = Omit<ProviderProps<PaletteModeContextType>, "value">;
 
-export const PaletteModeContext = React.createContext<PaletteModeContextType>({} as PaletteModeContextType);
+const PaletteModeContext = React.createContext<PaletteModeContextType>({} as PaletteModeContextType);
+
+export default PaletteModeContext;
 
 const checkIsSystemPaletteMode = (mode?: string | null) => !mode || (mode !== "light" && mode !== "dark");
 
-function PaletteModeProvider(props: PaletteModeProviderProps) {
+export function PaletteModeProvider(props: PaletteModeProviderProps) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [paletteMode, setPaletteMode] = useState<PaletteMode | "system">(
     checkIsSystemPaletteMode(localStorage.getItem("paletteMode"))
@@ -52,5 +54,3 @@ function PaletteModeProvider(props: PaletteModeProviderProps) {
 
   return <PaletteModeContext.Provider value={{ currentPaletteMode, paletteMode, setPaletteMode: setPaletteModeWrapper }} {...props} />;
 }
-
-export default PaletteModeProvider;

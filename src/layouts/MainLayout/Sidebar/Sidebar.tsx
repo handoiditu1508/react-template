@@ -1,9 +1,8 @@
 import logo from "@/assets/logo.svg";
 import CustomButton from "@/components/CustomButton";
-// import Scrollbar from "@/components/Scrollbar";
 import CONFIG from "@/configs";
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
-import { InfoContext } from "@/providers/InfoProvider";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
+import InfoContext from "@/contexts/InfoContext";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer, useTheme } from "@mui/material";
@@ -43,6 +42,7 @@ const Sidebar = () => {
     duration: theme.transitions.duration.shorter,
     easing: theme.transitions.easing.easeOut,
   });
+
   return (
     <SwipeableDrawer
       open={sidebarOpen}
@@ -51,10 +51,9 @@ const Sidebar = () => {
       anchor="left"
       disableBackdropTransition={!iOS}
       disableDiscovery={iOS}
-      disableSwipeToOpen// Disable since overlap with clippath thumb in xs and sm breakpoints
       variant={sidebarVariant}
       ModalProps={{
-        keepMounted: true,// Better open performance on mobile
+        keepMounted: true, // Better open performance on mobile
       }}
       sx={{
         width: sidebarState === "mini" ? miniSidebarWidth : undefined,

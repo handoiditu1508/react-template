@@ -5,7 +5,7 @@ import ErrorBoundary from "./ErrorBoundary";
 type OwnProps = {
   fallbackType?: "inline" | "backdrop";
   errorCallback?: () => void;
-}
+};
 
 type SuspenseProps = OwnProps & Omit<React.SuspenseProps, keyof OwnProps>;
 

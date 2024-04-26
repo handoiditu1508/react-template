@@ -1,5 +1,5 @@
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
-import { InfoContext } from "@/providers/InfoProvider";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
+import InfoContext from "@/contexts/InfoContext";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -16,6 +16,7 @@ import React, { ProviderProps, useContext, useEffect, useState } from "react";
 import { SidebarTab } from "./SidebarItem";
 
 type SidebarState = "hidden" | "temporary" | "mini" | "permanent" | "miniHovered";
+
 type CustomTransition = (...props: string[]) => React.CSSProperties["transition"];
 const sidebarTabs: SidebarTab[][] = [
   [

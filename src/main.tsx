@@ -3,16 +3,15 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
+import { BreakpointsProvider } from "./contexts/BreakpointsContext";
+import { ConfirmationDialogProvider } from "./contexts/ConfirmationDialogContext";
+import { InfoProvider } from "./contexts/InfoContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
+import { PaletteModeProvider } from "./contexts/PaletteModeContext";
 import "./i18n";
 import "./index.scss";
-import AppThemeProvider from "./providers/AppThemeProvider";
-import BreakpointsProvider from "./providers/BreakpointsProvider";
-import ConfirmationDialogProvider from "./providers/ConfirmationDialogProvider";
-import InfoProvider from "./providers/InfoProvider";
-import NotificationProvider from "./providers/NotificationProvider";
-import PaletteModeProvider from "./providers/PaletteModeProvider";
 import store from "./redux/store";
-import reportWebVitals from "./reportWebVitals";
+import AppThemeProvider from "./themes/AppThemeProvider";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -38,8 +37,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

@@ -1,7 +1,7 @@
 import defaultConfig from "./config";
-import type ConfigType from "./models/ConfigType";
+import type ConfigType from "./ConfigType";
 
-const environmentConfig: ConfigType | Partial<ConfigType> = require(process.env.REACT_APP_ENVIRONMENT_NAME ? `./${process.env.REACT_APP_ENVIRONMENT_NAME}.config` : "./config").default;
+const environmentConfig: Partial<ConfigType> = (await import(`./${import.meta.env.MODE}.config.ts`)).default;
 
 const CONFIG: ConfigType = {
   ...defaultConfig,

@@ -31,4 +31,3 @@ export default authApi;
 export const {
   useRefreshTokenMutation,
 } = authApi;
-

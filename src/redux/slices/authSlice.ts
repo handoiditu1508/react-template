@@ -7,7 +7,7 @@ import { RootState } from "../store";
 export type AuthState = {
   expirationTime: number | null;// miliseconds
   user: User | null;
-}
+};
 
 export const expirationTimeStorageKey = "expirationTime";
 

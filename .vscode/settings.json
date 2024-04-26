@@ -5,6 +5,7 @@
   "typescript.preferences.quoteStyle": "double",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.fixAll.eslint": "explicit"
   },
@@ -12,6 +13,28 @@
   "files.insertFinalNewline": true,
   "eslint.validate": [
     "javascript",
-    "typescript"
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
   ],
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.format.enable": true,
+  "prettier.disableLanguages": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "files.eol": "\r\n",
 }

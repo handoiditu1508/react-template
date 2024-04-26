@@ -1,17 +1,18 @@
 import logo from "@/assets/logo.svg";
 import CustomLink from "@/components/CustomLink";
 import CONFIG from "@/configs";
-import { BreakpointsContext } from "@/providers/BreakpointsProvider";
-import { InfoContext } from "@/providers/InfoProvider";
-import { PaletteModeContext } from "@/providers/PaletteModeProvider";
+import BreakpointsContext from "@/contexts/BreakpointsContext";
+import InfoContext from "@/contexts/InfoContext";
+import PaletteModeContext from "@/contexts/PaletteModeContext";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
-import { AppBar, Box, Container, Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Slide, ToggleButton, ToggleButtonGroup, Toolbar, Typography, useScrollTrigger, useTheme } from "@mui/material";
+import { AppBar, Box, Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Slide, ToggleButton, ToggleButtonGroup, Toolbar, Typography, useScrollTrigger, useTheme } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import LayoutContainer from "../LayoutContainer";
 import { SidebarContext } from "../Sidebar";
 
 const languages: { code: string; name: string; }[] = [
@@ -69,9 +70,8 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
             }),
             zIndex: theme.zIndex.appBar,
           }}>
-          <Container disableGutters maxWidth="lg" sx={{
+          <LayoutContainer sx={{
             paddingTop: "var(--header-top-spacing)",
-            paddingX: { md: 4 },
           }}>
             <AppBar position="relative" ref={ref} elevation={4} color="inherit" sx={{
               borderRadius: { md: 2 },
@@ -102,7 +102,7 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
                 </Box>
               </Toolbar>
             </AppBar>
-          </Container>
+          </LayoutContainer>
         </Box>
       </Slide>
       <Drawer open={settingsDrawerOpen} anchor="right" variant="temporary" onClose={() => setSettingsDrawerOpen(false)}>

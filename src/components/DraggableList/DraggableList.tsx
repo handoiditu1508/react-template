@@ -6,15 +6,15 @@ import DraggableListItem from "./DraggableListItem";
 
 type OwnProps<T = any> = {
   selectedIndex?: number;
-  items: T[],
+  items: T[];
   selectItemId: (item: T) => string | number;
   selectItemContent: (item: T) => string | number | undefined;
   onMoveItem: (fromIndex: number, toIndex: number) => void;
   onRemoveItem?: (index: number) => void;
   onSelectItem?: (index: number) => void;
-}
+};
 
-export type DraggableListProps<T = any> = OwnProps<T> & Omit<ListProps, keyof OwnProps>
+export type DraggableListProps<T = any> = OwnProps<T> & Omit<ListProps, keyof OwnProps>;
 
 const DraggableList = styled(({ selectedIndex, items, selectItemId, selectItemContent, onMoveItem, onRemoveItem = CONFIG.EMPTY_FUNCTION, onSelectItem = CONFIG.EMPTY_FUNCTION,
   ...props }: DraggableListProps) => {
