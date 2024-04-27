@@ -187,6 +187,20 @@
         "after": true
       }
     ],
+    "brace-style": [
+      "off",
+      "1tbs",
+      {
+        "allowSingleLine": false
+      }
+    ],
+    "@typescript-eslint/brace-style": [
+      "warn",
+      "1tbs",
+      {
+        "allowSingleLine": false
+      }
+    ],
     "@typescript-eslint/type-annotation-spacing": "warn",
     "@typescript-eslint/member-delimiter-style": [
       "warn",

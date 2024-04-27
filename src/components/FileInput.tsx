@@ -215,7 +215,10 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
         value={inputValue}
         error={!!error}
         helperText={error}
-        onChange={e => { setInputValue(e.target.value); onChangeInput && onChangeInput(); }}
+        onChange={e => {
+          setInputValue(e.target.value);
+          onChangeInput && onChangeInput();
+        }}
         onClick={stopBubbling}
         onPaste={pasteFromClipboard}
         onKeyDown={onPressEnter}
