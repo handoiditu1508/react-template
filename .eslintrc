@@ -244,6 +244,7 @@
       }
     ],
     "react/display-name": "off",
+    "react/no-unescaped-entities": "off",
     "import/newline-after-import": "warn"
   }
 }
