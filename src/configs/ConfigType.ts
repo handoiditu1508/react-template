@@ -6,7 +6,7 @@ type ConfigType = {
    */
   LAYOUT_PADDING: number;
   EMPTY_FUNCTION: () => void;
-  EMPTY_OBJECT: Record<string, never>;
+  EMPTY_OBJECT: {};
   EMPTY_ARRAY: [];
 };
 
