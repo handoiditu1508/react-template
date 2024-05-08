@@ -1,5 +1,6 @@
 import { stopBubbling } from "@/common/eventHelpers";
 import { loadFileFromUrl } from "@/common/fileHelpers";
+import CONFIG from "@/configs";
 import ForwardIcon from "@mui/icons-material/Forward";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { Box, Button, CircularProgress, IconButton, InputAdornment, Stack, StackProps, styled, TextField, Typography } from "@mui/material";
@@ -86,7 +87,7 @@ type OwnProps = {
 };
 export type FileInputProps = OwnProps & Omit<StackProps, keyof OwnProps>;
 
-function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, error, onFilesChange, onChangeInput, ...props }: FileInputProps) {
+function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, error, onFilesChange = CONFIG.EMPTY_FUNCTION, onChangeInput = CONFIG.EMPTY_FUNCTION, ...props }: FileInputProps) {
   const [status, setStatus] = useState<FileInputStatus>();
   const [inputValue, setInputValue] = useState<string>("");
   const dragInnerCounter = useRef<number>(0);
@@ -118,7 +119,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
     if (!files) {
       setFileListToInput(event.dataTransfer.files);
     }
-    onFilesChange && onFilesChange(Array.from(event.dataTransfer.files), "drop");
+    onFilesChange(Array.from(event.dataTransfer.files), "drop");
   };
 
   const openFileSelectWindow = () => {
@@ -138,14 +139,14 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
     if (!files) {
       setFileListToInput([]);
     }
-    onFilesChange && onFilesChange([], "reset");
+    onFilesChange([], "reset");
   };
 
   const uploadFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     if (!files) {
       setStatus("uploaded");
     }
-    onFilesChange && onFilesChange(Array.from(event.currentTarget.files || []), "browse");
+    onFilesChange(Array.from(event.currentTarget.files || []), "browse");
   };
 
   const loadFileFromInputValue = async () => {
@@ -157,7 +158,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
       if (!files) {
         setFileListToInput(fileArray);
       }
-      onFilesChange && onFilesChange(fileArray, "url");
+      onFilesChange(fileArray, "url");
     } catch (error) {
       setStatus("idle");
       console.error(error);
@@ -168,7 +169,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
     if (!files) {
       setFileListToInput(event.clipboardData.files);
     }
-    onFilesChange && onFilesChange(Array.from(event.clipboardData.files), "clipboard");
+    onFilesChange(Array.from(event.clipboardData.files), "clipboard");
   };
 
   const setFileListToInput = (fileList: FileList | File[]) => {
@@ -217,7 +218,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
         helperText={error}
         onChange={e => {
           setInputValue(e.target.value);
-          onChangeInput && onChangeInput();
+          onChangeInput();
         }}
         onClick={stopBubbling}
         onPaste={pasteFromClipboard}
