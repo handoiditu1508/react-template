@@ -137,16 +137,16 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
 
   const reset = () => {
     if (!files) {
-      setFileListToInput([]);
+      setFileListToInput(CONFIG.EMPTY_ARRAY);
     }
-    onFilesChange([], "reset");
+    onFilesChange(CONFIG.EMPTY_ARRAY, "reset");
   };
 
   const uploadFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     if (!files) {
       setStatus("uploaded");
     }
-    onFilesChange(Array.from(event.currentTarget.files || []), "browse");
+    onFilesChange(Array.from(event.currentTarget.files || CONFIG.EMPTY_ARRAY), "browse");
   };
 
   const loadFileFromInputValue = async () => {
