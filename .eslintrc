@@ -245,6 +245,27 @@
     ],
     "react/display-name": "off",
     "react/no-unescaped-entities": "off",
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      {
+        "props": "never",
+        "children": "never",
+        "propElementValues": "always"
+      }
+    ],
+    "react/no-unknown-property": [
+      "warn",
+      {
+        "ignore": []
+      }
+    ],
+    "react/jsx-no-useless-fragment": [
+      "warn",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "react/jsx-fragments": "warn",
     "import/newline-after-import": "warn"
   }
 }

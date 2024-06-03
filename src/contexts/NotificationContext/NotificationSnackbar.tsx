@@ -27,15 +27,13 @@ function NotificationSnackbar() {
 
   const handleClickCloseButton = (event: React.SyntheticEvent | Event) => handleClose(event, "closebutton");
 
-  const action = (<>
-    <IconButton
-      size="small"
-      aria-label="close"
-      color="inherit"
-      onClick={handleClickCloseButton}>
-      <CloseIcon fontSize="small" />
-    </IconButton>
-  </>);
+  const action = (<IconButton
+    size="small"
+    aria-label="close"
+    color="inherit"
+    onClick={handleClickCloseButton}>
+    <CloseIcon fontSize="small" />
+  </IconButton>);
 
   return (currentNotification ? <Snackbar
     key={currentNotification.id}
