@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 export const notificationMessageTimeout = 3000;
 
 export type NotificationMessage = {
-  id?: string | number;
+  id?: React.Key;
   severity?: AlertColor;
   text: string;
 };

@@ -1,13 +1,14 @@
 import CONFIG from "@/configs";
 import { useDragListItem } from "@/hooks";
 import { Collapse, List, ListProps, styled } from "@mui/material";
+import React from "react";
 import { TransitionGroup } from "react-transition-group";
 import DraggableListItem from "./DraggableListItem";
 
 type OwnProps<T = any> = {
   selectedIndex?: number;
   items: T[];
-  selectItemId: (item: T) => string | number;
+  selectItemId: (item: T) => React.Key;
   selectItemContent: (item: T) => string | number | undefined;
   onMoveItem: (fromIndex: number, toIndex: number) => void;
   onRemoveItem?: (index: number) => void;
