@@ -7,6 +7,8 @@ const defaultConfig: ConfigType = {
   EMPTY_FUNCTION: () => { },
   EMPTY_OBJECT: {},
   EMPTY_ARRAY: [],
+  CLIENT_ID: "client-id.apps.googleusercontent.com",
+  CLIENT_SECRET: "secret",
 };
 
 export default defaultConfig;

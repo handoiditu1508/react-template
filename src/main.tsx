@@ -1,8 +1,10 @@
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import CONFIG from "./configs";
 import { BreakpointsProvider } from "./contexts/BreakpointsContext";
 import { ConfirmationDialogProvider } from "./contexts/ConfirmationDialogContext";
 import { InfoProvider } from "./contexts/InfoContext";
@@ -26,7 +28,9 @@ root.render(
               <AppThemeProvider>{/* mui theme */}
                 <BreakpointsProvider>{/* breakpoints helper */}
                   <BrowserRouter>{/* react router */}
-                    <App />
+                    <GoogleOAuthProvider clientId={CONFIG.CLIENT_ID}>
+                      <App />
+                    </GoogleOAuthProvider>
                   </BrowserRouter>
                 </BreakpointsProvider>
               </AppThemeProvider>
