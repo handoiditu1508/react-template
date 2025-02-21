@@ -1,4 +1,5 @@
-import eslint from "@eslint/js";
+// import eslint from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 import importPlugin from "eslint-plugin-import";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -10,8 +11,8 @@ export default tseslint.config(
   { ignores: ["dist"] },
   {
     extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
+      // eslint.configs.recommended,
+      // ...tseslint.configs.recommended,
     ],
     files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
     languageOptions: {
@@ -25,6 +26,7 @@ export default tseslint.config(
       "@typescript-eslint": tseslint.plugin,
       "import": importPlugin,
       react,
+      "@stylistic": stylistic,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -36,11 +38,11 @@ export default tseslint.config(
           "allowConstantExport": true,
         },
       ],
-      "linebreak-style": [
+      "@stylistic/linebreak-style": [
         "warn",
         "windows",
       ],
-      "no-multiple-empty-lines": [
+      "@stylistic/no-multiple-empty-lines": [
         "warn",
         {
           "max": 1,
@@ -48,56 +50,40 @@ export default tseslint.config(
           "maxEOF": 0,
         },
       ],
-      "no-multi-spaces": "warn",
-      "no-trailing-spaces": "warn",
-      "array-bracket-spacing": [
+      "@stylistic/no-multi-spaces": "warn",
+      "@stylistic/no-trailing-spaces": "warn",
+      "@stylistic/array-bracket-spacing": [
         "warn",
         "never",
       ],
-      "space-in-parens": [
+      "@stylistic/space-in-parens": [
         "warn",
         "never",
       ],
-      "arrow-spacing": [
+      "@stylistic/arrow-spacing": [
         "warn",
         {
           "before": true,
           "after": true,
         },
       ],
-      "semi": [
+      "@stylistic/semi": [
         "warn",
         "always",
       ],
-      // "@typescript-eslint/semi": [
-      //   "warn",
-      //   "always",
-      // ],
-      "object-curly-spacing": [
+      "@stylistic/object-curly-spacing": [
         "warn",
         "always",
       ],
-      // "@typescript-eslint/object-curly-spacing": [
-      //   "warn",
-      //   "always"
-      // ],
-      "comma-spacing": [
+      "@stylistic/comma-spacing": [
         "warn",
         {
           "before": false,
           "after": true,
         },
       ],
-      // "@typescript-eslint/comma-spacing": [
-      //   "warn",
-      //   {
-      //     "before": false,
-      //     "after": true
-      //   }
-      // ],
-      "space-infix-ops": "warn",
-      // "@typescript-eslint/space-infix-ops": "warn",
-      "space-before-function-paren": [
+      "@stylistic/space-infix-ops": "warn",
+      "@stylistic/space-before-function-paren": [
         "warn",
         {
           "anonymous": "always",
@@ -105,18 +91,9 @@ export default tseslint.config(
           "asyncArrow": "always",
         },
       ],
-      // "@typescript-eslint/space-before-function-paren": [
-      //   "warn",
-      //   {
-      //     "anonymous": "always",
-      //     "named": "never",
-      //     "asyncArrow": "always"
-      //   },
-      // ],
-      "space-before-blocks": "warn",
-      // "@typescript-eslint/space-before-blocks": "warn",
-      "indent": [
-        "warn",
+      "@stylistic/space-before-blocks": "warn",
+      "@stylistic/indent": [
+        "off",
         2,
         {
           "SwitchCase": 1,
@@ -127,27 +104,11 @@ export default tseslint.config(
           },
         },
       ],
-      // "@typescript-eslint/indent": [
-      //   "off",
-      //   2,
-      //   {
-      //     "SwitchCase": 1,
-      //     "VariableDeclarator": {
-      //       "var": 2,
-      //       "let": 2,
-      //       "const": 3
-      //     }
-      //   }
-      // ],
-      "quotes": [
+      "@stylistic/quotes": [
         "warn",
         "double",
       ],
-      // "@typescript-eslint/quotes": [
-      //   "warn",
-      //   "double"
-      // ],
-      "comma-dangle": [
+      "@stylistic/comma-dangle": [
         "warn",
         {
           "arrays": "always-multiline",
@@ -155,88 +116,52 @@ export default tseslint.config(
           "imports": "always-multiline",
           "exports": "only-multiline",
           "functions": "only-multiline",
+          "enums": "only-multiline",
+          "generics": "ignore",
+          "tuples": "only-multiline",
         },
       ],
-      // "@typescript-eslint/comma-dangle": [
-      //   "warn",
-      //   {
-      //     "arrays": "always-multiline",
-      //     "objects": "always-multiline",
-      //     "imports": "always-multiline",
-      //     "exports": "only-multiline",
-      //     "functions": "only-multiline",
-      //     "enums": "only-multiline",
-      //     "generics": "ignore",
-      //     "tuples": "only-multiline"
-      //   }
-      // ],
-      "padding-line-between-statements": [
+      "@stylistic/padding-line-between-statements": [
         "warn",
         {
           "blankLine": "always",
           "prev": "*",
           "next": [
             "return",
-            // "interface",
-            // "type",
+            "interface",
+            "type",
           ],
         },
       ],
-      // "@typescript-eslint/padding-line-between-statements": [
-      //   "warn",
-      //   {
-      //     "blankLine": "always",
-      //     "prev": "*",
-      //     "next": [
-      //       "return",
-      //       "interface",
-      //       "type"
-      //     ]
-      //   }
-      // ],
-      "keyword-spacing": [
+      "@stylistic/keyword-spacing": [
         "warn",
         {
           "before": true,
           "after": true,
         },
       ],
-      // "@typescript-eslint/keyword-spacing": [
-      //   "warn",
-      //   {
-      //     "before": true,
-      //     "after": true
-      //   }
-      // ],
-      "brace-style": [
+      "@stylistic/brace-style": [
         "warn",
         "1tbs",
         {
           "allowSingleLine": false,
         },
       ],
-      // "@typescript-eslint/brace-style": [
-      //   "warn",
-      //   "1tbs",
-      //   {
-      //     "allowSingleLine": false
-      //   }
-      // ],
-      // "@typescript-eslint/type-annotation-spacing": "warn",
-      // "@typescript-eslint/member-delimiter-style": [
-      //   "warn",
-      //   {
-      //     "multiline": {
-      //       "delimiter": "semi",
-      //       "requireLast": true
-      //     },
-      //     "singleline": {
-      //       "delimiter": "semi",
-      //       "requireLast": true
-      //     }
-      //   }
-      // ],
-      "jsx-quotes": [
+      "@stylistic/type-annotation-spacing": "warn",
+      "@stylistic/member-delimiter-style": [
+        "warn",
+        {
+          "multiline": {
+            "delimiter": "semi",
+            "requireLast": true,
+          },
+          "singleline": {
+            "delimiter": "semi",
+            "requireLast": true,
+          },
+        },
+      ],
+      "@stylistic/jsx-quotes": [
         "warn",
         "prefer-double",
       ],
@@ -246,7 +171,7 @@ export default tseslint.config(
           "additionalHooks": "useUpdateEffect",
         },
       ],
-      "react/jsx-tag-spacing": [
+      "@stylistic/jsx-tag-spacing": [
         "warn",
         {
           "closingSlash": "never",
@@ -257,7 +182,7 @@ export default tseslint.config(
       ],
       "react/display-name": "off",
       "react/no-unescaped-entities": "off",
-      "react/jsx-curly-brace-presence": [
+      "@stylistic/jsx-curly-brace-presence": [
         "warn",
         {
           "props": "never",
