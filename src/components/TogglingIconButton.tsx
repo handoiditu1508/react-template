@@ -12,9 +12,9 @@ type TogglingIconButtonProps = OwnProps & Omit<IconButtonProps, keyof OwnProps>;
 const TogglingIconButton = styled(React.forwardRef<HTMLButtonElement, TogglingIconButtonProps>(({ idleIcon, activeIcon, customColor, color, style, ...props }, ref) => {
   const theme = useTheme();
   const standardizedColor = customColor || (theme.palette.isPaletteColorOption(color) && theme.palette[color].main) || color;
-  const hoverColor = standardizedColor && standardizedColor.startsWith("#") ?
-    alpha(standardizedColor, theme.palette.action.hoverOpacity) :
-    `rgba(0, 0, 0, ${theme.palette.action.hoverOpacity})`;
+  const hoverColor = standardizedColor && standardizedColor.startsWith("#")
+    ? alpha(standardizedColor, theme.palette.action.hoverOpacity)
+    : `rgba(0, 0, 0, ${theme.palette.action.hoverOpacity})`;
 
   return (
     <IconButton ref={ref} style={{ ...style, "--custom-color": standardizedColor, "--hover-color": hoverColor } as React.CSSProperties} {...props}>

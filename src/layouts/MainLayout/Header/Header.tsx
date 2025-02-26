@@ -55,7 +55,8 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <>
       <Slide appear={false} direction="down" in={!hideHeaderTrigger}>
-        <Box component="main"
+        <Box
+          component="main"
           className="mui-fixed"
           sx={{
             marginLeft: "var(--sidebar-current-width)",
@@ -73,10 +74,15 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
           <LayoutContainer sx={{
             paddingTop: "var(--header-top-spacing)",
           }}>
-            <AppBar position="relative" ref={ref} elevation={4} color="inherit" sx={{
-              borderRadius: { md: 2 },
-              boxShadow: shadowHeaderTrigger ? undefined : "none",
-            }}>
+            <AppBar
+              ref={ref}
+              position="relative"
+              elevation={4}
+              color="inherit"
+              sx={{
+                borderRadius: { md: 2 },
+                boxShadow: shadowHeaderTrigger ? undefined : "none",
+              }}>
               <Toolbar>
                 {(smAndDown || mobile) && <Box flexGrow={1}>
                   <IconButton edge="start" sx={{ marginRight: 1 }} onClick={() => setSidebarOpen(!sidebarOpen)}><MenuIcon /></IconButton>
@@ -133,7 +139,7 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
 
           <p className="title">Language</p>
           <Select value={i18n.resolvedLanguage || languages[0].code} fullWidth size="small" onChange={handleChangeLanguage}>
-            {languages.map(language => <MenuItem key={language.code} value={language.code}>{language.name}</MenuItem>)}
+            {languages.map((language) => <MenuItem key={language.code} value={language.code}>{language.name}</MenuItem>)}
           </Select>
         </Box>
       </Drawer>

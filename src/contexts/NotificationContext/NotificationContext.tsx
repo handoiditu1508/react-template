@@ -32,7 +32,7 @@ export function NotificationProvider(props: NotificationProviderProps) {
   useEffect(() => {
     if (notifications.length !== 0 && shouldSetTimeout) {
       timeout.current = setTimeout(() => {
-        setNotifications(notifications => notifications.slice(1));
+        setNotifications((notifications) => notifications.slice(1));
         setShouldSetTimeout(true);
       }, notificationMessageTimeout);
       setShouldSetTimeout(false);
@@ -41,19 +41,24 @@ export function NotificationProvider(props: NotificationProviderProps) {
 
   const pushNotification = (notification: NotificationMessage) => {
     notification.id ||= uuidv4();
-    setNotifications(notifications => [...notifications, notification]);
+    setNotifications((notifications) => [...notifications, notification]);
   };
 
   const nextNotification = () => {
     clearTimeout(timeout.current);
     setShouldSetTimeout(true);
-    setNotifications(notifications => notifications.slice(1));
+    setNotifications((notifications) => notifications.slice(1));
   };
 
-  return <NotificationContext.Provider value={{
-    notifications,
-    currentNotification: notifications[0],
-    pushNotification,
-    nextNotification,
-  }} {...props} />;
+  return (
+    <NotificationContext.Provider
+      value={{
+        notifications,
+        currentNotification: notifications[0],
+        pushNotification,
+        nextNotification,
+      }}
+      {...props}
+    />
+  );
 }

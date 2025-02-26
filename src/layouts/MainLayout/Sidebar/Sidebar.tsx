@@ -46,8 +46,6 @@ const Sidebar = () => {
   return (
     <SwipeableDrawer
       open={sidebarOpen}
-      onClose={toggleDrawer(false)}
-      onOpen={toggleDrawer(true)}
       anchor="left"
       disableBackdropTransition={!iOS}
       disableDiscovery={iOS}
@@ -83,42 +81,52 @@ const Sidebar = () => {
         onMouseEnter: () => setSidebarHovered(true),
         onMouseLeave: () => setSidebarHovered(false),
       }}
+      onClose={toggleDrawer(false)}
+      onOpen={toggleDrawer(true)}
     >
       <List>
         <ListItem sx={{
           display: "flex",
           justifyContent: "space-between",
         }}>
-          <CustomButton variant="text" to="/" disableRipple disableTouchRipple sx={{
-            paddingX: 0,
-            marginLeft: `${(miniSidebarWidth - 40) / 2}px`,
-            "&:hover": {
-              backgroundColor: "transparent",
-            },
-          }}>
+          <CustomButton
+            variant="text"
+            to="/"
+            disableRipple
+            disableTouchRipple
+            sx={{
+              paddingX: 0,
+              marginLeft: `${(miniSidebarWidth - 40) / 2}px`,
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}>
             <ListItemIcon sx={{
               minWidth: "unset",
               marginRight: 1,
             }}>
               <img src={logo} alt="logo" width={40} height={40} />
             </ListItemIcon>
-            <ListItemText primary={CONFIG.APP_NAME} primaryTypographyProps={{
-              color: "primary",
-              variant: "h6",
-              textTransform: "none",
-            }} />
+            <ListItemText
+              primary={CONFIG.APP_NAME}
+              primaryTypographyProps={{
+                color: "primary",
+                variant: "h6",
+                textTransform: "none",
+              }}
+            />
           </CustomButton>
           {!(smAndDown || mobile) && <IconButton
             color="primary"
             size="small"
-            onClick={() => setSidebarPinned(!sidebarPinned)}
             sx={{
               marginRight: 1,
               opacity: sidebarState === "mini" ? 0 : undefined,
               ...((sidebarState === "permanent" || sidebarState === "miniHovered") && {
                 transition: theme.transitions.create("opacity", { delay: theme.transitions.duration.enteringScreen, duration: 0 }),
               }),
-            }}>
+            }}
+            onClick={() => setSidebarPinned(!sidebarPinned)}>
             {sidebarPinned ? <RadioButtonCheckedIcon /> : <RadioButtonUncheckedIcon />}
           </IconButton>}
         </ListItem>
@@ -126,7 +134,7 @@ const Sidebar = () => {
 
       <List>
         {sidebarTabs.map((tabs, tabsIndex) => <Fragment key={tabsIndex}>
-          {tabs.map(tab => <SidebarItem key={tab.title} sidebarTab={tab} hideChilds={sidebarState === "mini"} />)}
+          {tabs.map((tab) => <SidebarItem key={tab.title} sidebarTab={tab} hideChilds={sidebarState === "mini"} />)}
           {(tabsIndex !== sidebarTabs.length - 1) && <Divider />}
         </Fragment>)}
       </List>

@@ -39,7 +39,8 @@ const DraggableList = styled(({ selectedIndex, items, selectItemId, selectItemCo
             onClick={() => onSelectItem(index)}
             onDragStart={() => handleDragStart(index)}
             onDragOver={handleDragOver(index)}
-            onDragEnd={handleDragEnd} />
+            onDragEnd={handleDragEnd}
+          />
         </Collapse>)}
       </TransitionGroup>
     </List>

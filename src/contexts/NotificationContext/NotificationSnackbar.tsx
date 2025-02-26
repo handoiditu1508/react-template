@@ -27,30 +27,34 @@ function NotificationSnackbar() {
 
   const handleClickCloseButton = (event: React.SyntheticEvent | Event) => handleClose(event, "closebutton");
 
-  const action = (<IconButton
-    size="small"
-    aria-label="close"
-    color="inherit"
-    onClick={handleClickCloseButton}>
-    <CloseIcon fontSize="small" />
-  </IconButton>);
+  const action = (
+    <IconButton
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={handleClickCloseButton}>
+      <CloseIcon fontSize="small" />
+    </IconButton>
+  );
 
-  return (currentNotification ? <Snackbar
-    key={currentNotification.id}
-    open={open}
-    autoHideDuration={notificationMessageTimeout}
-    onClose={handleClose}
-    message={!currentNotification.severity && currentNotification.text}
-    action={!currentNotification.severity && action}>
-    {currentNotification.severity && <Alert
-      severity={currentNotification.severity}
-      elevation={6}
-      variant="filled"
-      onClose={handleClickCloseButton}
-      sx={{ width: "100%" }}>
-      {currentNotification.text}
-    </Alert>}
-  </Snackbar> : null);
+  return (currentNotification
+    ? <Snackbar
+      key={currentNotification.id}
+      open={open}
+      autoHideDuration={notificationMessageTimeout}
+      message={!currentNotification.severity && currentNotification.text}
+      action={!currentNotification.severity && action}
+      onClose={handleClose}>
+      {currentNotification.severity && <Alert
+        severity={currentNotification.severity}
+        elevation={6}
+        variant="filled"
+        sx={{ width: "100%" }}
+        onClose={handleClickCloseButton}>
+        {currentNotification.text}
+      </Alert>}
+    </Snackbar>
+    : null);
 }
 
 export default NotificationSnackbar;

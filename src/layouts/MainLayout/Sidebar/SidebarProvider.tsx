@@ -135,20 +135,25 @@ function SidebarProvider(props: SidebarProviderProps) {
     delay: theme.transitions.duration.shorter,
   });
 
-  return <SidebarContext.Provider value={{
-    sidebarOpen,
-    setSidebarOpen: setSidebarOpenWrapper,
-    sidebarCurrentWidth,
-    sidebarPinned,
-    setSidebarPinned,
-    sidebarState,
-    sidebarVariant,
-    miniSidebarTransition,
-    permanentSidebarTransition,
-    sidebarHovered,
-    setSidebarHovered,
-    sidebarTabs,
-  }} {...props} />;
+  return (
+    <SidebarContext.Provider
+      value={{
+        sidebarOpen,
+        setSidebarOpen: setSidebarOpenWrapper,
+        sidebarCurrentWidth,
+        sidebarPinned,
+        setSidebarPinned,
+        sidebarState,
+        sidebarVariant,
+        miniSidebarTransition,
+        permanentSidebarTransition,
+        sidebarHovered,
+        setSidebarHovered,
+        sidebarTabs,
+      }}
+      {...props}
+    />
+  );
 }
 
 export default SidebarProvider;

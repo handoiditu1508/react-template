@@ -37,7 +37,7 @@ const defaultThemeOptions: ThemeOptions = {
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
   },
   palette: {
-    isPaletteColorOption: (color?: string): color is ColorOption => colorOptions.some(value => value === color),
+    isPaletteColorOption: (color?: string): color is ColorOption => colorOptions.some((value) => value === color),
   },
   constants: {
     scalingFactor,
@@ -74,10 +74,10 @@ const defaultThemeOptions: ThemeOptions = {
     hideNumberInputArrows: {
       "&[type=number]": {
         "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
-          "WebkitAppearance": "none",
+          WebkitAppearance: "none",
           margin: 0,
         },
-        "MozAppearance": "textfield",
+        MozAppearance: "textfield",
         appearance: "textfield",
       },
     },

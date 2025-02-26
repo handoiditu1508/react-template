@@ -73,19 +73,24 @@ export function ConfirmationDialogProvider(props: ConfirmationDialogProviderProp
     setOpen(false);
   };
 
-  return <ConfirmationDialogContext.Provider value={{
-    openDialog,
-    closeDialog,
-    setLoading,
-    open,
-    loading,
-    title,
-    description,
-    cancelButtonText,
-    confirmButtonText,
-    hideCancelButton,
-    onCancel: onCancel.current,
-    onConfirm: onConfirm.current,
-    preventCloseOnConfirm,
-  }} {...props} />;
+  return (
+    <ConfirmationDialogContext.Provider
+      value={{
+        openDialog,
+        closeDialog,
+        setLoading,
+        open,
+        loading,
+        title,
+        description,
+        cancelButtonText,
+        confirmButtonText,
+        hideCancelButton,
+        onCancel: onCancel.current,
+        onConfirm: onConfirm.current,
+        preventCloseOnConfirm,
+      }}
+      {...props}
+    />
+  );
 }

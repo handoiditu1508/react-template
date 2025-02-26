@@ -11,12 +11,12 @@ const postApi = appApi.injectEndpoints({
     }),
     getPosts: builder.query<Post[], void>({
       query: () => "posts",
-      providesTags: (result) => result
+      providesTags: (result) => (result
         ? [
           ...result.map(({ id }) => ({ type: "Post", id } as const)),
           { type: "Post", id: "LIST" },
         ]
-        : [{ type: "Post", id: "LIST" }],
+        : [{ type: "Post", id: "LIST" }]),
     }),
     addPost: builder.mutation<Post, Partial<Post>>({
       query: (body) => ({

@@ -15,7 +15,8 @@ function InnerMainLayout() {
 
   return (
     <>
-      <Paper square
+      <Paper
+        square
         sx={{
           boxShadow: "none",
           overflow: "auto",
@@ -24,7 +25,8 @@ function InnerMainLayout() {
         }}>{/* background for app */}
         <Header />
         <Sidebar />
-        <Box component="main"
+        <Box
+          component="main"
           sx={{
             marginLeft: "var(--sidebar-current-width)",
             marginTop: "var(--header-client-height)",
@@ -44,10 +46,12 @@ function InnerMainLayout() {
             flexGrow: 1,
             display: { md: "flex" },
           }}>{/* center content & limit content size */}
-            <Paper square={smAndDown} sx={{
-              boxShadow: "none",
-              width: "100%",
-            }}>{/* background color for main content */}
+            <Paper
+              square={smAndDown}
+              sx={{
+                boxShadow: "none",
+                width: "100%",
+              }}>{/* background color for main content */}
               <Suspense>
                 <Outlet />
               </Suspense>
