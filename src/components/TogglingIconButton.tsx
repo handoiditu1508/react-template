@@ -1,5 +1,5 @@
 import { IconButton, IconButtonProps, alpha, styled, useTheme } from "@mui/material";
-import React from "react";
+import React, { JSX } from "react";
 
 type OwnProps = {
   idleIcon: JSX.Element;

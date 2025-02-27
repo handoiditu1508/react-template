@@ -13,7 +13,7 @@ const CustomLink = styled(({
   state,
   preventScrollReset,
   relative,
-  unstable_viewTransition,
+  viewTransition,
   ...props
 }: CustomLinkProps) => {
   return (
@@ -31,7 +31,7 @@ const CustomLink = styled(({
         state={state}
         preventScrollReset={preventScrollReset}
         relative={relative}
-        unstable_viewTransition={unstable_viewTransition}
+        viewTransition={viewTransition}
         {...props}
       />
   );

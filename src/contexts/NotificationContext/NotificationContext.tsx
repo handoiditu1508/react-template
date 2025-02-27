@@ -25,7 +25,7 @@ export default NotificationContext;
 
 export function NotificationProvider(props: NotificationProviderProps) {
   const [notifications, setNotifications] = useState<NotificationMessage[]>([]);
-  const timeout = useRef<NodeJS.Timeout>();
+  const timeout = useRef<NodeJS.Timeout>(undefined);
   const [shouldSetTimeout, setShouldSetTimeout] = useState<boolean>(true);
 
   // remove oldest notification after timeout
