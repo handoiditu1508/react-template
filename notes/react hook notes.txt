@@ -6,9 +6,9 @@
 ==========> useState <==========
 
 ==========> useEffect <==========
-- used to handle componentDidMount, componentUpdated, componentWillUmount
+- used to handle componentDidMount, componentUpdated, componentWillUnmount
 - first parameter is a function that run after every renders (likes componentUpdated)
-- second parameter is an array of dependencies to prevent useEffect hook from rerun
+- second parameter is an array of dependencies to prevent useEffect hook from rerun unnecessarily
 - to run effect only once (likes componentDidMount), define second parameter to an empty array []
 - first parameter return a function which run before every rerenders, we can use this function to cancel watchers, timers, ... (likes componentWillUmount)
 - can use multiple useEffects to group related logics
@@ -68,7 +68,7 @@
 ==========> Type notes <==========
 - types can be union using |
 - types can be intersect using &
-- type P = keyof {name: string; age: number;}. P = "name" | "number"
+- type P = keyof {name: string; age: number;}. P = "name" | "age"
 - never type is used to blocking specific properties from including in a type
 - Exclude<ButtonVariant, "primary"> exclude "primary" from type ButtonVariant
 - React.ComponentProps<typeof CustomButton>
