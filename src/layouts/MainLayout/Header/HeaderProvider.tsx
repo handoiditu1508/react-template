@@ -1,13 +1,7 @@
 import BreakpointsContext from "@/contexts/BreakpointsContext";
 import { useTheme } from "@mui/material";
-import React, { ProviderProps, useContext, useEffect, useState } from "react";
-
-type HeaderContextType = {
-  headerHeight: number;
-  headerTopSpacing: number;
-  headerClientHeight: number;// headerHeight + headerTopSpacing + other spacings if any
-};
-export const HeaderContext = React.createContext<HeaderContextType>({} as HeaderContextType);
+import { ProviderProps, useContext, useEffect, useState } from "react";
+import HeaderContext, { HeaderContextType } from "./HeaderContext";
 
 type HeaderProviderProps = Omit<ProviderProps<HeaderContextType>, "value">;
 

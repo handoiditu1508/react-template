@@ -12,12 +12,10 @@ import ParkIcon from "@mui/icons-material/Park";
 import PetsIcon from "@mui/icons-material/Pets";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import { SwipeableDrawerProps, useTheme } from "@mui/material";
-import React, { ProviderProps, useContext, useEffect, useState } from "react";
+import { ProviderProps, useContext, useEffect, useState } from "react";
+import SidebarContext, { SidebarContextType, SidebarState } from "./SidebarContext";
 import { SidebarTab } from "./SidebarItem";
 
-type SidebarState = "hidden" | "temporary" | "mini" | "permanent" | "miniHovered";
-
-type CustomTransition = (...props: string[]) => React.CSSProperties["transition"];
 const sidebarTabs: SidebarTab[][] = [
   [
     {
@@ -87,22 +85,6 @@ const sidebarTabs: SidebarTab[][] = [
     },
   ],
 ];
-
-type SidebarContextType = {
-  sidebarOpen: boolean;
-  setSidebarOpen: (sidebarOpen: boolean) => void;
-  sidebarCurrentWidth: number;// number of pixels sidebar is using permanently
-  sidebarPinned: boolean;
-  setSidebarPinned: (sidebarPinned: boolean) => void;
-  sidebarState: SidebarState;
-  sidebarVariant: SwipeableDrawerProps["variant"];
-  miniSidebarTransition: CustomTransition;
-  permanentSidebarTransition: CustomTransition;
-  sidebarHovered: boolean;
-  setSidebarHovered: (sidebarHovered: boolean) => void;
-  sidebarTabs: SidebarTab[][];
-};
-export const SidebarContext = React.createContext<SidebarContextType>({} as SidebarContextType);
 
 type SidebarProviderProps = Omit<ProviderProps<SidebarContextType>, "value">;
 

@@ -7,8 +7,8 @@ import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer, useTheme } from "@mui/material";
 import React, { Fragment, useContext, useState } from "react";
+import SidebarContext from "./SidebarContext";
 import SidebarItem from "./SidebarItem";
-import { SidebarContext } from "./SidebarProvider";
 
 const Sidebar = () => {
   const theme = useTheme();
