@@ -40,6 +40,50 @@
 - good for holding value that assigned once in useEffect so when component rerender, variable won't be reset
 ==========> useRef <==========
 
+==========> useTransition <==========
+- enable app to call long running setState without freezing the UI
+- take no parameter, return [isPending, startTransition]
+- isPending tell whether there is a pending useTransition
+- startTransition take a call back function called Action, which let us run setState inside it
+  + setState run inside Action is run synchronously so it won't block the UI
+  + when there are multiple Transitions, React batches them together
+  + the final state might is not the result of the last setState since backend API might return response not in order
+  + Action can be an async function
+    + setState call after await statement must be wrapped in a startTransition call
+  + Action executes immediately, but setState calls inside Action are batched
+  + startTransition can be import to use in non-hook scope
+==========> useTransition <==========
+
+==========> useActionState <==========
+- used to handle form submit
+- const [state, formAction, isPending] = useActionState(fn, initialState, permalink?);
+- state: the current state
+- formAction: action to pass to <form>'s action or <button>'s formAction property
+  + the action can also be called manually within startTransition
+- isPending: flag that tells you whether there is a pending Transition
+- fn: the function to be called when the form is submitted or button pressed
+  + 2 parameters: the current state and FormData
+- initialState: initial state
+- permalink: redirect link, use for perserving form state across pages
+==========> useActionState <==========
+
+==========> useDebugValue <==========
+- add a label to a custom Hook in React DevTools
+- useDebugValue(value, format?)
+==========> useDebugValue <==========
+
+==========> useDeferredValue <==========
+- create a deferred version of a value
+- const deferredValue = useDeferredValue(value, initialValue?);
+- value: value to defer
+- initialValue: value to use during the initial render of a component
+- deferedValue: return initialValue during first render or the current value. During value update, rerender component in the background and only update deferedValue once background rerender complete
+  + background rerender can be interupt when value is updated before background rerender complete
+- use for scenario when user type in an input which require expensive loading
+- use with React.memo so that slow component only rerender when user stop typing and the final value actually different from the last value
+  + without useDeferredValue, value change every time user type in the input and slow component rerender every time the value change
+==========> useDeferredValue <==========
+
 ==========> useCallback <==========
 - used to cache function, because function is recreate every render, when pass function as prop, child component doesn't know if function is the same or not and will rerender itself unnecessarily
 - first parameter is function we want to cache, second parameter is an array of dependencies
