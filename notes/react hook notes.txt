@@ -72,6 +72,71 @@
 - useDebugValue(value, format?)
 ==========> useDebugValue <==========
 
+==========> useId <==========
+- create unique id string that can be passed to accessibility attributes
+- const id = useId()
+- <input type="password" aria-describedby={id} />
+==========> useId <==========
+
+==========> useImperativeHandle <==========
+- allow customize ref object exposed to parent
+- useImperativeHandle(ref, createHandle, dependencies?)
+- ref: the ref you received as a prop to the component
+  + function MyComponent({ ref }) { ... }
+- createHandle: a function that takes no arguments and returns the ref handle you want to expose
+  + that ref handle can have any type
+- dependencies: states or props to watch in order to know when to re-execute createHandle function
+==========> useImperativeHandle <==========
+
+==========> useLayoutEffect <==========
+- is a version of useEffect that fires before the browser repaints the screen
+- useLayoutEffect(setup, dependencies?)
+- example scenario:
+  + you want to show the tooltip on top of the button if there is enough space
+  + to do that, you need to
+    + render tooltip (even in a wrong position) and button
+    + get tooltip's height
+    + set tooltip's position based on its height
+  + when using useEffect hook, user will see the tooltip move from its start position to the correct position since component rerender after those steps
+    + render tooltip (even in a wrong position) and button
+    + paint the UI
+    + get tooltip's height
+    + set tooltip's position based on its height
+    + repaint the UI
+  + when using useLayoutEffect hook, the UI only paint after you run the logic
+    + render tooltip (even in a wrong position) and button
+    + get tooltip's height
+    + set tooltip's position based on its height
+    + paint the UI
+==========> useLayoutEffect <==========
+
+==========> useOptimistic <==========
+- let you show a temporary state while an async action is underway
+- const [optimisticState, addOptimistic] = useOptimistic(state, updateFn)
+- optimisticState: the resulting optimistic state, equal to state unless an action is pending, in which case it is equal to the value returned by updateFn
+- addOptimistic: the dispatch function to call when you have an optimistic update
+  + take 1 argument, optimisticValue of any type
+  + call the updateFn with state and optimisticValue
+- state: the value to be returned initially and whenever no action is pending
+- updateFn: the function to return optimisticState
+  + 2 arguments: currentState and optimisticValue
+  + must be a pure function
+  + merge currentState and optimisticValue to create optimisticState
+  + notice: if called when the last action is not finished, updateFn is called multiple times with old optimisticValues
+==========> useOptimistic <==========
+
+==========> useFormStatus <==========
+- provides status information of the last form submission
+- const { pending, data, method, action } = useFormStatus();
+- pending: boolean value to tell whether <form> is pending submission
+- data: an object implementing the FormData interface that contains the data the parent <form> is submitting
+  + null when <form> is not submitting, no parent <form>
+- method: a string value of either 'get' or 'post'
+- action: a reference to the function passed to the action prop on the parent <form>
+  + null when no parent <form>, no action prop, URI value provided to the action prop
+- must be called in a component that render within a <form>
+==========> useFormStatus <==========
+
 ==========> useDeferredValue <==========
 - create a deferred version of a value
 - const deferredValue = useDeferredValue(value, initialValue?);
@@ -100,6 +165,12 @@
 - likes PureComponent, only rerender component when props or states changed (equality compare)
 - Export default React.memo(MyComponent) instead of Export default MyComponent
 ==========> React.memo <==========
+
+==========> React.use <==========
+- read the value of a resource like a Promise or context
+- const message = use(messagePromise)
+- const theme = use(ThemeContext)
+==========> React.use <==========
 
 ==========> Notes <==========
 - useCallback - cache a function, useMemo - cache result from function
