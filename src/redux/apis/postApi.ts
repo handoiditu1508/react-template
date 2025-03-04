@@ -32,6 +32,19 @@ const postApi = appApi.injectEndpoints({
         method: "PUT",
         body,
       }),
+      // optimistic update
+      onQueryStarted: async (body, { dispatch, queryFulfilled }) => {
+        const patchResult = dispatch(
+          postApi.util.updateQueryData("getPost", body.id, (draft) => {
+            Object.assign(draft, body);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
       invalidatesTags: (_result, _error, body) => [{ type: "Post", id: body.id }],
     }),
     deletePost: builder.mutation<{ success: boolean; id: number; }, number>({
