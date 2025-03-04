@@ -18,6 +18,24 @@ const postApi = appApi.injectEndpoints({
         ]
         : [{ type: "Post", id: "LIST" }]),
     }),
+    // infinite scroll pagination
+    getInfinitePosts: builder.infiniteQuery<Post[], { postTitle: string; }, { pageNumber: number; }>({
+      query: ({ queryArg, pageParam }) => `posts?t=${queryArg.postTitle}&p=${pageParam.pageNumber}`,
+      infiniteQueryOptions: {
+        initialPageParam: {
+          pageNumber: 1,
+        },
+        maxPages: 3,
+        getNextPageParam: (currentPage, allPages, currentPageParam, allPageParams) => ({
+          pageNumber: currentPageParam.pageNumber + 1,
+        }),
+        getPreviousPageParam: (currentPage, allPages, currentPageParam, allPageParams) => currentPageParam.pageNumber > 1
+          ? ({
+            pageNumber: currentPageParam.pageNumber - 1,
+          })
+          : undefined,
+      },
+    }),
     addPost: builder.mutation<Post, Partial<Post>>({
       query: (body) => ({
         url: "posts",
@@ -62,6 +80,7 @@ export default postApi;
 export const {
   useGetPostQuery,
   useGetPostsQuery,
+  useGetInfinitePostsInfiniteQuery,
   useAddPostMutation,
   useUpdatePostMutation,
   useDeletePostMutation,
