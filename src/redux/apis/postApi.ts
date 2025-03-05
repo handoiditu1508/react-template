@@ -13,7 +13,7 @@ const postApi = appApi.injectEndpoints({
       query: () => "posts",
       providesTags: (result) => (result
         ? [
-          ...result.map(({ id }) => ({ type: "Post", id } as const)),
+          ...result.map(({ id }) => ({ type: "Post" as const, id })),
           { type: "Post", id: "LIST" },
         ]
         : [{ type: "Post", id: "LIST" }]),
