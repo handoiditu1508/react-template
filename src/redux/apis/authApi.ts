@@ -21,6 +21,7 @@ const authApi = appApi.injectEndpoints({
 
         return res;
       },
+      invalidatesTags: (result) => (result ? ["UNAUTHORIZED"] : []),
     }),
   }),
 });

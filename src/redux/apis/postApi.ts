@@ -1,5 +1,6 @@
 import Post from "@/models/entities/Post";
 import appApi from "./appApi";
+import { invalidatesIdTag, invalidatesListTag, providesIdTag, providesListTags } from "./rtkQueryCacheUtils";
 
 const postApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -7,16 +8,11 @@ const postApi = appApi.injectEndpoints({
       query: (id) => ({
         url: `posts/${id}`,
       }),
-      providesTags: (_result, _error, id) => [{ type: "Post", id }],
+      providesTags: (_result, error, id) => providesIdTag("Post", id, error),
     }),
     getPosts: builder.query<Post[], void>({
       query: () => "posts",
-      providesTags: (result) => (result
-        ? [
-          ...result.map(({ id }) => ({ type: "Post" as const, id })),
-          { type: "Post", id: "LIST" },
-        ]
-        : [{ type: "Post", id: "LIST" }]),
+      providesTags: (result, error) => providesListTags("Post", result, error),
     }),
     // infinite scroll pagination
     getInfinitePosts: builder.infiniteQuery<Post[], { postTitle: string; }, { pageNumber: number; }>({
@@ -42,7 +38,7 @@ const postApi = appApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Post", id: "LIST" }],
+      invalidatesTags: (result, error) => invalidatesListTag("Post", error),
     }),
     updatePost: builder.mutation<Post, Partial<Post> & Pick<Post, "id">>({
       query: (body) => ({
@@ -63,14 +59,14 @@ const postApi = appApi.injectEndpoints({
           patchResult.undo();
         }
       },
-      invalidatesTags: (_result, _error, body) => [{ type: "Post", id: body.id }],
+      invalidatesTags: (_result, error, body) => invalidatesIdTag("Post", body.id, error),
     }),
     deletePost: builder.mutation<{ success: boolean; id: number; }, number>({
       query: (id) => ({
         url: `posts/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (_result, _error, id) => [{ type: "Post", id }],
+      invalidatesTags: (_result, error, id) => invalidatesIdTag("Post", id, error),
     }),
   }),
 });
