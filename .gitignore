@@ -176,3 +176,7 @@ build
 
 # Ignore code-workspaces
 *.code-workspace
+
+# Vite auto-generated files
+vite.config.d.ts
+vite.config.js

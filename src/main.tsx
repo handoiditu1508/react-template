@@ -6,7 +6,6 @@ import App from "./App";
 import { BreakpointsProvider } from "./contexts/BreakpointsContext";
 import { ConfirmationDialogProvider } from "./contexts/ConfirmationDialogContext";
 import { InfoProvider } from "./contexts/InfoContext";
-import { NotificationProvider } from "./contexts/NotificationContext";
 import { PaletteModeProvider } from "./contexts/PaletteModeContext";
 import "./i18n";
 import "./index.scss";
@@ -19,21 +18,19 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>{/* redux store */}
-      <NotificationProvider>{/* control notification toasts */}
-        <ConfirmationDialogProvider>{/* shared confirmation dialog */}
-          <InfoProvider>{/* info about style and environment changes */}
-            <PaletteModeProvider>{/* dark, light modes */}
-              <AppThemeProvider>{/* mui theme */}
-                <BreakpointsProvider>{/* breakpoints helper */}
-                  <BrowserRouter>{/* react router */}
-                    <App />
-                  </BrowserRouter>
-                </BreakpointsProvider>
-              </AppThemeProvider>
-            </PaletteModeProvider>
-          </InfoProvider>
-        </ConfirmationDialogProvider>
-      </NotificationProvider>
+      <ConfirmationDialogProvider>{/* shared confirmation dialog */}
+        <InfoProvider>{/* info about style and environment changes */}
+          <PaletteModeProvider>{/* dark, light modes */}
+            <AppThemeProvider>{/* mui theme */}
+              <BreakpointsProvider>{/* breakpoints helper */}
+                <BrowserRouter>{/* react router */}
+                  <App />
+                </BrowserRouter>
+              </BreakpointsProvider>
+            </AppThemeProvider>
+          </PaletteModeProvider>
+        </InfoProvider>
+      </ConfirmationDialogProvider>
     </Provider>
   </React.StrictMode>
 );

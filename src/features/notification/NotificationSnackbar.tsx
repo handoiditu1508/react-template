@@ -1,10 +1,14 @@
+import CONFIG from "@/configs";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { nextNotification, selectCurrentNotification } from "@/redux/slices/notificationSlice";
 import CloseIcon from "@mui/icons-material/Close";
 import { Alert, IconButton, Snackbar } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
-import NotificationContext, { notificationMessageTimeout } from "./NotificationContext";
+import React, { useEffect, useState } from "react";
 
 function NotificationSnackbar() {
-  const { currentNotification, nextNotification } = useContext(NotificationContext);
+  const dispatch = useAppDispatch();
+  const currentNotification = useAppSelector(selectCurrentNotification);
+
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,7 +24,7 @@ function NotificationSnackbar() {
       return;
     }
     if (reason === "closebutton") {
-      nextNotification();
+      dispatch(nextNotification());
     }
     setOpen(false);
   };
@@ -41,7 +45,7 @@ function NotificationSnackbar() {
     ? <Snackbar
       key={currentNotification.id}
       open={open}
-      autoHideDuration={notificationMessageTimeout}
+      autoHideDuration={CONFIG.NOTIFICATION_MESSAGE_TIMEOUT}
       message={!currentNotification.severity && currentNotification.text}
       action={!currentNotification.severity && action}
       onClose={handleClose}>
