@@ -25,6 +25,7 @@ export type CacheItem<T extends EntityTags, ID extends string | number> = {
  */
 export type CacheList<T extends EntityTags, ID extends string | number> = (
   | CacheItem<T, "LIST">
+  | CacheItem<T, `LIST-${string}`>// invalidate only lists that contain specific id without invalidate getById
   | CacheItem<T, ID>
   | DefaultTags
 )[];
@@ -33,7 +34,7 @@ export type CacheList<T extends EntityTags, ID extends string | number> = (
  * ```ts
  * providesListTags("Post", [{ id: 2 }, { id: 5 }], error);
  * // return
- * [{ type: "Post", id: "LIST" }, { type: "Post", id: 2 }, { type: "Post", id: 5 }
+ * [{ type: "Post", id: "LIST" }, { type: "Post", id: 2 }, { type: "Post", id: "LIST-2" }, { type: "Post", id: 5 }, { type: "Post", id: "LIST-5" }
  * // or
  * [{ type: "Post", id: "LIST" }, "UNAUTHORIZED"]
  * // or
@@ -52,7 +53,10 @@ export function providesListTags<T extends EntityTags, R extends { id: string | 
   var tags: CacheList<T, R["id"]> = [{ type: tagType, id: "LIST" }];
 
   if (resultsWithIds) {
-    tags.push(...resultsWithIds.map(({ id }) => ({ type: tagType, id })));
+    tags.push(...resultsWithIds.flatMap(({ id }) => [
+      { type: tagType, id },
+      { type: tagType, id: `LIST-${id}` },
+    ]));
   }
 
   if (error) {
@@ -129,4 +133,25 @@ export function invalidatesIdTag<T extends EntityTags, ID extends string | numbe
   error: FetchBaseQueryError | undefined
 ): CacheList<T, ID> {
   return error ? [] : [{ type: tagType, id: id }];
+}
+
+/**
+ * ```ts
+ * invalidatesOptimisticPessimisticIdTag("Post", 2, error);
+ * // return
+ * [{ type: "Post", id: 2 }]
+ * // or
+ * [{ type: "Post", id: "LIST-2" }]
+ * ```
+ * @param tagType Tag type.
+ * @param id Entity id.
+ * @param error Error object returned by RTK Query.
+ * @returns Array of tags.
+ */
+export function invalidatesOptimisticPessimisticIdTag<T extends EntityTags, ID extends string | number>(
+  tagType: T,
+  id: ID,
+  error: FetchBaseQueryError | undefined
+): CacheList<T, ID> {
+  return error ? [{ type: tagType, id }] : [{ type: tagType, id: `LIST-${id}` }];
 }

@@ -1,6 +1,6 @@
 import Post from "@/models/entities/Post";
 import appApi from "./appApi";
-import { invalidatesIdTag, invalidatesListTag, providesIdTag, providesListTags } from "./rtkQueryCacheUtils";
+import { invalidatesIdTag, invalidatesListTag, invalidatesOptimisticPessimisticIdTag, providesIdTag, providesListTags } from "./rtkQueryCacheUtils";
 
 const postApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -38,6 +38,15 @@ const postApi = appApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      // pessimistic update
+      onQueryStarted: async (body, { dispatch, queryFulfilled }) => {
+        try {
+          const { data: createdPost } = await queryFulfilled;
+          dispatch(
+            postApi.util.upsertQueryData("getPost", createdPost.id, createdPost)
+          );
+        } catch {}
+      },
       invalidatesTags: (result, error) => invalidatesListTag("Post", error),
     }),
     updatePost: builder.mutation<Post, Partial<Post> & Pick<Post, "id">>({
@@ -46,20 +55,23 @@ const postApi = appApi.injectEndpoints({
         method: "PUT",
         body,
       }),
-      // optimistic update
+      // optimistic and pessimistic updates
       onQueryStarted: async (body, { dispatch, queryFulfilled }) => {
+        // optimistic
         const patchResult = dispatch(
           postApi.util.updateQueryData("getPost", body.id, (draft) => {
             Object.assign(draft, body);
           })
         );
         try {
-          await queryFulfilled;
+          const { data: updatedPost } = await queryFulfilled;
+          // pessimistic
+          dispatch(postApi.util.upsertQueryData("getPost", body.id, updatedPost));
         } catch {
           patchResult.undo();
         }
       },
-      invalidatesTags: (_result, error, body) => invalidatesIdTag("Post", body.id, error),
+      invalidatesTags: (_result, error, body) => invalidatesOptimisticPessimisticIdTag("Post", body.id, error),
     }),
     deletePost: builder.mutation<{ success: boolean; id: number; }, number>({
       query: (id) => ({
