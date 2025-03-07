@@ -1,6 +1,6 @@
 import Post from "@/models/entities/Post";
+import { invalidatesIdTag, invalidatesListTag, invalidatesOptimisticPessimisticIdTag, providesIdTag, providesListTags } from "../utils/rtkQueryCacheUtils";
 import appApi from "./appApi";
-import { invalidatesIdTag, invalidatesListTag, invalidatesOptimisticPessimisticIdTag, providesIdTag, providesListTags } from "./rtkQueryCacheUtils";
 
 const postApi = appApi.injectEndpoints({
   endpoints: (builder) => ({

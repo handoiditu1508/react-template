@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import axiosBaseQuery from "./axiosBaseQuery";
-import reauthBaseQueryWrapper from "./reauthBaseQueryWrapper";
-import { allTags } from "./rtkQueryCacheUtils";
+import axiosBaseQuery from "../utils/axiosBaseQuery";
+import reauthBaseQueryWrapper from "../utils/reauthBaseQueryWrapper";
+import { allTags } from "../utils/rtkQueryCacheUtils";
 
 const appApi = createApi({
   reducerPath: "appApi",

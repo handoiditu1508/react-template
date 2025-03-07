@@ -1,10 +1,10 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import appApi from "./apis/appApi";
-import rtkQueryErrorLoggerMiddleware from "./apis/rtkQueryErrorLoggerMiddleware";
 import authSlice from "./slices/authSlice";
 import counterSlice from "./slices/counterSlice";
 import { notificationSlice } from "./slices/notificationSlice";
+import rtkQueryErrorLoggerMiddleware from "./utils/rtkQueryErrorLoggerMiddleware";
 
 // development environment only
 // const reduxLogger = require("redux-logger");
