@@ -1,6 +1,9 @@
 import Post from "@/models/entities/Post";
+import { createEntityAdapter, EntityState } from "@reduxjs/toolkit";
 import { invalidatesIdTag, invalidatesListTag, invalidatesOptimisticPessimisticIdTag, providesIdTag, providesListTags } from "../utils/rtkQueryCacheUtils";
 import appApi from "./appApi";
+
+let postsAdapter = createEntityAdapter<Post>();
 
 const postApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -30,6 +33,36 @@ const postApi = appApi.injectEndpoints({
             pageNumber: currentPageParam.pageNumber - 1,
           })
           : undefined,
+      },
+    }),
+    // streaming update through websocket
+    getWsPosts: builder.query<EntityState<Post, number>, void>({
+      query: () => "posts",
+      transformResponse: (posts: Post[]) => {
+        return postsAdapter.addMany(postsAdapter.getInitialState(), posts);
+      },
+      onCacheEntryAdded: async (_arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) => {
+        // websocket connection
+        const location = window.location;
+        let webSocketUrl = location.protocol === "https:" ? "wss://" : "ws://";
+        webSocketUrl += location.host + "/ws/posts";
+        const ws = new WebSocket(webSocketUrl);
+
+        try {
+          // wait for the cache entry to be added before listening for new posts
+          await cacheDataLoaded;
+
+          // listen for new posts after the cache entry is added
+          ws.addEventListener("message", (event: MessageEvent<Post>) => {
+            const data = event.data;
+            updateCachedData((draft) => postsAdapter.upsertOne(draft, data));
+          });
+        } catch {}
+
+        // close websocket connection and clear entity adapter when the cache entry is removed
+        await cacheEntryRemoved;
+        ws.close();
+        postsAdapter = createEntityAdapter<Post>();
       },
     }),
     addPost: builder.mutation<Post, Partial<Post>>({
