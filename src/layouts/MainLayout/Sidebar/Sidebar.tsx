@@ -1,7 +1,7 @@
 import logo from "@/assets/logo.svg";
 import CustomButton from "@/components/CustomButton";
 import CONFIG from "@/configs";
-import BreakpointsContext from "@/contexts/BreakpointsContext";
+import { BreakpointsContext } from "@/contexts/breakpoints";
 import InfoContext from "@/contexts/InfoContext";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";

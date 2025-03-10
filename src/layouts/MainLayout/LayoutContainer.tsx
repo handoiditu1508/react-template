@@ -1,4 +1,4 @@
-import { mdAndUpMediaQuery } from "@/common/breakpointsHelpers";
+import { mdAndUpMediaQuery } from "@/contexts/breakpoints";
 import { Container, styled } from "@mui/material";
 
 const LayoutContainer = styled(Container)(({ theme }) => ({

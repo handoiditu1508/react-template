@@ -3,7 +3,7 @@ import type { } from "@mui/lab/themeAugmentation";
 // When using TypeScript 3.x and below
 // import "@mui/lab/themeAugmentation";
 
-import { smAndUpMediaQuery } from "@/common/breakpointsHelpers";
+import { smAndUpMediaQuery } from "@/contexts/breakpoints";
 import ColorOption, { colorOptions } from "@/models/ColorOption";
 import { PaletteMode, Theme, ThemeOptions, alpha, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";

@@ -1,30 +1,11 @@
-import { mdAndDownMediaQuery, mdAndUpMediaQuery, mdMediaQuery, smAndDownMediaQuery, smAndUpMediaQuery, smMediaQuery, xsAndUpMediaQuery, xsMediaQuery } from "@/common/breakpointsHelpers";
 import { useMediaQuery, useTheme } from "@mui/material";
-import React, { ProviderProps } from "react";
-
-type BreakpointsContextType = {
-  xs: boolean;
-  xsAndUp: boolean;
-  smAndDown: boolean;
-  sm: boolean;
-  smAndUp: boolean;
-  mdAndDown: boolean;
-  md: boolean;
-  mdAndUp: boolean;
-  // lgAndDown: boolean;
-  // lg: boolean;
-  // lgAndUp: boolean;
-  // xl: boolean;
-  // xlAndUp: boolean;
-};
-
-const BreakpointsContext = React.createContext<BreakpointsContextType>({} as BreakpointsContextType);
-
-export default BreakpointsContext;
+import { ProviderProps } from "react";
+import BreakpointsContext, { BreakpointsContextType } from "./BreakpointsContext";
+import { mdAndDownMediaQuery, mdAndUpMediaQuery, mdMediaQuery, smAndDownMediaQuery, smAndUpMediaQuery, smMediaQuery, xsAndUpMediaQuery, xsMediaQuery } from "./breakpointsHelpers";
 
 type BreakpointsProviderProps = Omit<ProviderProps<BreakpointsContextType>, "value">;
 
-export function BreakpointsProvider(props: BreakpointsProviderProps) {
+export default function BreakpointsProvider(props: BreakpointsProviderProps) {
   const theme = useTheme();
 
   return (
