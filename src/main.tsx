@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { BreakpointsProvider } from "./contexts/breakpoints";
 import { InfoProvider } from "./contexts/info";
-import { PaletteModeProvider } from "./contexts/PaletteModeContext";
+import { PaletteModeProvider } from "./contexts/paletteMode";
 import { ConfirmationDialogProvider } from "./features/confirmationDialog";
 import "./i18n";
 import "./index.scss";

@@ -3,7 +3,7 @@ import CustomLink from "@/components/CustomLink";
 import CONFIG from "@/configs";
 import { BreakpointsContext } from "@/contexts/breakpoints";
 import { InfoContext } from "@/contexts/info";
-import PaletteModeContext from "@/contexts/PaletteModeContext";
+import { PaletteModeContext } from "@/contexts/paletteMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu";

@@ -1,21 +1,12 @@
 import { PaletteMode, useMediaQuery } from "@mui/material";
-import React, { ProviderProps, useEffect, useState } from "react";
-
-type PaletteModeContextType = {
-  currentPaletteMode: PaletteMode;
-  paletteMode: PaletteMode | "system";
-  setPaletteMode: (mode: PaletteMode | "system") => void;
-};
+import { ProviderProps, useEffect, useState } from "react";
+import PaletteModeContext, { PaletteModeContextType } from "./PaletteModeContext";
 
 type PaletteModeProviderProps = Omit<ProviderProps<PaletteModeContextType>, "value">;
 
-const PaletteModeContext = React.createContext<PaletteModeContextType>({} as PaletteModeContextType);
-
-export default PaletteModeContext;
-
 const checkIsSystemPaletteMode = (mode?: string | null) => !mode || (mode !== "light" && mode !== "dark");
 
-export function PaletteModeProvider(props: PaletteModeProviderProps) {
+export default function PaletteModeProvider(props: PaletteModeProviderProps) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [paletteMode, setPaletteMode] = useState<PaletteMode | "system">(
     checkIsSystemPaletteMode(localStorage.getItem("paletteMode"))

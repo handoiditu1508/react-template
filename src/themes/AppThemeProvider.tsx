@@ -1,4 +1,4 @@
-import PaletteModeContext from "@/contexts/PaletteModeContext";
+import { PaletteModeContext } from "@/contexts/paletteMode";
 import { createMainTheme } from "@/themes";
 import { PaletteMode, Theme, ThemeProvider } from "@mui/material";
 import { ThemeProviderProps } from "@mui/material/styles/ThemeProvider";
