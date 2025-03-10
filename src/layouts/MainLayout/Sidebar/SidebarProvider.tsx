@@ -1,5 +1,5 @@
 import { BreakpointsContext } from "@/contexts/breakpoints";
-import InfoContext from "@/contexts/InfoContext";
+import { InfoContext } from "@/contexts/info";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DarkModeIcon from "@mui/icons-material/DarkMode";

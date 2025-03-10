@@ -2,7 +2,7 @@ import logo from "@/assets/logo.svg";
 import CustomLink from "@/components/CustomLink";
 import CONFIG from "@/configs";
 import { BreakpointsContext } from "@/contexts/breakpoints";
-import InfoContext from "@/contexts/InfoContext";
+import { InfoContext } from "@/contexts/info";
 import PaletteModeContext from "@/contexts/PaletteModeContext";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";

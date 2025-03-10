@@ -2,7 +2,7 @@ import logo from "@/assets/logo.svg";
 import CustomButton from "@/components/CustomButton";
 import CONFIG from "@/configs";
 import { BreakpointsContext } from "@/contexts/breakpoints";
-import InfoContext from "@/contexts/InfoContext";
+import { InfoContext } from "@/contexts/info";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer, useTheme } from "@mui/material";

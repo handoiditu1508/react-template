@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { BreakpointsProvider } from "./contexts/breakpoints";
-import { InfoProvider } from "./contexts/InfoContext";
+import { InfoProvider } from "./contexts/info";
 import { PaletteModeProvider } from "./contexts/PaletteModeContext";
 import { ConfirmationDialogProvider } from "./features/confirmationDialog";
 import "./i18n";

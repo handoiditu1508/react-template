@@ -1,20 +1,7 @@
-import React, { ProviderProps, useEffect, useState } from "react";
-
-type InfoContextType = {
-  iOS: boolean;
-  mobile: boolean;
-  mac: boolean;
-  windowWidth: number;
-  windowHeight: number;
-  windowScrollX: number;
-  windowScrollY: number;
-};
+import { ProviderProps, useEffect, useState } from "react";
+import InfoContext, { InfoContextType } from "./InfoContext";
 
 type InfoProviderProps = Omit<ProviderProps<InfoContextType>, "value">;
-
-const InfoContext = React.createContext<InfoContextType>({} as InfoContextType);
-
-export default InfoContext;
 
 const isIOS = () => /iPad|iPhone|iPod/i.test(navigator.userAgent);
 const isMobile = () => /iPad|iPhone|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini|X11/i.test(navigator.userAgent);
