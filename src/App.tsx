@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./App.scss";
-import { ConfirmationDialog } from "./contexts/ConfirmationDialogContext";
+import { ConfirmationDialog } from "./features/confirmationDialog";
 import { NotificationSnackbar, useNotificationScheduler } from "./features/notification";
 import { useAppDispatch } from "./hooks";
 import { loadAuthStateFromLocalAsync } from "./redux/slices/authSlice";
