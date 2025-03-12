@@ -47,13 +47,13 @@ const navigatesList: { text: string; link: string; }[] = [
   },
 ];
 
-const Footer = styled((props: BoxProps) => {
+const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
   const { t } = useTranslation();
   const { xs, smAndUp } = useContext(BreakpointsContext);
   const year = new Date().getFullYear();
 
   return (
-    <Box {...props}>
+    <Box component={component} {...props}>
       <Paper square>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
@@ -153,8 +153,5 @@ const Footer = styled((props: BoxProps) => {
     padding: 0,
   },
 }));
-Footer.defaultProps = {
-  component: "footer",
-};
 
 export default Footer;
