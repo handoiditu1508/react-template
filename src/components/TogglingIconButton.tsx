@@ -9,7 +9,7 @@ type OwnProps = {
 
 type TogglingIconButtonProps = OwnProps & Omit<IconButtonProps, keyof OwnProps>;
 
-const TogglingIconButton = styled(React.forwardRef<HTMLButtonElement, TogglingIconButtonProps>(({ idleIcon, activeIcon, customColor, color, style, ...props }, ref) => {
+const TogglingIconButton = styled(({ idleIcon, activeIcon, customColor, color, style, ...props }: TogglingIconButtonProps) => {
   const theme = useTheme();
   const standardizedColor = customColor || (theme.palette.isPaletteColorOption(color) && theme.palette[color].main) || color;
   const hoverColor = standardizedColor && standardizedColor.startsWith("#")
@@ -17,12 +17,12 @@ const TogglingIconButton = styled(React.forwardRef<HTMLButtonElement, TogglingIc
     : `rgba(0, 0, 0, ${theme.palette.action.hoverOpacity})`;
 
   return (
-    <IconButton ref={ref} style={{ ...style, "--custom-color": standardizedColor, "--hover-color": hoverColor } as React.CSSProperties} {...props}>
+    <IconButton style={{ ...style, "--custom-color": standardizedColor, "--hover-color": hoverColor } as React.CSSProperties} {...props}>
       {idleIcon}
       {activeIcon || idleIcon}
     </IconButton>
   );
-}))(() => ({
+})(() => ({
   ".MuiSvgIcon-root:nth-of-type(2)": {
     display: "none",
     color: "var(--custom-color)",

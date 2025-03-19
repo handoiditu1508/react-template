@@ -26,7 +26,7 @@ const languages: { code: string; name: string; }[] = [
   },
 ];
 
-const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
+export default function Header({ ref }: { ref: React.Ref<HTMLDivElement>; }) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const { paletteMode, setPaletteMode } = useContext(PaletteModeContext);
@@ -145,6 +145,4 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
       </Drawer>
     </>
   );
-});
-
-export default Header;
+}
