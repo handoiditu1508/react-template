@@ -1,5 +1,10 @@
+import FaSvgIcon from "@/components/FaSvgIcon";
+import MdiSvgIcon from "@/components/MdiSvgIcon";
 import { BreakpointsContext } from "@/contexts/breakpoints";
 import { InfoContext } from "@/contexts/info";
+import { faHandFist } from "@fortawesome/free-solid-svg-icons/faHandFist";
+import { faSkull } from "@fortawesome/free-solid-svg-icons/faSkull";
+import { mdiShieldSword } from "@mdi/js";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -22,7 +27,7 @@ const sidebarTabs: SidebarTab[][] = [
       title: "Nature",
       to: "/nature",
       icon: <GrassIcon />,
-      childs: [
+      children: [
         {
           title: "Lone Ranger",
           to: "/nature/solo",
@@ -49,7 +54,7 @@ const sidebarTabs: SidebarTab[][] = [
       title: "Water",
       to: "/water",
       icon: <WaterDropIcon />,
-      childs: [
+      children: [
         {
           title: "Ice",
           to: "/ice",
@@ -76,6 +81,25 @@ const sidebarTabs: SidebarTab[][] = [
       title: "Magic",
       to: "/magic",
       icon: <AutoFixHighIcon />,
+      children: [
+        {
+          title: "Necromancy",
+          to: "/magic/necromancy",
+          icon: <FaSvgIcon icon={faSkull} />,
+        },
+      ],
+    },
+    {
+      title: "Physics",
+      to: "/physics",
+      icon: <FaSvgIcon icon={faHandFist} />,
+      children: [
+        {
+          title: "Knight",
+          to: "/physics/knight",
+          icon: <MdiSvgIcon path={mdiShieldSword} />,
+        },
+      ],
     },
   ],
   [

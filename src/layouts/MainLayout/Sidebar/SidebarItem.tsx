@@ -8,7 +8,7 @@ export type SidebarTab = {
   title: string;
   to: To;
   icon?: JSX.Element;
-  childs?: SidebarTab[];
+  children?: SidebarTab[];
 };
 
 type SidebarItemProps = {
@@ -44,7 +44,7 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
             {sidebarTab.icon}
           </ListItemIcon>}
           <ListItemText primary={t(sidebarTab.title)} />
-          {sidebarTab.childs && sidebarTab.childs.length !== 0 && <ExpandMoreIcon
+          {sidebarTab.children && sidebarTab.children.length !== 0 && <ExpandMoreIcon
             sx={{
               transform: open ? "rotate(180deg)" : undefined,
               transition: theme.transitions.create("transform", {
@@ -59,9 +59,9 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
           />}
         </ListItemButton>
       </ListItem>
-      {sidebarTab.childs && sidebarTab.childs.length !== 0 && <Collapse in={open && !hideChilds} unmountOnExit>
+      {sidebarTab.children && sidebarTab.children.length !== 0 && <Collapse in={open && !hideChilds} unmountOnExit>
         <List disablePadding dense>
-          {sidebarTab.childs.map((child) => <SidebarItem key={child.title} sidebarTab={child} level={level + 1} hideChilds={hideChilds} />)}
+          {sidebarTab.children.map((child) => <SidebarItem key={child.title} sidebarTab={child} level={level + 1} hideChilds={hideChilds} />)}
         </List>
       </Collapse>}
     </>
