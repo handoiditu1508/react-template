@@ -1,11 +1,11 @@
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import { SvgIcon, SvgIconProps } from "@mui/material";
 
-type FontAwesomeSvgIconProps = {
+type FaSvgIconProps = {
   icon: IconDefinition;
-} & Omit<SvgIconProps, "component" | "viewBox" | "inheritViewBox">;
+} & Omit<SvgIconProps, "component" | "viewBox" | "inheritViewBox" | "children">;
 
-export default function FontAwesomeSvgIcon({ icon, ...props }: FontAwesomeSvgIconProps) {
+export default function FaSvgIcon({ icon, ...props }: FaSvgIconProps) {
   const {
     icon: [width, height, , , svgPathData],
   } = icon;
