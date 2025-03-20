@@ -4,7 +4,7 @@ import CONFIG from "@/configs";
 import { BreakpointsContext } from "@/contexts/breakpoints";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import EmailIcon from "@mui/icons-material/Email";
-import { Box, BoxProps, Breadcrumbs, Divider, Grid, Link, Paper, Stack, Typography, styled } from "@mui/material";
+import { Box, BoxProps, Breadcrumbs, Divider, Grid2, Link, Paper, Stack, Typography, styled } from "@mui/material";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -49,14 +49,14 @@ const navigatesList: { text: string; link: string; }[] = [
 
 const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
   const { t } = useTranslation();
-  const { xs, smAndUp } = useContext(BreakpointsContext);
+  const { xs, smAndUp, mdAndUp } = useContext(BreakpointsContext);
   const year = new Date().getFullYear();
 
   return (
     <Box component={component} {...props}>
       <Paper square>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
+        <Grid2 container spacing={3}>
+          <Grid2 size={{ xs: 12, md: 4 }}>
             <Stack direction="row">
               <Box>
                 <img src={logo} alt="logo" width={100} height={100} />
@@ -70,26 +70,24 @@ const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
                 </Typography>
               </Box>
             </Stack>
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                <Typography className="title" variant="h5" textAlign={{ xs: "center", md: "start" }}>{t("Navigates")}</Typography>
-              </Grid>
-              {smAndUp && <Grid item sm={6} />}
-              <Grid item xs={12} sm={6}>
-                <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                  {navigatesList.slice(0, smAndUp ? ((navigatesList.length / 2) + 1) : undefined).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
-                </Stack>
-              </Grid>
-              {smAndUp && <Grid item sm={6}>
-                <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                  {navigatesList.slice((navigatesList.length / 2) + 1).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
-                </Stack>
-              </Grid>}
-            </Grid>
-          </Grid>
-        </Grid>
+          </Grid2>
+          <Grid2 container size={{ xs: 12, md: 8 }}>
+            <Grid2 size={{ xs: 12, md: 6 }}>
+              <Typography className="title" variant="h5" textAlign={{ xs: "center", md: "start" }}>{t("Navigates")}</Typography>
+            </Grid2>
+            {mdAndUp && <Grid2 size={6} />}
+            <Grid2 size={{ xs: 12, sm: 6 }}>
+              <Stack alignItems={{ xs: "center", md: "flex-start" }}>
+                {navigatesList.slice(0, smAndUp ? ((navigatesList.length / 2) + 1) : undefined).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
+              </Stack>
+            </Grid2>
+            {smAndUp && <Grid2 size={6}>
+              <Stack alignItems={{ xs: "center", md: "flex-start" }}>
+                {navigatesList.slice((navigatesList.length / 2) + 1).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
+              </Stack>
+            </Grid2>}
+          </Grid2>
+        </Grid2>
         <Divider />
         <Box className="legal-section" component="section">
           <Box flexGrow={1} />
