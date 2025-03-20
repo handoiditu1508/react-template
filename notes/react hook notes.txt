@@ -253,6 +253,8 @@
 - popper:
   + position: relative to an anchor element
   + content: any UI
+- popover:
+  + likes popper, but block scrolling and clicking
 ==========> which MUI overlay method to use <==========
 
 
