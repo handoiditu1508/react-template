@@ -45,6 +45,18 @@ const navigatesList: { text: string; link: string; }[] = [
     text: "Magic",
     link: "/magic",
   },
+  {
+    text: "Necromancy",
+    link: "/magic/necromancy",
+  },
+  {
+    text: "Physics",
+    link: "/physics",
+  },
+  {
+    text: "Knight",
+    link: "/physics/knight",
+  },
 ];
 
 const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
@@ -78,12 +90,12 @@ const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
             {mdAndUp && <Grid2 size={6} />}
             <Grid2 size={{ xs: 12, sm: 6 }}>
               <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                {navigatesList.slice(0, smAndUp ? ((navigatesList.length / 2) + 1) : undefined).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
+                {navigatesList.slice(0, smAndUp ? (Math.ceil(navigatesList.length / 2)) : undefined).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
               </Stack>
             </Grid2>
             {smAndUp && <Grid2 size={6}>
               <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-                {navigatesList.slice((navigatesList.length / 2) + 1).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
+                {navigatesList.slice(Math.ceil(navigatesList.length / 2)).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
               </Stack>
             </Grid2>}
           </Grid2>
