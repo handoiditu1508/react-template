@@ -24,10 +24,34 @@ declare module "@mui/material/styles" {
   }
 
   export interface Palette {
+    scrollbar: {
+      hover: {
+        thumbBackground: string;
+        thumbBorder: string;
+        track: string;
+      };
+      thumb: {
+        hover: {
+          background: string;
+        };
+      };
+    };
     isPaletteColorOption: (color?: string) => color is ColorOption;
   }
 
   export interface PaletteOptions {
+    scrollbar?: {
+      hover: {
+        thumbBackground: string;
+        thumbBorder: string;
+        track: string;
+      };
+      thumb: {
+        hover: {
+          background: string;
+        };
+      };
+    };
     isPaletteColorOption?: (color?: string) => color is ColorOption;
   }
 
