@@ -29,9 +29,11 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
 
     if (!this.props.hideError) {
       // You can render any custom fallback UI
-      return (<Box display="flex" justifyContent="center" alignItems="center" width="100%" height="100%">
-        <ReportProblemIcon fontSize="large" />
-      </Box>);
+      return (
+        <Box display="flex" justifyContent="center" alignItems="center" width="100%" height="100%">
+          <ReportProblemIcon fontSize="large" />
+        </Box>
+      );
     }
 
     return undefined;

@@ -1,15 +1,14 @@
 import logo from "@/assets/logo.svg";
 import CustomLink from "@/components/CustomLink";
 import CONFIG from "@/configs";
-import BreakpointsContext from "@/contexts/BreakpointsContext";
-import InfoContext from "@/contexts/InfoContext";
-import PaletteModeContext from "@/contexts/PaletteModeContext";
+import { BreakpointsContext } from "@/contexts/breakpoints";
+import { InfoContext } from "@/contexts/info";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
-import { AppBar, Box, Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Slide, ToggleButton, ToggleButtonGroup, Toolbar, Typography, useScrollTrigger, useTheme } from "@mui/material";
+import { AppBar, Box, Drawer, IconButton, MenuItem, Select, SelectChangeEvent, Slide, ToggleButton, ToggleButtonGroup, Toolbar, Typography, useColorScheme, useScrollTrigger, useTheme } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LayoutContainer from "../LayoutContainer";
@@ -26,16 +25,16 @@ const languages: { code: string; name: string; }[] = [
   },
 ];
 
-const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
+export default function Header({ ref }: { ref?: React.Ref<HTMLDivElement>; }) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
-  const { paletteMode, setPaletteMode } = useContext(PaletteModeContext);
   const { sidebarOpen, setSidebarOpen, sidebarState, miniSidebarTransition, permanentSidebarTransition } = useContext(SidebarContext);
   const { smAndDown } = useContext(BreakpointsContext);
   const { mobile } = useContext(InfoContext);
   const hideHeaderTrigger = useScrollTrigger({ threshold: 250 });
   const shadowHeaderTrigger = useScrollTrigger({ threshold: 0, disableHysteresis: true });
   const [settingsDrawerOpen, setSettingsDrawerOpen] = useState<boolean>(false);
+  const { mode, setMode } = useColorScheme();
 
   // add transition manually because of <Slide>'s transition conflict
   const slideTransition = hideHeaderTrigger
@@ -55,7 +54,8 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <>
       <Slide appear={false} direction="down" in={!hideHeaderTrigger}>
-        <Box component="main"
+        <Box
+          component="main"
           className="mui-fixed"
           sx={{
             marginLeft: "var(--sidebar-current-width)",
@@ -73,10 +73,15 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
           <LayoutContainer sx={{
             paddingTop: "var(--header-top-spacing)",
           }}>
-            <AppBar position="relative" ref={ref} elevation={4} color="inherit" sx={{
-              borderRadius: { md: 2 },
-              boxShadow: shadowHeaderTrigger ? undefined : "none",
-            }}>
+            <AppBar
+              ref={ref}
+              position="relative"
+              elevation={4}
+              color="inherit"
+              sx={{
+                borderRadius: { md: 2 },
+                boxShadow: shadowHeaderTrigger ? undefined : "none",
+              }}>
               <Toolbar>
                 {(smAndDown || mobile) && <Box flexGrow={1}>
                   <IconButton edge="start" sx={{ marginRight: 1 }} onClick={() => setSidebarOpen(!sidebarOpen)}><MenuIcon /></IconButton>
@@ -125,20 +130,18 @@ const Header = React.forwardRef<HTMLDivElement>((_, ref) => {
           },
         }}>
           <p className="title">Mode</p>
-          <ToggleButtonGroup value={paletteMode} color="primary" fullWidth aria-label="toggle button group">
-            <ToggleButton value="light" onClick={() => setPaletteMode("light")}><LightModeIcon /></ToggleButton>
-            <ToggleButton value="system" onClick={() => setPaletteMode("system")}><SettingsBrightnessIcon /></ToggleButton>
-            <ToggleButton value="dark" onClick={() => setPaletteMode("dark")}><DarkModeIcon /></ToggleButton>
+          <ToggleButtonGroup value={mode} color="primary" fullWidth aria-label="toggle button group">
+            <ToggleButton value="light" onClick={() => setMode("light")}><LightModeIcon /></ToggleButton>
+            <ToggleButton value="system" onClick={() => setMode("system")}><SettingsBrightnessIcon /></ToggleButton>
+            <ToggleButton value="dark" onClick={() => setMode("dark")}><DarkModeIcon /></ToggleButton>
           </ToggleButtonGroup>
 
           <p className="title">Language</p>
           <Select value={i18n.resolvedLanguage || languages[0].code} fullWidth size="small" onChange={handleChangeLanguage}>
-            {languages.map(language => <MenuItem key={language.code} value={language.code}>{language.name}</MenuItem>)}
+            {languages.map((language) => <MenuItem key={language.code} value={language.code}>{language.name}</MenuItem>)}
           </Select>
         </Box>
       </Drawer>
     </>
   );
-});
-
-export default Header;
+}

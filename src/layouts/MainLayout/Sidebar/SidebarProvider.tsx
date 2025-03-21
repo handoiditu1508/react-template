@@ -1,5 +1,10 @@
-import BreakpointsContext from "@/contexts/BreakpointsContext";
-import InfoContext from "@/contexts/InfoContext";
+import FaSvgIcon from "@/components/FaSvgIcon";
+import MdiSvgIcon from "@/components/MdiSvgIcon";
+import { BreakpointsContext } from "@/contexts/breakpoints";
+import { InfoContext } from "@/contexts/info";
+import { faHandFist } from "@fortawesome/free-solid-svg-icons/faHandFist";
+import { faSkull } from "@fortawesome/free-solid-svg-icons/faSkull";
+import { mdiShieldSword } from "@mdi/js";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -12,19 +17,17 @@ import ParkIcon from "@mui/icons-material/Park";
 import PetsIcon from "@mui/icons-material/Pets";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import { SwipeableDrawerProps, useTheme } from "@mui/material";
-import React, { ProviderProps, useContext, useEffect, useState } from "react";
+import { ProviderProps, useContext, useEffect, useState } from "react";
+import SidebarContext, { SidebarContextType, SidebarState } from "./SidebarContext";
 import { SidebarTab } from "./SidebarItem";
 
-type SidebarState = "hidden" | "temporary" | "mini" | "permanent" | "miniHovered";
-
-type CustomTransition = (...props: string[]) => React.CSSProperties["transition"];
 const sidebarTabs: SidebarTab[][] = [
   [
     {
       title: "Nature",
       to: "/nature",
       icon: <GrassIcon />,
-      childs: [
+      children: [
         {
           title: "Lone Ranger",
           to: "/nature/solo",
@@ -51,7 +54,7 @@ const sidebarTabs: SidebarTab[][] = [
       title: "Water",
       to: "/water",
       icon: <WaterDropIcon />,
-      childs: [
+      children: [
         {
           title: "Ice",
           to: "/ice",
@@ -78,6 +81,25 @@ const sidebarTabs: SidebarTab[][] = [
       title: "Magic",
       to: "/magic",
       icon: <AutoFixHighIcon />,
+      children: [
+        {
+          title: "Necromancy",
+          to: "/magic/necromancy",
+          icon: <FaSvgIcon icon={faSkull} />,
+        },
+      ],
+    },
+    {
+      title: "Physics",
+      to: "/physics",
+      icon: <FaSvgIcon icon={faHandFist} />,
+      children: [
+        {
+          title: "Knight",
+          to: "/physics/knight",
+          icon: <MdiSvgIcon path={mdiShieldSword} />,
+        },
+      ],
     },
   ],
   [
@@ -87,22 +109,6 @@ const sidebarTabs: SidebarTab[][] = [
     },
   ],
 ];
-
-type SidebarContextType = {
-  sidebarOpen: boolean;
-  setSidebarOpen: (sidebarOpen: boolean) => void;
-  sidebarCurrentWidth: number;// number of pixels sidebar is using permanently
-  sidebarPinned: boolean;
-  setSidebarPinned: (sidebarPinned: boolean) => void;
-  sidebarState: SidebarState;
-  sidebarVariant: SwipeableDrawerProps["variant"];
-  miniSidebarTransition: CustomTransition;
-  permanentSidebarTransition: CustomTransition;
-  sidebarHovered: boolean;
-  setSidebarHovered: (sidebarHovered: boolean) => void;
-  sidebarTabs: SidebarTab[][];
-};
-export const SidebarContext = React.createContext<SidebarContextType>({} as SidebarContextType);
 
 type SidebarProviderProps = Omit<ProviderProps<SidebarContextType>, "value">;
 
@@ -153,20 +159,25 @@ function SidebarProvider(props: SidebarProviderProps) {
     delay: theme.transitions.duration.shorter,
   });
 
-  return <SidebarContext.Provider value={{
-    sidebarOpen,
-    setSidebarOpen: setSidebarOpenWrapper,
-    sidebarCurrentWidth,
-    sidebarPinned,
-    setSidebarPinned,
-    sidebarState,
-    sidebarVariant,
-    miniSidebarTransition,
-    permanentSidebarTransition,
-    sidebarHovered,
-    setSidebarHovered,
-    sidebarTabs,
-  }} {...props} />;
+  return (
+    <SidebarContext.Provider
+      value={{
+        sidebarOpen,
+        setSidebarOpen: setSidebarOpenWrapper,
+        sidebarCurrentWidth,
+        sidebarPinned,
+        setSidebarPinned,
+        sidebarState,
+        sidebarVariant,
+        miniSidebarTransition,
+        permanentSidebarTransition,
+        sidebarHovered,
+        setSidebarHovered,
+        sidebarTabs,
+      }}
+      {...props}
+    />
+  );
 }
 
 export default SidebarProvider;

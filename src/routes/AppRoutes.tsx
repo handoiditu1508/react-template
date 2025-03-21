@@ -13,7 +13,8 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<Suspense><MainLayout /></Suspense>}>
         {MainRoute}
-        <Route path="*"
+        <Route
+          path="*"
           element={
             <main style={{ padding: "1rem" }}>
               <p>{t("There's nothing here!")}</p>

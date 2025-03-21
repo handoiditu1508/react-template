@@ -27,13 +27,15 @@ const axiosBaseQuery = (
     const err = axiosError as AxiosError;
 
     return {
-      error: err.response ? {
-        status: err.response.status,
-        data: err.response.data || err.message,
-      } : {
-        status: "CUSTOM_ERROR",
-        error: err.message,
-      },
+      error: err.response
+        ? {
+          status: err.response.status,
+          data: err.response.data || err.message,
+        }
+        : {
+          status: "CUSTOM_ERROR",
+          error: err.message,
+        },
     };
   }
 };

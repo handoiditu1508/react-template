@@ -1,41 +1,11 @@
 import CONFIG from "@/configs";
-import React, { ProviderProps, useRef, useState } from "react";
-
-export type ConfirmationDialogOptions = {
-  description?: string;
-  cancelButtonText?: string;
-  confirmButtonText?: string;
-  hideCancelButton?: boolean;
-  onCancel?: () => void | Promise<void>;
-  onConfirm?: () => void | Promise<void>;
-  preventCloseOnConfirm?: boolean;
-};
-
-export type CancelReason = "backdropClick" | "escapeKeyDown" | "cancelButton";
-
-type ConfirmationDialogContextType = {
-  openDialog: (title: string, options?: ConfirmationDialogOptions) => void;
-  closeDialog: () => void;
-  setLoading: (loading: boolean) => void;
-  open: boolean;
-  loading: boolean;
-  title: string;
-  description?: string;
-  cancelButtonText: string;
-  confirmButtonText: string;
-  hideCancelButton: boolean;
-  onCancel: (reason: CancelReason) => void | Promise<void>;
-  onConfirm: () => void | Promise<void>;
-  preventCloseOnConfirm: boolean;
-};
+import { ProviderProps, useRef, useState } from "react";
+import ConfirmationDialogContext, { ConfirmationDialogContextType } from "./ConfirmationDialogContext";
+import ConfirmationDialogOptions from "./ConfirmationDialogOptions";
 
 type ConfirmationDialogProviderProps = Omit<ProviderProps<ConfirmationDialogContextType>, "value">;
 
-const ConfirmationDialogContext = React.createContext<ConfirmationDialogContextType>({} as ConfirmationDialogContextType);
-
-export default ConfirmationDialogContext;
-
-export function ConfirmationDialogProvider(props: ConfirmationDialogProviderProps) {
+export default function ConfirmationDialogProvider(props: ConfirmationDialogProviderProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
@@ -73,19 +43,24 @@ export function ConfirmationDialogProvider(props: ConfirmationDialogProviderProp
     setOpen(false);
   };
 
-  return <ConfirmationDialogContext.Provider value={{
-    openDialog,
-    closeDialog,
-    setLoading,
-    open,
-    loading,
-    title,
-    description,
-    cancelButtonText,
-    confirmButtonText,
-    hideCancelButton,
-    onCancel: onCancel.current,
-    onConfirm: onConfirm.current,
-    preventCloseOnConfirm,
-  }} {...props} />;
+  return (
+    <ConfirmationDialogContext.Provider
+      value={{
+        openDialog,
+        closeDialog,
+        setLoading,
+        open,
+        loading,
+        title,
+        description,
+        cancelButtonText,
+        confirmButtonText,
+        hideCancelButton,
+        onCancel: onCancel.current,
+        onConfirm: onConfirm.current,
+        preventCloseOnConfirm,
+      }}
+      {...props}
+    />
+  );
 }

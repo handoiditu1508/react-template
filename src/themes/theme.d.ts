@@ -14,6 +14,19 @@ export interface ThemeConstants {
   xsHeaderHeight: number;
 }
 
+export type ScrollbarPalette = {
+  hover: {
+    thumbBackground: string;
+    thumbBorder: string;
+    track: string;
+  };
+  thumb: {
+    hover: {
+      background: string;
+    };
+  };
+};
+
 declare module "@mui/material/styles" {
   export interface Theme {
     constants: ThemeConstants;
@@ -24,10 +37,12 @@ declare module "@mui/material/styles" {
   }
 
   export interface Palette {
+    scrollbar: ScrollbarPalette;
     isPaletteColorOption: (color?: string) => color is ColorOption;
   }
 
   export interface PaletteOptions {
+    scrollbar?: ScrollbarPalette;
     isPaletteColorOption?: (color?: string) => color is ColorOption;
   }
 

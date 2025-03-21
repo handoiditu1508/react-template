@@ -1,7 +1,8 @@
 import { LoadingButton } from "@mui/lab";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogProps, DialogTitle } from "@mui/material";
 import { useContext } from "react";
-import ConfirmationDialogContext, { CancelReason } from "./ConfirmationDialogContext";
+import CancelReason from "./CancelReason";
+import ConfirmationDialogContext from "./ConfirmationDialogContext";
 
 function ConfirmationDialog(props: Omit<DialogProps, "open">) {
   const {

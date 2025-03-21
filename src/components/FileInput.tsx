@@ -7,7 +7,7 @@ import { Box, Button, CircularProgress, IconButton, InputAdornment, Stack, Stack
 import React, { useEffect, useRef, useState } from "react";
 import { v1 as uuidv1 } from "uuid";
 
-const StyledStack = styled(Stack, { shouldForwardProp: prop => !(["status", "error"] as PropertyKey[]).includes(prop) })<{
+const StyledStack = styled(Stack, { shouldForwardProp: (prop) => !(["status", "error"] as PropertyKey[]).includes(prop) })<{
   status?: FileInputStatus;
   error?: boolean;
 }>(({ theme, status, error }) => ({
@@ -188,7 +188,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
       hiddenFileInputRef.current.files = container.files;
     } else if (Array.isArray(fileList)) {
       const container = new DataTransfer();
-      fileList.forEach(file => {
+      fileList.forEach((file) => {
         container.items.add(file);
       });
       hiddenFileInputRef.current.files = container.files;
@@ -208,7 +208,8 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
   return (
     <StyledStack status={status} error={!!error} {...props}>
       <Box className="dropzone" onClick={openFileSelectWindow} onDragEnter={startDrag}>{dropzonePlaceholder ?? "Drop file here or click to upload"}</Box>
-      <TextField placeholder={inputPlaceholder ?? "Paste file or file url"}
+      <TextField
+        placeholder={inputPlaceholder ?? "Paste file or file url"}
         type="text"
         variant="standard"
         fullWidth
@@ -216,27 +217,29 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
         value={inputValue}
         error={!!error}
         helperText={error}
-        onChange={e => {
+        InputProps={{
+          endAdornment: (<InputAdornment position="end">
+            <IconButton size="small" edge="end" onClick={loadFileFromInputValue}><ForwardIcon /></IconButton>
+          </InputAdornment>),
+        }}
+        onChange={(e) => {
           setInputValue(e.target.value);
           onChangeInput();
         }}
         onClick={stopBubbling}
         onPaste={pasteFromClipboard}
         onKeyDown={onPressEnter}
-        InputProps={{
-          endAdornment: (<InputAdornment position="end">
-            <IconButton size="small" edge="end" onClick={loadFileFromInputValue}><ForwardIcon /></IconButton>
-          </InputAdornment>),
-        }} />
-      <Box className="drop-overlay"
-        onDragOver={e => e.preventDefault()}
+      />
+      <Box
+        className="drop-overlay"
+        onDragOver={(e) => e.preventDefault()}
         onDragLeave={endDrag}
         onDrop={dropFile}>
         <UploadFileIcon fontSize="large" color="primary" />
       </Box>
       <Box className="result-overlay">
         <Typography variant="subtitle1" noWrap maxWidth="100%">{hiddenFileInputRef.current.files?.item(0)?.name}</Typography>
-        <Button onClick={reset} size="small">Retry</Button>
+        <Button size="small" onClick={reset}>Retry</Button>
       </Box>
       <Box className="loading-overlay">
         <CircularProgress />

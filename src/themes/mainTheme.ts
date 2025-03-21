@@ -3,11 +3,11 @@ import type { } from "@mui/lab/themeAugmentation";
 // When using TypeScript 3.x and below
 // import "@mui/lab/themeAugmentation";
 
-import { smAndUpMediaQuery } from "@/common/breakpointsHelpers";
+import { smAndUpMediaQuery } from "@/contexts/breakpoints";
 import ColorOption, { colorOptions } from "@/models/ColorOption";
-import { PaletteMode, Theme, ThemeOptions, alpha, createTheme } from "@mui/material";
+import { alpha, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { deepmerge } from "@mui/utils";
+import type { } from "@mui/material/themeCssVarsAugmentation";
 
 const lightGrey = grey[300];
 const normalGrey = grey[500];
@@ -20,10 +20,61 @@ const sidebarIconSize = 24;
 const sidebarLeftPadding = (miniSidebarWidth - sidebarIconSize) / 2;
 const headerHeight = 64;
 const xsHeaderHeight = 56;
+const isPaletteColorOption = (color?: string): color is ColorOption => colorOptions.some((value) => value === color);
 
-// default
-const defaultThemeOptions: ThemeOptions = {
-  spacing: scalingFactor,
+const mainTheme = createTheme({
+  cssVariables: {
+    colorSchemeSelector: "class",
+  },
+  colorSchemes: {
+    dark: {
+      palette: {
+        background: {
+          default: "#2C2C2C",
+          paper: "#2C2C2C",
+        },
+        scrollbar: {
+          hover: {
+            thumbBackground: alpha(normalGrey, 0.4),
+            thumbBorder: darkGrey,
+            track: darkGrey,
+          },
+          thumb: {
+            hover: {
+              background: normalGrey,
+            },
+          },
+        },
+        isPaletteColorOption,
+      },
+    },
+    light: {
+      palette: {
+        warning: {
+          main: "#ffc107",
+          dark: "#c69500",
+          light: "#ffcd39",
+        },
+        background: {
+          paper: "#f5f5f5",
+          default: "#e5e4e2",
+        },
+        scrollbar: {
+          hover: {
+            thumbBackground: alpha(normalGrey, 0.4),
+            thumbBorder: lightGrey,
+            track: lightGrey,
+          },
+          thumb: {
+            hover: {
+              background: alpha(normalGrey, 0.6),
+            },
+          },
+        },
+        isPaletteColorOption,
+      },
+    },
+  },
   breakpoints: {
     values: {
       xs: 0,
@@ -35,9 +86,6 @@ const defaultThemeOptions: ThemeOptions = {
   },
   typography: {
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-  },
-  palette: {
-    isPaletteColorOption: (color?: string): color is ColorOption => colorOptions.some(value => value === color),
   },
   constants: {
     scalingFactor,
@@ -70,14 +118,26 @@ const defaultThemeOptions: ThemeOptions = {
       "&::-webkit-scrollbar-corner": {
         display: "none",
       },
+      "&:hover": {
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "var(--mui-palette-scrollbar-hover-thumbBackground)",
+          borderColor: "var(--mui-palette-scrollbar-hover-thumbBorder)",
+          "&:hover": {
+            backgroundColor: "var(--mui-palette-scrollbar-thumb-hover-background)",
+          },
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "var(--mui-palette-scrollbar-hover-track)",
+        },
+      },
     },
     hideNumberInputArrows: {
       "&[type=number]": {
         "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
-          "WebkitAppearance": "none",
+          WebkitAppearance: "none",
           margin: 0,
         },
-        "MozAppearance": "textfield",
+        MozAppearance: "textfield",
         appearance: "textfield",
       },
     },
@@ -87,116 +147,54 @@ const defaultThemeOptions: ThemeOptions = {
       long: 1000,
     },
   },
-};
-
-// dark & light mode
-const themeOptionsDictionary: Record<PaletteMode, ThemeOptions> = {
-  light: deepmerge(defaultThemeOptions, {
-    palette: {
-      mode: "light",
-      warning: {
-        main: "#ffc107",
-        dark: "#c69500",
-        light: "#ffcd39",
+  shape: {
+    smallBorder: "1px solid var(--mui-palette-divider)",
+    mediumBorder: "2px solid var(--mui-palette-divider)",
+    largeBorder: "4px solid var(--mui-palette-divider)",
+  },
+  components: {
+    MuiPaper: {
+      defaultProps: {
+        elevation: 4,
       },
-      background: {
-        paper: "#f5f5f5",
-        default: "#e5e4e2",
-      },
-    },
-    mixins: {
-      scrollbar: {
-        "&:hover": {
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: alpha(normalGrey, 0.4),
-            borderColor: lightGrey,
-            "&:hover": {
-              backgroundColor: alpha(normalGrey, 0.6),
-            },
-          },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: lightGrey,
-          },
-        },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          ...theme.mixins.scrollbar,
+        }),
       },
     },
-    shape: {
-      smallBorder: "1px solid rgba(0, 0, 0, 0.12)",
-      mediumBorder: "2px solid rgba(0, 0, 0, 0.12)",
-      largeBorder: "4px solid rgba(0, 0, 0, 0.12)",
-    },
-  } as ThemeOptions),
-  dark: deepmerge(defaultThemeOptions, {
-    palette: {
-      mode: "dark",
-      background: {
-        default: "#2C2C2C",
-        paper: "#2C2C2C",
-      },
-    },
-    mixins: {
-      scrollbar: {
-        "&:hover": {
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: alpha(normalGrey, 0.4),
-            borderColor: darkGrey,
-            "&:hover": {
-              backgroundColor: normalGrey,
-            },
-          },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: darkGrey,
-          },
-        },
-      },
-    },
-    shape: {
-      smallBorder: "1px solid rgba(255, 255, 255, 0.12)",
-      mediumBorder: "2px solid rgba(255, 255, 255, 0.12)",
-      largeBorder: "4px solid rgba(255, 255, 255, 0.12)",
-    },
-  } as ThemeOptions),
-};
-
-// custom components style
-for (let paletteMode in themeOptionsDictionary) {
-  const themeOptions = themeOptionsDictionary[paletteMode as PaletteMode];
-  themeOptionsDictionary[paletteMode as PaletteMode] = deepmerge(themeOptions, {
-    components: {
-      MuiPaper: {
-        defaultProps: {
+    MuiDrawer: {
+      defaultProps: {
+        PaperProps: {
           elevation: 4,
         },
-        styleOverrides: {
-          root: ({ theme }) => ({
-            ...theme.mixins.scrollbar,
-          }),
-        },
       },
-      MuiDrawer: {
-        defaultProps: {
-          PaperProps: {
-            elevation: 4,
-          },
+      styleOverrides: {
+        root: {
+          width: sidebarWidth,
+          whiteSpace: "nowrap",
+          boxSizing: "border-box",
+          overflowX: "hidden",
         },
-        styleOverrides: {
-          root: {
-            width: sidebarWidth,
-            whiteSpace: "nowrap",
-            boxSizing: "border-box",
-            overflowX: "hidden",
-          },
-          paper: {
-            width: sidebarWidth,
-            border: "none",
-            overflowX: "hidden",
-            ".MuiListItemButton-root": {
-              ".MuiListItemIcon-root:first-of-type": {
-                ".MuiSvgIcon-root": {
-                  fontSize: sidebarIconSize,
-                },
+        paper: {
+          width: sidebarWidth,
+          border: "none",
+          overflowX: "hidden",
+          ".MuiListItemButton-root": {
+            ".MuiListItemIcon-root:first-of-type": {
+              ".MuiSvgIcon-root": {
+                fontSize: sidebarIconSize,
               },
             },
+          },
+          "> .MuiList-root": {
+            "> .MuiListItem-root": {
+              "> .MuiListItemButton-root": {
+                paddingLeft: sidebarLeftPadding,
+              },
+            },
+          },
+          ".os-viewport": {
             "> .MuiList-root": {
               "> .MuiListItem-root": {
                 "> .MuiListItemButton-root": {
@@ -204,65 +202,42 @@ for (let paletteMode in themeOptionsDictionary) {
                 },
               },
             },
-            ".os-viewport": {
-              "> .MuiList-root": {
-                "> .MuiListItem-root": {
-                  "> .MuiListItemButton-root": {
-                    paddingLeft: sidebarLeftPadding,
-                  },
-                },
-              },
-            },
           },
         },
       },
-      MuiSwipeableDrawer: {
-        defaultProps: {
-          PaperProps: {
-            elevation: 4,
+    },
+    MuiSwipeableDrawer: {
+      defaultProps: {
+        PaperProps: {
+          elevation: 4,
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          minHeight: xsHeaderHeight,
+          [smAndUpMediaQuery(theme.breakpoints)]: {
+            minHeight: headerHeight,
           },
-        },
+        }),
       },
-      MuiToolbar: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            minHeight: xsHeaderHeight,
-            [smAndUpMediaQuery(theme.breakpoints)]: {
-              minHeight: headerHeight,
-            },
-          }),
-        },
+    },
+    MuiListItem: {
+      defaultProps: {
+        disablePadding: true,
       },
-      MuiListItem: {
-        defaultProps: {
-          disablePadding: true,
-        },
-      },
-      MuiTextField: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            textarea: {
-              ...theme.mixins.scrollbar,
-            },
-            fieldset: {
-              border: theme.shape.smallBorder,
-            },
-            ".MuiInputBase-root": {
-              ".MuiInputBase-input": {
-                ...theme.mixins.hideNumberInputArrows,
-              },
-              "&.Mui-disabled": {
-                ".MuiInputAdornment-root": {
-                  color: theme.palette.action.disabled,
-                },
-              },
-            },
-          }),
-        },
-      },
-      MuiInput: {
-        styleOverrides: {
-          root: ({ theme }) => ({
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          textarea: {
+            ...theme.mixins.scrollbar,
+          },
+          fieldset: {
+            border: theme.shape.smallBorder,
+          },
+          ".MuiInputBase-root": {
             ".MuiInputBase-input": {
               ...theme.mixins.hideNumberInputArrows,
             },
@@ -271,69 +246,81 @@ for (let paletteMode in themeOptionsDictionary) {
                 color: theme.palette.action.disabled,
               },
             },
-          }),
-        },
+          },
+        }),
       },
-      MuiButton: {
-        defaultProps: {
-          variant: "contained",
-        },
-      },
-      MuiSlider: {
-        styleOverrides: {
-          vertical: {
-            "input[type=\"range\"]": {
-              WebkitAppearance: "slider-vertical",
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          ".MuiInputBase-input": {
+            ...theme.mixins.hideNumberInputArrows,
+          },
+          "&.Mui-disabled": {
+            ".MuiInputAdornment-root": {
+              color: theme.palette.action.disabled,
             },
           },
-        },
+        }),
       },
-      MuiLink: {
-        defaultProps: {
-          underline: "none",
-        },
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: "contained",
       },
-      MuiDialogContent: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            ...theme.mixins.scrollbar,
-          }),
-        },
-      },
-      MuiCardContent: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            ...theme.mixins.scrollbar,
-          }),
-        },
-      },
-      MuiAccordion: {
-        defaultProps: {
-          variant: "outlined",
-        },
-      },
-      MuiCard: {
-        defaultProps: {
-          variant: "outlined",
-        },
-      },
-      MuiTypography: {
-        styleOverrides: {
-          root: {
-            "code&": {
-              fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
-              fontSize: "initial",
-              fontWeight: "initial",
-              lineHeight: "initial",
-              letterSpacing: "initial",
-            },
+    },
+    MuiSlider: {
+      styleOverrides: {
+        vertical: {
+          "input[type=\"range\"]": {
+            WebkitAppearance: "slider-vertical",
           },
         },
       },
     },
-  } as ThemeOptions);
-}
+    MuiLink: {
+      defaultProps: {
+        underline: "none",
+      },
+    },
+    MuiDialogContent: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          ...theme.mixins.scrollbar,
+        }),
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          ...theme.mixins.scrollbar,
+        }),
+      },
+    },
+    MuiAccordion: {
+      defaultProps: {
+        variant: "outlined",
+      },
+    },
+    MuiCard: {
+      defaultProps: {
+        variant: "outlined",
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          "code&": {
+            fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+            fontSize: "initial",
+            fontWeight: "initial",
+            lineHeight: "initial",
+            letterSpacing: "initial",
+          },
+        },
+      },
+    },
+  },
+});
 
-export const createMainTheme = (mode: PaletteMode): Theme => {
-  return createTheme(themeOptionsDictionary[mode]);
-};
+export default mainTheme;

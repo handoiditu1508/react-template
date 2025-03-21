@@ -18,11 +18,16 @@ const reauthBaseQueryWrapper = <F extends BaseQueryFn<
   const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
     // wait until the mutex is available without locking it
     await mutex.waitForUnlock();
+
     let result = await baseQuery(args, api, extraOptions);
+
+    // check response is unauthorized
     if (result.error && result.error.status === 401 && localStorage.getItem(expirationTimeStorageKey)) {
-      // checking whether the mutex is locked
+      // checking whether the mutex is unlocked
       if (!mutex.isLocked()) {
+        // lock other requests until refresh token api returned
         const release = await mutex.acquire();
+
         const refreshResult = await baseQuery({ url: "refreshToken", method: "POST" }, api, extraOptions);
 
         if (refreshResult.data) {
@@ -34,11 +39,15 @@ const reauthBaseQueryWrapper = <F extends BaseQueryFn<
         } else {
           api.dispatch(clearAuthState());
         }
+
         // release must be called once the mutex should be released again.
         release();
       } else {
+        // refresh token api already running
+
         // wait until the mutex is available without locking it
         await mutex.waitForUnlock();
+
         // check expiration time to know if user token is stored in cookie or not
         if (localStorage.getItem(expirationTimeStorageKey)) {
           // retry the initial query

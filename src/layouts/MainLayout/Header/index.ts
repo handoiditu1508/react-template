@@ -1,6 +1,7 @@
 import Header from "./Header";
-import HeaderProvider, { HeaderContext } from "./HeaderProvider";
+import HeaderContext, { HeaderContextType } from "./HeaderContext";
+import HeaderProvider from "./HeaderProvider";
 import withHeaderProvider from "./withHeaderProvider";
 
 export default Header;
-export { HeaderContext, HeaderProvider, withHeaderProvider };
+export { HeaderContext, HeaderProvider, withHeaderProvider, type HeaderContextType };
