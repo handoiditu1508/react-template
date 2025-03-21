@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 type SupportAction = {
   id: number;
   text: string;

@@ -35,7 +35,8 @@ const DraggableListItem = styled(({ dragging, selected, disableHoverEffect, text
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             overflow: "hidden",
-          }} />
+          }}
+        />
       </ListItemButton>
     </ListItem>
   );

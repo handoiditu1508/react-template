@@ -13,25 +13,27 @@ const CustomLink = styled(({
   state,
   preventScrollReset,
   relative,
-  unstable_viewTransition,
+  viewTransition,
   ...props
 }: CustomLinkProps) => {
   return (
-    disabled ? <Link
-      {...props}
-      href={undefined}
-      underline="none"
-    /> : <Link
-      component={RouterLink}
-      to={to}
-      reloadDocument={reloadDocument}
-      replace={replace}
-      state={state}
-      preventScrollReset={preventScrollReset}
-      relative={relative}
-      unstable_viewTransition={unstable_viewTransition}
-      {...props}
-    />
+    disabled
+      ? <Link
+        {...props}
+        href={undefined}
+        underline="none"
+      />
+      : <Link
+        component={RouterLink}
+        to={to}
+        reloadDocument={reloadDocument}
+        replace={replace}
+        state={state}
+        preventScrollReset={preventScrollReset}
+        relative={relative}
+        viewTransition={viewTransition}
+        {...props}
+      />
   );
 })(({ theme, disabled }) => ({
   ...(disabled && {

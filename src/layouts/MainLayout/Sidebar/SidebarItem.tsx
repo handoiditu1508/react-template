@@ -1,6 +1,6 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText, useTheme } from "@mui/material";
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, To, useMatch, useResolvedPath } from "react-router-dom";
 
@@ -8,7 +8,7 @@ export type SidebarTab = {
   title: string;
   to: To;
   icon?: JSX.Element;
-  childs?: SidebarTab[];
+  children?: SidebarTab[];
 };
 
 type SidebarItemProps = {
@@ -39,26 +39,29 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
   return (
     <>
       <ListItem>
-        <ListItemButton component={Link} selected={!!fullyMatch} onClick={handleClickItem} to={sidebarTab.to} style={{ paddingLeft: leftPadding + (level * theme.constants.scalingFactor) }}>
+        <ListItemButton component={Link} selected={!!fullyMatch} to={sidebarTab.to} style={{ paddingLeft: leftPadding + (level * theme.constants.scalingFactor) }} onClick={handleClickItem}>
           {sidebarTab.icon && <ListItemIcon>
             {sidebarTab.icon}
           </ListItemIcon>}
           <ListItemText primary={t(sidebarTab.title)} />
-          {sidebarTab.childs && sidebarTab.childs.length !== 0 && <ExpandMoreIcon sx={{
-            transform: open ? "rotate(180deg)" : undefined,
-            transition: theme.transitions.create("transform", {
-              duration: theme.transitions.duration.short,
-              easing: theme.transitions.easing.sharp,
-            }),
-            "&:hover": {
-              color: theme.palette.primary.main,
-            },
-          }} onClick={handleClickExpandIcon} />}
+          {sidebarTab.children && sidebarTab.children.length !== 0 && <ExpandMoreIcon
+            sx={{
+              transform: open ? "rotate(180deg)" : undefined,
+              transition: theme.transitions.create("transform", {
+                duration: theme.transitions.duration.short,
+                easing: theme.transitions.easing.sharp,
+              }),
+              "&:hover": {
+                color: theme.palette.primary.main,
+              },
+            }}
+            onClick={handleClickExpandIcon}
+          />}
         </ListItemButton>
       </ListItem>
-      {sidebarTab.childs && sidebarTab.childs.length !== 0 && <Collapse in={open && !hideChilds} unmountOnExit>
+      {sidebarTab.children && sidebarTab.children.length !== 0 && <Collapse in={open && !hideChilds} unmountOnExit>
         <List disablePadding dense>
-          {sidebarTab.childs.map(child => <SidebarItem key={child.title} sidebarTab={child} level={level + 1} hideChilds={hideChilds} />)}
+          {sidebarTab.children.map((child) => <SidebarItem key={child.title} sidebarTab={child} level={level + 1} hideChilds={hideChilds} />)}
         </List>
       </Collapse>}
     </>

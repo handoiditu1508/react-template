@@ -1,6 +1,7 @@
 {
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
+  "editor.indentSize": "tabSize",
   "javascript.preferences.quoteStyle": "double",
   "typescript.preferences.quoteStyle": "double",
   "editor.formatOnSave": true,

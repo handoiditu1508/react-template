@@ -1,12 +1,13 @@
 import { stopBubbling } from "@/common/eventHelpers";
 import { loadFileFromUrl } from "@/common/fileHelpers";
+import CONFIG from "@/configs";
 import ForwardIcon from "@mui/icons-material/Forward";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { Box, Button, CircularProgress, IconButton, InputAdornment, Stack, StackProps, styled, TextField, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { v1 as uuidv1 } from "uuid";
 
-const StyledStack = styled(Stack, { shouldForwardProp: prop => !(["status", "error"] as PropertyKey[]).includes(prop) })<{
+const StyledStack = styled(Stack, { shouldForwardProp: (prop) => !(["status", "error"] as PropertyKey[]).includes(prop) })<{
   status?: FileInputStatus;
   error?: boolean;
 }>(({ theme, status, error }) => ({
@@ -86,7 +87,7 @@ type OwnProps = {
 };
 export type FileInputProps = OwnProps & Omit<StackProps, keyof OwnProps>;
 
-function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, error, onFilesChange, onChangeInput, ...props }: FileInputProps) {
+function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, error, onFilesChange = CONFIG.EMPTY_FUNCTION, onChangeInput = CONFIG.EMPTY_FUNCTION, ...props }: FileInputProps) {
   const [status, setStatus] = useState<FileInputStatus>();
   const [inputValue, setInputValue] = useState<string>("");
   const dragInnerCounter = useRef<number>(0);
@@ -118,7 +119,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
     if (!files) {
       setFileListToInput(event.dataTransfer.files);
     }
-    onFilesChange && onFilesChange(Array.from(event.dataTransfer.files), "drop");
+    onFilesChange(Array.from(event.dataTransfer.files), "drop");
   };
 
   const openFileSelectWindow = () => {
@@ -136,16 +137,16 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
 
   const reset = () => {
     if (!files) {
-      setFileListToInput([]);
+      setFileListToInput(CONFIG.EMPTY_ARRAY);
     }
-    onFilesChange && onFilesChange([], "reset");
+    onFilesChange(CONFIG.EMPTY_ARRAY, "reset");
   };
 
   const uploadFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     if (!files) {
       setStatus("uploaded");
     }
-    onFilesChange && onFilesChange(Array.from(event.currentTarget.files || []), "browse");
+    onFilesChange(Array.from(event.currentTarget.files || CONFIG.EMPTY_ARRAY), "browse");
   };
 
   const loadFileFromInputValue = async () => {
@@ -157,7 +158,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
       if (!files) {
         setFileListToInput(fileArray);
       }
-      onFilesChange && onFilesChange(fileArray, "url");
+      onFilesChange(fileArray, "url");
     } catch (error) {
       setStatus("idle");
       console.error(error);
@@ -168,7 +169,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
     if (!files) {
       setFileListToInput(event.clipboardData.files);
     }
-    onFilesChange && onFilesChange(Array.from(event.clipboardData.files), "clipboard");
+    onFilesChange(Array.from(event.clipboardData.files), "clipboard");
   };
 
   const setFileListToInput = (fileList: FileList | File[]) => {
@@ -187,7 +188,7 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
       hiddenFileInputRef.current.files = container.files;
     } else if (Array.isArray(fileList)) {
       const container = new DataTransfer();
-      fileList.forEach(file => {
+      fileList.forEach((file) => {
         container.items.add(file);
       });
       hiddenFileInputRef.current.files = container.files;
@@ -207,7 +208,8 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
   return (
     <StyledStack status={status} error={!!error} {...props}>
       <Box className="dropzone" onClick={openFileSelectWindow} onDragEnter={startDrag}>{dropzonePlaceholder ?? "Drop file here or click to upload"}</Box>
-      <TextField placeholder={inputPlaceholder ?? "Paste file or file url"}
+      <TextField
+        placeholder={inputPlaceholder ?? "Paste file or file url"}
         type="text"
         variant="standard"
         fullWidth
@@ -215,24 +217,29 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
         value={inputValue}
         error={!!error}
         helperText={error}
-        onChange={e => { setInputValue(e.target.value); onChangeInput && onChangeInput(); }}
-        onClick={stopBubbling}
-        onPaste={pasteFromClipboard}
-        onKeyDown={onPressEnter}
         InputProps={{
           endAdornment: (<InputAdornment position="end">
             <IconButton size="small" edge="end" onClick={loadFileFromInputValue}><ForwardIcon /></IconButton>
           </InputAdornment>),
-        }} />
-      <Box className="drop-overlay"
-        onDragOver={e => e.preventDefault()}
+        }}
+        onChange={(e) => {
+          setInputValue(e.target.value);
+          onChangeInput();
+        }}
+        onClick={stopBubbling}
+        onPaste={pasteFromClipboard}
+        onKeyDown={onPressEnter}
+      />
+      <Box
+        className="drop-overlay"
+        onDragOver={(e) => e.preventDefault()}
         onDragLeave={endDrag}
         onDrop={dropFile}>
         <UploadFileIcon fontSize="large" color="primary" />
       </Box>
       <Box className="result-overlay">
         <Typography variant="subtitle1" noWrap maxWidth="100%">{hiddenFileInputRef.current.files?.item(0)?.name}</Typography>
-        <Button onClick={reset} size="small">Retry</Button>
+        <Button size="small" onClick={reset}>Retry</Button>
       </Box>
       <Box className="loading-overlay">
         <CircularProgress />

@@ -7,6 +7,7 @@ const defaultConfig: ConfigType = {
   EMPTY_FUNCTION: () => { },
   EMPTY_OBJECT: {},
   EMPTY_ARRAY: [],
+  NOTIFICATION_MESSAGE_TIMEOUT: 3000,
 };
 
 export default defaultConfig;

@@ -24,7 +24,8 @@ const CloseBadge = styled(({ hidden, onClose = stopBubbling, ...props }: CloseBa
           onClick: handleClick,
         },
       }}
-      {...props} />
+      {...props}
+    />
   );
 })(() => ({
   ".MuiBadge-badge": {

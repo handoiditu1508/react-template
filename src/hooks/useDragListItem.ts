@@ -27,7 +27,7 @@ const useDragListItem = (
     event.preventDefault();
 
     const elementRect = event.currentTarget.getBoundingClientRect();
-    const mouseOffset = event.clientY - elementRect.top - elementRect.height / 2;
+    const mouseOffset = event.clientY - elementRect.top - (elementRect.height / 2);
     if ((draggingIndex < index && mouseOffset < 0) || (draggingIndex > index && mouseOffset > 0)) {
       return;
     }

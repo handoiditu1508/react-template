@@ -13,7 +13,7 @@ function SupportActionMenu({ supportActions, menuItemProps, ...props }: SupportA
   return (
     <Menu {...props}>
       {supportActions.map((supportAction) => ([
-        <SupportActionMenuItem supportAction={supportAction} {...menuItemProps} />,
+        <SupportActionMenuItem key={supportAction.id} supportAction={supportAction} {...menuItemProps} />,
         (supportAction.bottomDivider && <Divider />),
       ]))}
     </Menu>
