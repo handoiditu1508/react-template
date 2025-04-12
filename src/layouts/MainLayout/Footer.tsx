@@ -34,6 +34,14 @@ const navigatesList: { text: string; link: string; }[] = [
     link: "/electricity",
   },
   {
+    text: "Air",
+    link: "/air",
+  },
+  {
+    text: "Earth",
+    link: "/earth",
+  },
+  {
     text: "Light",
     link: "/light",
   },
@@ -50,8 +58,8 @@ const navigatesList: { text: string; link: string; }[] = [
     link: "/magic/necromancy",
   },
   {
-    text: "Physics",
-    link: "/physics",
+    text: "Physical",
+    link: "/physical",
   },
   {
     text: "Knight",

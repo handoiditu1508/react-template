@@ -6,12 +6,14 @@ import { faHandFist } from "@fortawesome/free-solid-svg-icons/faHandFist";
 import { faSkull } from "@fortawesome/free-solid-svg-icons/faSkull";
 import { mdiShieldSword } from "@mdi/js";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+import AirIcon from "@mui/icons-material/Air";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import FlareIcon from "@mui/icons-material/Flare";
 import ForestIcon from "@mui/icons-material/Forest";
 import GrassIcon from "@mui/icons-material/Grass";
+import LandscapeIcon from "@mui/icons-material/Landscape";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import ParkIcon from "@mui/icons-material/Park";
 import PetsIcon from "@mui/icons-material/Pets";
@@ -68,6 +70,16 @@ const sidebarTabs: SidebarTab[][] = [
       icon: <ElectricBoltIcon />,
     },
     {
+      title: "Air",
+      to: "/air",
+      icon: <AirIcon />,
+    },
+    {
+      title: "Earth",
+      to: "/earth",
+      icon: <LandscapeIcon />,
+    },
+    {
       title: "Light",
       to: "/light",
       icon: <FlareIcon />,
@@ -90,8 +102,8 @@ const sidebarTabs: SidebarTab[][] = [
       ],
     },
     {
-      title: "Physics",
-      to: "/physics",
+      title: "Physical",
+      to: "/physical",
       icon: <FaSvgIcon icon={faHandFist} />,
       children: [
         {
