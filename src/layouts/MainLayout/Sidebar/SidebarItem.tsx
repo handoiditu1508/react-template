@@ -28,6 +28,7 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
 
   const handleClickItem = () => {
     setOpen(!open);
+    window.scrollTo({ top: 0 });
   };
 
   const handleClickExpandIcon: React.MouseEventHandler<SVGSVGElement> = (event) => {
