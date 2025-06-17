@@ -7,7 +7,7 @@ import SidebarContext from "./SidebarContext";
 
 export type SidebarTab = {
   title: string;
-  to: To;
+  to?: To;
   icon?: JSX.Element;
   children?: SidebarTab[];
   hashPath: string;
@@ -42,7 +42,14 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
   return (
     <>
       <ListItem>
-        <ListItemButton component={Link} selected={!!partialMatch} to={sidebarTab.to} style={{ paddingLeft: leftPadding + (level * theme.constants.scalingFactor) }} onClick={handleClickItem}>
+        <ListItemButton
+          {...(sidebarTab.to && {
+            component: Link,
+            to: sidebarTab.to,
+          })}
+          selected={!!partialMatch}
+          style={{ paddingLeft: leftPadding + (level * theme.constants.scalingFactor) }}
+          onClick={handleClickItem}>
           {sidebarTab.icon && <ListItemIcon>
             {sidebarTab.icon}
           </ListItemIcon>}
