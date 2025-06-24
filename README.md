@@ -87,6 +87,27 @@ export default defineConfig({
 
 in `src/main.tsx`, replaces `BrowserRouter` with `HashRouter`.
 
+### Config i18n
+
+Replace `react-template` with your repository name.
+
+```typescript
+i18n
+  // existed code
+  .init({
+    // existed code
+    interpolation: {
+      // existed code
+    },
+    // add this field
+    backend: {
+      loadPath: "/react-template/locales/{{lng}}/{{ns}}.json",
+    }
+  });
+```
+
+*Content of `src/i18n.ts`.*
+
 ## Deploy to github pages
 
 ```bash
