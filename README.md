@@ -28,3 +28,68 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Fetch latest code from template repository
+
+```bash
+git remote add template https://github.com/handoiditu1508/react-template
+git fetch template master
+git merge template/master --allow-unrelated-histories
+```
+
+## Prepare to deploy to github pages
+
+### Create deployment branch
+
+Create and switch to `github-pages` branch.
+
+```bash
+git checkout -b github-pages
+```
+
+### Install `gh-pages`
+
+```bash
+npm install gh-pages
+```
+
+### Config `package.json`
+
+Add these 2 commands.
+
+```json
+{
+  // existed code
+  "scripts": {
+    // existed commands
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  }
+  // existed code
+}
+```
+
+*Content of `package.json`.*
+
+### Config base path
+
+Replace `react-template` with your repository name.
+
+```typescript
+export default defineConfig({
+  base: "/react-template",
+});
+```
+
+*Content of `vite.config.ts`.*
+
+### Config router
+
+in `src/index.tsx`, replaces `BrowserRouter` with `HashRouter`.
+
+## Deploy to github pages
+
+```bash
+npm run predeploy
+npm run deploy
+```
