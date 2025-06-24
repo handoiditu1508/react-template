@@ -50,7 +50,7 @@ git checkout -b github-pages
 ### Install `gh-pages`
 
 ```bash
-npm install gh-pages
+npm install --save-dev gh-pages
 ```
 
 ### Config `package.json`
@@ -85,7 +85,7 @@ export default defineConfig({
 
 ### Config router
 
-in `src/index.tsx`, replaces `BrowserRouter` with `HashRouter`.
+in `src/main.tsx`, replaces `BrowserRouter` with `HashRouter`.
 
 ## Deploy to github pages
 
