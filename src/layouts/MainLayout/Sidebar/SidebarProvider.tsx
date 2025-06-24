@@ -30,8 +30,8 @@ type TemporarySidebarTab = Pick<SidebarTab, "title" | "to" | "icon"> & {
 
 const flatSidebarTabs: SidebarTab[] = [];
 
-function convertTemporaryToSidebarTab(temporary: TemporarySidebarTab, index: number = 0, parentHashPath: string = ""): SidebarTab {
-  const hashPath = parentHashPath ? `${parentHashPath}/${index}` : index.toString();
+function convertTemporaryToSidebarTab(temporary: TemporarySidebarTab, index: number = 0, parentHashPath: string = "/"): SidebarTab {
+  const hashPath = parentHashPath.endsWith("/") ? `${parentHashPath}${index}/` : `${parentHashPath}/${index}/`;
 
   const sidebarTab: SidebarTab = {
     ...temporary,
