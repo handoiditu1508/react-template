@@ -67,9 +67,13 @@ const navigatesList: { text: string; link: string; }[] = [
   },
 ];
 
+const handleClickLink = () => {
+  window.scrollTo({ top: 0 });
+};
+
 const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
   const { t } = useTranslation();
-  const { xs, smAndUp, lgAndUp } = useContext(BreakpointsContext);
+  const { xsAndDown, smAndUp, lgAndUp } = useContext(BreakpointsContext);
   const year = new Date().getFullYear();
 
   return (
@@ -98,12 +102,12 @@ const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
             {lgAndUp && <Grid2 size={6} />}
             <Grid2 size={{ xs: 12, sm: 6 }}>
               <Stack alignItems={{ xs: "center", lg: "flex-start" }}>
-                {navigatesList.slice(0, smAndUp ? (Math.ceil(navigatesList.length / 2)) : undefined).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
+                {navigatesList.slice(0, smAndUp ? (Math.ceil(navigatesList.length / 2)) : undefined).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1" onClick={handleClickLink}>{t(nav.text)}</CustomLink>)}
               </Stack>
             </Grid2>
             {smAndUp && <Grid2 size={6}>
               <Stack alignItems={{ xs: "center", lg: "flex-start" }}>
-                {navigatesList.slice(Math.ceil(navigatesList.length / 2)).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1">{t(nav.text)}</CustomLink>)}
+                {navigatesList.slice(Math.ceil(navigatesList.length / 2)).map((nav) => <CustomLink key={nav.text} to={nav.link} underline="hover" variant="body1" onClick={handleClickLink}>{t(nav.text)}</CustomLink>)}
               </Stack>
             </Grid2>}
           </Grid2>
@@ -118,7 +122,7 @@ const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
             </Typography>
             <CustomLink to="/privacy-policy" underline="hover" variant="subtitle2">{t("Privacy Policy")}</CustomLink>
           </Breadcrumbs>}
-          {xs && <Stack alignItems="center">
+          {xsAndDown && <Stack alignItems="center">
             <Typography className="copyright-text" variant="subtitle2" textAlign="center">
               <CopyrightIcon />
               Copyright {year}, {window.location.host}

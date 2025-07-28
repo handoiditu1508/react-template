@@ -24,7 +24,7 @@ const Sidebar = () => {
     setSidebarPinned,
     sidebarTabs,
   } = useContext(SidebarContext);
-  const { smAndDown } = useContext(BreakpointsContext);
+  const { mdAndDown } = useContext(BreakpointsContext);
   const toggleDrawer = (val: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => setSidebarOpen(val);
   const [miniSidebarWidth] = useState<number>(theme.constants.miniSidebarWidth || 0);
   /**
@@ -109,14 +109,16 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText
               primary={CONFIG.APP_NAME}
-              primaryTypographyProps={{
-                color: "primary",
-                variant: "h6",
-                textTransform: "none",
+              slotProps={{
+                primary: {
+                  color: "primary",
+                  variant: "h6",
+                  textTransform: "none",
+                },
               }}
             />
           </CustomButton>
-          {!(smAndDown || mobile) && <IconButton
+          {!(mdAndDown || mobile) && <IconButton
             color="primary"
             size="small"
             sx={{
