@@ -12,10 +12,10 @@ const StyledStack = styled(Stack, { shouldForwardProp: (prop) => !(["status", "e
   error?: boolean;
 }>(({ theme, status, error }) => ({
   minHeight: 100,
-  border: theme.shape.largeBorder,
-  borderColor: error ? theme.palette.error.main : theme.palette.primary.main,
+  border: theme.vars.shape.largeBorder,
+  borderColor: error ? theme.vars.palette.error.main : theme.vars.palette.primary.main,
   borderStyle: "dashed",
-  borderRadius: `calc(${theme.shape.borderRadius} * 2)`,
+  borderRadius: `calc(${theme.vars.shape.borderRadius} * 2)`,
   padding: theme.spacing(1),
   display: "inline-flex",
   position: "relative",
@@ -25,7 +25,7 @@ const StyledStack = styled(Stack, { shouldForwardProp: (prop) => !(["status", "e
   }),
   ".dropzone": {
     cursor: "pointer",
-    color: theme.palette.grey[500],
+    color: theme.vars.palette.grey[500],
     display: "flex",
     flexGrow: 1,
     justifyContent: "center",

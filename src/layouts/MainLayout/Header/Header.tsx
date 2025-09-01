@@ -68,7 +68,7 @@ export default function Header({ ref }: { ref?: React.Ref<HTMLDivElement>; }) {
             ...((sidebarState === "permanent" || sidebarState === "miniHovered") && {
               transition: `${permanentSidebarTransition("margin", "width")}, ${slideTransition} !important`,
             }),
-            zIndex: theme.zIndex.appBar,
+            zIndex: theme.vars.zIndex.appBar,
           }}>
           <LayoutContainer sx={{
             paddingTop: "var(--header-top-spacing)",
@@ -115,8 +115,8 @@ export default function Header({ ref }: { ref?: React.Ref<HTMLDivElement>; }) {
           ...theme.typography.h6,
           paddingY: 1,
           textAlign: "center",
-          borderBottom: theme.shape.smallBorder,
-          borderColor: theme.palette.divider,
+          borderBottom: theme.vars.shape.smallBorder,
+          borderColor: theme.vars.palette.divider,
         }}>
           Settings
         </Box>

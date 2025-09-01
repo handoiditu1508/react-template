@@ -25,6 +25,7 @@ const isPaletteColorOption = (color?: string): color is ColorOption => colorOpti
 const mainTheme = createTheme({
   cssVariables: {
     colorSchemeSelector: "class",
+    nativeColor: true,
   },
   colorSchemes: {
     dark: {
@@ -263,7 +264,7 @@ const mainTheme = createTheme({
             ...theme.mixins.scrollbar,
           },
           fieldset: {
-            border: theme.shape.smallBorder,
+            border: theme.vars.shape.smallBorder,
           },
           ".MuiInputBase-root": {
             ".MuiInputBase-input": {
@@ -271,7 +272,7 @@ const mainTheme = createTheme({
             },
             "&.Mui-disabled": {
               ".MuiInputAdornment-root": {
-                color: theme.palette.action.disabled,
+                color: theme.vars.palette.action.disabled,
               },
             },
           },
@@ -286,7 +287,7 @@ const mainTheme = createTheme({
           },
           "&.Mui-disabled": {
             ".MuiInputAdornment-root": {
-              color: theme.palette.action.disabled,
+              color: theme.vars.palette.action.disabled,
             },
           },
         }),

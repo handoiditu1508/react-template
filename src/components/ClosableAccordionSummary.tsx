@@ -32,9 +32,9 @@ const ClosableAccordionSummary = styled(({ onClose, children, ...props }: Closab
     marginLeft: theme.spacing(1),
     justifyContent: "space-between",
     ".closeIcon": {
-      color: theme.palette.action.active,
+      color: theme.vars.palette.action.active,
       "&:hover": {
-        color: theme.palette.error.main,
+        color: theme.vars.palette.error.main,
       },
     },
   },

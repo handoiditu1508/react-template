@@ -38,7 +38,7 @@ const CustomLink = styled(({
 })(({ theme, disabled }) => ({
   ...(disabled && {
     "&, &:active": {
-      color: theme.palette.text.disabled,
+      color: theme.vars.palette.text.disabled,
     },
   }),
 }));

@@ -31,7 +31,7 @@ export default function Suspense({ fallbackType = "inline", errorCallback, ...pr
             </Box>}
             {fallbackType === "backdrop" && <Backdrop
               open={open}
-              sx={{ zIndex: theme.zIndex.drawer + 1 }}
+              sx={{ zIndex: theme.vars.zIndex.drawer + 1 }}
               onClick={handleClose}>
               <CircularProgress />
             </Backdrop>}

@@ -43,12 +43,12 @@ const DraggableListItem = styled(({ dragging, selected, disableHoverEffect, text
     </ListItem>
   );
 })(({ theme, dragging, disableHoverEffect }) => ({
-  borderBottom: theme.shape.smallBorder,
+  borderBottom: theme.vars.shape.smallBorder,
   opacity: dragging ? 0.5 : undefined,
   ".MuiListItemSecondaryAction-root": {
     ".MuiIconButton-root": {
       "&:hover": {
-        color: theme.palette.error.main,
+        color: theme.vars.palette.error.main,
       },
     },
   },

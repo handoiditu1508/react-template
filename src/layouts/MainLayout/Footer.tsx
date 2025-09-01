@@ -139,7 +139,7 @@ const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
   );
 })(({ theme }) => ({
   flexShrink: 0,
-  color: theme.palette.text.secondary,
+  color: theme.vars.palette.text.secondary,
   ">.MuiPaper-root": {
     boxShadow: "none",
     padding: theme.spacing(CONFIG.LAYOUT_PADDING),
@@ -149,9 +149,9 @@ const Footer = styled(({ component = "footer", ...props }: BoxProps) => {
     margin: theme.spacing(2, -CONFIG.LAYOUT_PADDING, 1),
   },
   ".MuiTypography-root": {
-    color: theme.palette.text.secondary,
+    color: theme.vars.palette.text.secondary,
     "&.title": {
-      color: theme.palette.text.primary,
+      color: theme.vars.palette.text.primary,
     },
   },
   ".footer-content-section": {

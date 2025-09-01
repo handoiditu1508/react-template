@@ -62,7 +62,7 @@ export default function SidebarItem({ sidebarTab, level = 0, hideChilds }: Sideb
                 easing: theme.transitions.easing.sharp,
               }),
               "&:hover": {
-                color: theme.palette.primary.main,
+                color: theme.vars.palette.primary.main,
               },
             }}
             onClick={handleClickExpandIcon}

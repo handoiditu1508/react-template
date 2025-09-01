@@ -20,7 +20,7 @@ function InnerMainLayout() {
         sx={{
           boxShadow: "none",
           overflow: "auto",
-          backgroundColor: { lg: theme.palette.background.default },
+          backgroundColor: { lg: theme.vars.palette.background.default },
           backgroundImage: { lg: "none" },
         }}>{/* background for app */}
         <Header />
