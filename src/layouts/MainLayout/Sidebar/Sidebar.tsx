@@ -56,30 +56,32 @@ const Sidebar = () => {
       sx={{
         width: sidebarState === "mini" ? miniSidebarWidth : undefined,
       }}
-      PaperProps={{
-        elevation: 4,
-        sx: {
-          ...(sidebarState === "mini" && {
-            transition: `${miniSidebarTransition("width")}, ${boxShadowTransition}`,
-            width: miniSidebarWidth,
-          }),
-          ...((sidebarState === "permanent" || sidebarState === "miniHovered") && {
-            transition: `${permanentSidebarTransition("width")}, ${boxShadowTransition}`,
-          }),
-          ".MuiListItemText-root, .MuiListItemButton-root>.MuiSvgIcon-root": {
-            opacity: sidebarState === "mini" ? 0 : undefined,
-            transition: transformTransition,
-            ...((sidebarState === "permanent" || sidebarState === "miniHovered") && {
-              transition: `${permanentSidebarTransition("opacity")}, ${transformTransition}`,
-            }),
+      slotProps={{
+        paper: {
+          elevation: 4,
+          sx: {
             ...(sidebarState === "mini" && {
-              transition: `${miniSidebarTransition("opacity")}, ${transformTransition}`,
+              transition: `${miniSidebarTransition("width")}, ${boxShadowTransition}`,
+              width: miniSidebarWidth,
             }),
+            ...((sidebarState === "permanent" || sidebarState === "miniHovered") && {
+              transition: `${permanentSidebarTransition("width")}, ${boxShadowTransition}`,
+            }),
+            ".MuiListItemText-root, .MuiListItemButton-root>.MuiSvgIcon-root": {
+              opacity: sidebarState === "mini" ? 0 : undefined,
+              transition: transformTransition,
+              ...((sidebarState === "permanent" || sidebarState === "miniHovered") && {
+                transition: `${permanentSidebarTransition("opacity")}, ${transformTransition}`,
+              }),
+              ...(sidebarState === "mini" && {
+                transition: `${miniSidebarTransition("opacity")}, ${transformTransition}`,
+              }),
+            },
+            boxShadow: sidebarState === "miniHovered" ? undefined : "none",
           },
-          boxShadow: sidebarState === "miniHovered" ? undefined : "none",
+          onMouseEnter: () => setSidebarHovered(true),
+          onMouseLeave: () => setSidebarHovered(false),
         },
-        onMouseEnter: () => setSidebarHovered(true),
-        onMouseLeave: () => setSidebarHovered(false),
       }}
       onClose={toggleDrawer(false)}
       onOpen={toggleDrawer(true)}

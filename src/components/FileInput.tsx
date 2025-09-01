@@ -15,7 +15,7 @@ const StyledStack = styled(Stack, { shouldForwardProp: (prop) => !(["status", "e
   border: theme.shape.largeBorder,
   borderColor: error ? theme.palette.error.main : theme.palette.primary.main,
   borderStyle: "dashed",
-  borderRadius: theme.shape.borderRadius * 2,
+  borderRadius: `calc(${theme.shape.borderRadius} * 2)`,
   padding: theme.spacing(1),
   display: "inline-flex",
   position: "relative",
@@ -217,10 +217,12 @@ function FileInput({ files, inputProps, dropzonePlaceholder, inputPlaceholder, e
         value={inputValue}
         error={!!error}
         helperText={error}
-        InputProps={{
-          endAdornment: (<InputAdornment position="end">
-            <IconButton size="small" edge="end" onClick={loadFileFromInputValue}><ForwardIcon /></IconButton>
-          </InputAdornment>),
+        slotProps={{
+          input: {
+            endAdornment: (<InputAdornment position="end">
+              <IconButton size="small" edge="end" onClick={loadFileFromInputValue}><ForwardIcon /></IconButton>
+            </InputAdornment>),
+          },
         }}
         onChange={(e) => {
           setInputValue(e.target.value);
