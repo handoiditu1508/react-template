@@ -236,7 +236,7 @@
 
 ==========> useTheme <==========
 - const theme = useTheme()
-- theme.palette.primary.main
+- theme.vars.palette.primary.main
 ==========> useTheme <==========
 
 
@@ -259,8 +259,8 @@
 
 
 ==========> Lighten/darken color <==========
-- theme.lighten(theme.palette.primary.light, 0.85)
-- theme.darken(theme.palette.primary.main, 0.8)
+- theme.lighten(theme.vars.palette.primary.light, 0.85)
+- theme.darken(theme.vars.palette.primary.main, 0.8)
 ==========> Lighten/darken color <==========
 
 
