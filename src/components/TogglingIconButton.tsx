@@ -1,4 +1,5 @@
-import { IconButton, IconButtonProps, styled, useTheme } from "@mui/material";
+import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import { styled, useTheme } from "@mui/material/styles";
 import React, { JSX } from "react";
 
 type OwnProps = {

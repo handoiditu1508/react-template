@@ -4,7 +4,15 @@ import CONFIG from "@/configs";
 import { BreakpointsContext } from "@/contexts/breakpoints";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import EmailIcon from "@mui/icons-material/Email";
-import { Box, BoxProps, Breadcrumbs, Divider, Grid, Link, Paper, Stack, Typography, styled } from "@mui/material";
+import Box, { BoxProps } from "@mui/material/Box";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 

@@ -1,5 +1,9 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { IconButton, ListItem, ListItemButton, ListItemProps, ListItemText, styled } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import ListItem, { ListItemProps } from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import { styled } from "@mui/material/styles";
 
 type OwnProps = {
   dragging?: boolean;

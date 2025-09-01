@@ -3,7 +3,15 @@ import { loadFileFromUrl } from "@/common/fileHelpers";
 import CONFIG from "@/configs";
 import ForwardIcon from "@mui/icons-material/Forward";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import { Box, Button, CircularProgress, IconButton, InputAdornment, Stack, StackProps, styled, TextField, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Stack, { StackProps } from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import React, { useEffect, useRef, useState } from "react";
 import { v1 as uuidv1 } from "uuid";
 

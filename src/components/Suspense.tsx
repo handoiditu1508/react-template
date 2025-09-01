@@ -1,4 +1,7 @@
-import { Backdrop, Box, CircularProgress, useTheme } from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
 

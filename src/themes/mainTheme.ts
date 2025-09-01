@@ -5,8 +5,8 @@ import type { } from "@mui/lab/themeAugmentation";
 
 import { smAndUpMediaQuery } from "@/contexts/breakpoints";
 import ColorOption, { colorOptions } from "@/models/ColorOption";
-import { alpha, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { alpha, createTheme } from "@mui/material/styles";
 import type { } from "@mui/material/themeCssVarsAugmentation";
 
 const lightGrey = grey[300];

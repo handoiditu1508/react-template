@@ -1,6 +1,7 @@
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CloseIcon from "@mui/icons-material/Close";
-import { AccordionSummary, AccordionSummaryProps, styled } from "@mui/material";
+import AccordionSummary, { AccordionSummaryProps } from "@mui/material/AccordionSummary";
+import { styled } from "@mui/material/styles";
 
 type OwnProps = {
   onClose?: React.MouseEventHandler<SVGSVGElement>;

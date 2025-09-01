@@ -1,5 +1,8 @@
 import SupportAction from "@/models/SupportAction";
-import { ListItemIcon, ListItemText, MenuItem, MenuItemProps, Typography } from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 
 type OwnProps = {
   supportAction: SupportAction;

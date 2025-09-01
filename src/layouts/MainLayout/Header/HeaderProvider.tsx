@@ -1,5 +1,5 @@
 import { BreakpointsContext } from "@/contexts/breakpoints";
-import { useTheme } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { ProviderProps, useContext, useEffect, useState } from "react";
 import HeaderContext, { HeaderContextType } from "./HeaderContext";
 
