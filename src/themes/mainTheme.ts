@@ -194,8 +194,10 @@ const mainTheme = createTheme({
     },
     MuiDrawer: {
       defaultProps: {
-        PaperProps: {
-          elevation: 4,
+        slotProps: {
+          paper: {
+            elevation: 4,
+          },
         },
       },
       styleOverrides: {
@@ -237,8 +239,10 @@ const mainTheme = createTheme({
     },
     MuiSwipeableDrawer: {
       defaultProps: {
-        PaperProps: {
-          elevation: 4,
+        slotProps: {
+          paper: {
+            elevation: 4,
+          },
         },
       },
     },
