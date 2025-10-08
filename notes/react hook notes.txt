@@ -197,6 +197,7 @@
 - Partial<CustomType> to make all properties optional
 - Required<CustomType> to make all properties required
 - Awaited<boolean | Promise<number> | Promise<Promise<string>>> == (boolean | number | string)
+- ReturnType<() => string> to get return type of a function
 ==========> Type notes <==========
 
 ==========> useNavigate <==========
