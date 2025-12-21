@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { SxProps, Theme } from "@mui/material/styles";
 import React from "react";
 
 // reference: https://mui.com/material-ui/react-number-field/#outlined-field
@@ -24,6 +25,7 @@ export type NumberFieldProps = BaseNumberField.Root.Props & {
   size?: "small" | "medium";
   error?: boolean;
   helperText?: React.ReactNode;
+  sx?: SxProps<Theme>;
 };
 
 function NumberField({
@@ -32,6 +34,7 @@ function NumberField({
   error,
   size = "medium",
   helperText,
+  sx,
   ...other
 }: NumberFieldProps) {
   let id = React.useId();
@@ -50,6 +53,7 @@ function NumberField({
           required={state.required}
           error={error}
           variant="outlined"
+          sx={sx}
         >
           {props.children}
         </FormControl>

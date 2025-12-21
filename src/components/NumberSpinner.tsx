@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { SxProps, Theme } from "@mui/material/styles";
 import React from "react";
 
 // reference: https://mui.com/material-ui/react-number-field/#spinner-field
@@ -15,6 +16,7 @@ export type NumberSpinnerProps = BaseNumberField.Root.Props & {
   label?: React.ReactNode;
   size?: "small" | "medium";
   error?: boolean;
+  sx?: SxProps<Theme>;
 };
 
 function NumberSpinner({
@@ -22,6 +24,7 @@ function NumberSpinner({
   label,
   error,
   size = "medium",
+  sx,
   ...other
 }: NumberSpinnerProps) {
   let id = React.useId();
@@ -49,6 +52,7 @@ function NumberSpinner({
                 color: "text.primary",
               },
             },
+            ...sx,
           }}
         >
           {props.children}
