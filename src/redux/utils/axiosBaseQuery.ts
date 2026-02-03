@@ -19,7 +19,7 @@ const axiosBaseQuery = (
         method: arg.method,
         data: arg.body,
         params: arg.params,
-        headers: arg.params,
+        headers: arg.headers,
       });
 
     return { data: result.data };
