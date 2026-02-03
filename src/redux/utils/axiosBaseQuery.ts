@@ -26,16 +26,67 @@ const axiosBaseQuery = (
   } catch (axiosError) {
     const err = axiosError as AxiosError;
 
-    return {
-      error: err.response
-        ? {
+    if (err.response) {
+      if (err.code === "ERR_BAD_RESPONSE") {
+        return {
+          error: {
+            status: "PARSING_ERROR",
+            originalStatus: err.response.status,
+            data: JSON.stringify(err.response.data),
+            error: err.message,
+
+          },
+        };
+      }
+
+      return {
+        error: {
           status: err.response.status,
-          data: err.response.data || err.message,
-        }
-        : {
-          status: "CUSTOM_ERROR",
           error: err.message,
         },
+      };
+    }
+
+    if (err.status) {
+      return {
+        error: {
+          status: err.status,
+          data: err.message,
+        },
+      };
+    }
+
+    switch (err.code) {
+      case "ERR_BAD_OPTION_VALUE":
+      case "ERR_BAD_OPTION":
+      case "ERR_NETWORK":
+      case "ERR_FR_TOO_MANY_REDIRECTS":
+      case "ERR_DEPRECATED":
+      case "ERR_BAD_REQUEST":
+      case "ERR_CANCELED":
+      case "ERR_NOT_SUPPORT":
+      case "ERR_INVALID_URL":
+        return {
+          error: {
+            status: "FETCH_ERROR",
+            error: err.message,
+          },
+        };
+      case "ECONNABORTED":
+      case "ETIMEDOUT":
+        return {
+          error: {
+            status: "TIMEOUT_ERROR",
+            error: err.message,
+          },
+        };
+    }
+
+    return {
+      error: {
+        status: "CUSTOM_ERROR",
+        error: err.message,
+      },
     };
   }
 };
