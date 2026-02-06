@@ -1,3 +1,4 @@
+import { isValidationProblemDetails, KnownApiError } from "@/models/apis/common";
 import { BaseQueryFn, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -24,17 +25,25 @@ const axiosBaseQuery = (
 
     return { data: result.data };
   } catch (axiosError) {
-    const err = axiosError as AxiosError;
+    const err = axiosError as AxiosError<KnownApiError>;
 
     if (err.response) {
+      if (isValidationProblemDetails(err.response.data)) {
+        return {
+          error: {
+            status: "FETCH_ERROR",
+            error: err.response.data.title ?? "Error sending request, please try again later.",
+          },
+        };
+      }
+
       if (err.code === "ERR_BAD_RESPONSE") {
         return {
           error: {
             status: "PARSING_ERROR",
             originalStatus: err.response.status,
             data: JSON.stringify(err.response.data),
-            error: err.message,
-
+            error: err.response.data.message,
           },
         };
       }
@@ -42,7 +51,7 @@ const axiosBaseQuery = (
       return {
         error: {
           status: err.response.status,
-          error: err.message,
+          error: err.response.data.message,
         },
       };
     }
