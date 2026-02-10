@@ -10,7 +10,12 @@ const axiosBaseQuery = (
     body?: AxiosRequestConfig["data"];
   },
   unknown,
-  FetchBaseQueryError
+  FetchBaseQueryError & {
+    /**
+     * Optional error code returned by the API.
+     */
+    code?: string;
+  }
 > => async (arg) => {
   try {
     const result = typeof arg === "string"
@@ -25,9 +30,21 @@ const axiosBaseQuery = (
 
     return { data: result.data };
   } catch (axiosError) {
+    // convert AxiosError to FetchBaseQueryError so that axiosBaseQuery can replace fetchBaseQuery with minimal changes
     const err = axiosError as AxiosError<KnownApiError>;
 
     if (err.response) {
+      if (err.code === "ERR_BAD_RESPONSE") {
+        return {
+          error: {
+            status: "PARSING_ERROR",
+            originalStatus: err.response.status,
+            data: JSON.stringify(err.response.data),
+            error: err.message,
+          },
+        };
+      }
+
       if (isValidationProblemDetails(err.response.data)) {
         return {
           error: {
@@ -37,21 +54,12 @@ const axiosBaseQuery = (
         };
       }
 
-      if (err.code === "ERR_BAD_RESPONSE") {
-        return {
-          error: {
-            status: "PARSING_ERROR",
-            originalStatus: err.response.status,
-            data: JSON.stringify(err.response.data),
-            error: err.response.data.message,
-          },
-        };
-      }
-
       return {
         error: {
           status: err.response.status,
           error: err.response.data.message,
+          data: err.response.data,
+          code: err.response.data.code,
         },
       };
     }
