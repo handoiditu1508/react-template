@@ -1,4 +1,4 @@
-import { LoginResponse } from "@/models/apis/Login";
+import { LoginResponse } from "@/models/apis/login";
 import { FetchBaseQueryError, QueryReturnValue } from "@reduxjs/toolkit/query";
 import { clearAuthState, setAuthState } from "../slices/authSlice";
 import appApi from "./appApi";

@@ -1,4 +1,4 @@
-import { LoginResponse } from "@/models/apis/Login";
+import { LoginResponse } from "@/models/apis/login";
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
 import { clearAuthState, expirationStorageKey, setAuthState } from "../slices/authSlice";
