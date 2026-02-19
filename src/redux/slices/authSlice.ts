@@ -21,16 +21,19 @@ export const loadAuthStateFromLocalAsync = createAsyncThunk(
   async (_arg, thunkApi) => {
     const { auth: state } = thunkApi.getState() as RootState;
 
-    state.expiration = Number(localStorage.getItem(expirationStorageKey));
+    const expiration = Number(localStorage.getItem(expirationStorageKey));
 
     // check token expired
-    if (isNaN(state.expiration) || state.expiration <= Date.now()) {
+    if (expiration <= Date.now()) {
       // call refresh token api
       const refreshTokenPromise = thunkApi.dispatch(authApi.endpoints.refreshToken.initiate());
       await refreshTokenPromise;
       refreshTokenPromise.reset();
-    } else if (!state.user) {
-      // todo: load signed in user details from BE
+    } else {
+      thunkApi.dispatch(setAuthExpiration(expiration));
+      if (!state.user) {
+        // todo: load signed in user details from BE
+      }
     }
   }
 );
@@ -45,6 +48,10 @@ const authSlice = createSlice({
         localStorage.setItem(expirationStorageKey, state.expiration.toString());
       }
     },
+    setAuthExpiration: (state, action: PayloadAction<number>) => {
+      state.expiration = action.payload;
+      localStorage.setItem(expirationStorageKey, state.expiration.toString());
+    },
     clearAuthState: (state) => {
       localStorage.removeItem(expirationStorageKey);
       state.expiration = null;
@@ -54,6 +61,7 @@ const authSlice = createSlice({
 
 export const {
   setAuthState,
+  setAuthExpiration,
   clearAuthState,
 } = authSlice.actions;
 
