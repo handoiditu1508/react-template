@@ -10,6 +10,7 @@ export type AuthState = {
 };
 
 export const expirationStorageKey = "expiration";
+export const refreshTokenExpirationStorageKey = "refreshTokenExpiration";
 
 const initialState: AuthState = {
   expiration: null,
@@ -22,18 +23,26 @@ export const loadAuthStateFromLocalAsync = createAsyncThunk(
     const { auth: state } = thunkApi.getState() as RootState;
 
     const expiration = Number(localStorage.getItem(expirationStorageKey));
+    const isAccessTokenValid = !!expiration && expiration <= Date.now();
+    const refreshTokenExpiration = Number(localStorage.getItem(refreshTokenExpirationStorageKey));
+    const isRefreshTokenValid = !!refreshTokenExpiration && refreshTokenExpiration <= Date.now();
 
-    // check token expired
-    if (expiration && expiration <= Date.now()) {
+    if (isRefreshTokenValid) {
+      // todo: store refresh token in redux store or something
+    }
+
+    if (isAccessTokenValid) {
+      thunkApi.dispatch(setAuthExpiration(expiration));
+      if (!state.user) {
+        // todo: load signed in user details from BE
+      }
+    } else if (isRefreshTokenValid) {
       // call refresh token api
       const refreshTokenPromise = thunkApi.dispatch(authApi.endpoints.refreshToken.initiate());
       await refreshTokenPromise;
       refreshTokenPromise.reset();
     } else {
-      thunkApi.dispatch(setAuthExpiration(expiration));
-      if (!state.user) {
-        // todo: load signed in user details from BE
-      }
+      thunkApi.dispatch(clearAuthState());
     }
   }
 );
