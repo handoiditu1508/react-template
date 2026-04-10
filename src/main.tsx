@@ -2,7 +2,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { BreakpointsProvider } from "./contexts/breakpoints";
 import { InfoProvider } from "./contexts/info";
@@ -22,9 +21,7 @@ root.render(
         <InfoProvider>{/* info about style and environment changes */}
           <ThemeProvider theme={mainTheme} noSsr>{/* mui theme */}
             <BreakpointsProvider>{/* breakpoints helper */}
-              <BrowserRouter>{/* react router */}
-                <App />
-              </BrowserRouter>
+              <App />
             </BreakpointsProvider>
           </ThemeProvider>
         </InfoProvider>

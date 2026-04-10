@@ -1,10 +1,11 @@
 import { useEffect } from "react";
+import { RouterProvider } from "react-router-dom";
 import "./App.scss";
 import { ConfirmationDialog } from "./features/confirmationDialog";
 import { NotificationSnackbar, useNotificationScheduler } from "./features/notification";
 import { useAppDispatch } from "./hooks";
 import { loadAuthStateFromLocalAsync } from "./redux/slices/authSlice";
-import AppRoutes from "./routes";
+import router from "./routes";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <>
-      <AppRoutes />
+      <RouterProvider router={router} />
       <NotificationSnackbar />
       <ConfirmationDialog />
     </>
