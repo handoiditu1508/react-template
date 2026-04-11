@@ -8,6 +8,6 @@ export type CrumbData = {
 };
 
 export type RouteHandleObject = {
-  crumb?: (data: any) => CrumbData;
+  crumb?: CrumbData | ((data: any) => CrumbData);
   hideBreadcrumbs?: boolean;
 };

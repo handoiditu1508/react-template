@@ -14,10 +14,10 @@ const mainRoutes: RouteObject[] = [
         index: true,
         element: <HomePage />,
         handle: {
-          crumb: () => ({
+          crumb: {
             to: "/",
             icon: <HomeIcon />,
-          }),
+          },
           hideBreadcrumbs: true,
         } as RouteHandleObject,
       },
