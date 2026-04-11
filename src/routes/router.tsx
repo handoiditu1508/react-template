@@ -1,11 +1,11 @@
 import Suspense from "@/components/Suspense";
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import mainRoutes from "./mainRoutes";
 
 const MainLayout = React.lazy(() => import("@/layouts/MainLayout"));
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <Suspense><MainLayout /></Suspense>,
     children: [
