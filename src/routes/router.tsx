@@ -1,3 +1,4 @@
+import AppProvider from "@/AppProvider";
 import Suspense from "@/components/Suspense";
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
@@ -7,16 +8,21 @@ const MainLayout = React.lazy(() => import("@/layouts/MainLayout"));
 
 const router = createBrowserRouter([
   {
-    element: <Suspense><MainLayout /></Suspense>,
+    element: <AppProvider />,
     children: [
-      ...mainRoutes,
       {
-        path: "*",
-        element: (
-          <main style={{ padding: "1rem" }}>
-            <p>There's nothing here!</p>
-          </main>
-        ),
+        element: <Suspense><MainLayout /></Suspense>,
+        children: [
+          ...mainRoutes,
+          {
+            path: "*",
+            element: (
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            ),
+          },
+        ],
       },
     ],
   },
