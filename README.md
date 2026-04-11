@@ -90,7 +90,7 @@ export default defineConfig({
 
 ### Config router
 
-in `src/main.tsx`, replaces `BrowserRouter` with `HashRouter`.
+in `src/routes/router.tsx`, replaces `createBrowserRouter` with `createHashRouter`.
 
 ### Config i18n
 
@@ -113,7 +113,50 @@ i18n
 
 *Content of `src/i18n.ts`.*
 
+### Change app name and title
+
+Replace `React Template` with your app name.
+
+```typescript
+const defaultConfig: ConfigType = {
+  APP_NAME: "React Template",
+  // existed code
+};
+```
+
+*Content of `src\configs\config.ts`*
+
+```html
+<head>
+  <!-- existed code -->
+  <title>React Template</title>
+</head>
+```
+
+*Content of `index.html`*
+
 ## Deploy to github pages
+
+### Switch to deployment branch
+
+```bash
+git switch github-pages
+```
+
+### Update from master
+
+```bash
+git fetch origin
+git merge master
+```
+
+### Resolve packages after switching branch
+
+```bash
+npm install
+```
+
+### Build and deploy
 
 ```bash
 npm run predeploy
