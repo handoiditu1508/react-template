@@ -9,15 +9,17 @@ const HomePage = React.lazy(() => import("@/modules/Main/pages/HomePage"));
 const mainRoutes: RouteObject[] = [
   {
     element: <MainModule />,
+    handle: {
+      crumb: {
+        to: "/",
+        icon: <HomeIcon />,
+      },
+    } as RouteHandleObject,
     children: [
       {
         index: true,
         element: <HomePage />,
         handle: {
-          crumb: () => ({
-            to: "/",
-            icon: <HomeIcon />,
-          }),
           hideBreadcrumbs: true,
         } as RouteHandleObject,
       },

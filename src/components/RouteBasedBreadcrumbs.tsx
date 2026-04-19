@@ -14,7 +14,9 @@ function RouteBasedBreadcrumbs(props: Omit<BreadcrumbsProps, "children">) {
 
   const crumbs: CrumbData[] = matches
     .filter((match) => match.handle && match.handle.crumb)
-    .map((match) => match.handle.crumb!(match.loaderData));
+    .map((match) => (typeof match.handle.crumb === "function"
+      ? match.handle.crumb!(match.loaderData)
+      : match.handle.crumb!));
 
   return (
     <Breadcrumbs aria-label="breadcrumb" maxItems={5} {...props}>
