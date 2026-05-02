@@ -66,6 +66,24 @@ const authSlice = createSlice({
       state.expiration = null;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        authApi.endpoints.refreshToken.matchFulfilled,
+        (state, action: PayloadAction<LoginResponse>) => {
+          const newAction = authSlice.actions.setAuthState(action.payload);
+          authSlice.caseReducers.setAuthState(state, newAction);
+        }
+      )
+      .addMatcher(
+        authApi.endpoints.refreshToken.matchRejected,
+        (state, action) => {
+          if (action.payload?.status === 401) {
+            authSlice.caseReducers.clearAuthState(state);
+          }
+        }
+      );
+  },
 });
 
 export const {
