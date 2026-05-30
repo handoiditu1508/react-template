@@ -3,7 +3,7 @@ import React from "react";
 import { Outlet, RouteObject } from "react-router-dom";
 import { RouteHandleObject } from "./models";
 
-const HomePage = React.lazy(() => import("@/modules/Main2/pages/HomePage"));
+const HomePage = React.lazy(() => import("@/modules/main/pages/HomePage"));
 
 const mainRoutes: RouteObject[] = [
   {
