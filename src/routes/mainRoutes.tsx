@@ -1,14 +1,13 @@
 import HomeIcon from "@mui/icons-material/Home";
 import React from "react";
-import { RouteObject } from "react-router-dom";
+import { Outlet, RouteObject } from "react-router-dom";
 import { RouteHandleObject } from "./models";
 
-const MainModule = React.lazy(() => import("@/modules/Main"));
-const HomePage = React.lazy(() => import("@/modules/Main/pages/HomePage"));
+const HomePage = React.lazy(() => import("@/modules/Main2/pages/HomePage"));
 
 const mainRoutes: RouteObject[] = [
   {
-    element: <MainModule />,
+    element: <Outlet />,
     handle: {
       crumb: {
         to: "/",
