@@ -1,6 +1,13 @@
 import Post from "@/models/entities/Post";
 import { createEntityAdapter, EntityState } from "@reduxjs/toolkit";
-import { invalidatesIdTag, invalidatesListTag, invalidatesOptimisticPessimisticIdTag, providesIdTag, providesListTags } from "../utils/rtkQueryTagUtils";
+import {
+  invalidatesCountTag,
+  invalidatesIdTag,
+  invalidatesListTag,
+  invalidatesOptimisticPessimisticIdTag,
+  providesIdTag,
+  providesListTags,
+} from "../utils/rtkQueryTagUtils";
 import appApi from "./appApi";
 
 let postsAdapter = createEntityAdapter<Post>();
@@ -19,7 +26,14 @@ const postApi = appApi.injectEndpoints({
     }),
     // infinite scroll pagination
     getInfinitePosts: builder.infiniteQuery<Post[], { postTitle: string; }, { pageNumber: number; }>({
-      query: ({ queryArg, pageParam }) => `/posts?t=${queryArg.postTitle}&p=${pageParam.pageNumber}`,
+      query: ({ queryArg, pageParam }) => ({
+        url: "/posts",
+        method: "GET",
+        params: {
+          t: queryArg.postTitle,
+          p: pageParam.pageNumber,
+        },
+      }),
       infiniteQueryOptions: {
         initialPageParam: {
           pageNumber: 1,
@@ -30,11 +44,12 @@ const postApi = appApi.injectEndpoints({
             pageNumber: currentPageParam.pageNumber + 1,
           }
           : undefined,
-        getPreviousPageParam: (currentPage, allPages, currentPageParam, allPageParams) => currentPageParam.pageNumber > 1
-          ? ({
-            pageNumber: currentPageParam.pageNumber - 1,
-          })
-          : undefined,
+        getPreviousPageParam: (currentPage, allPages, currentPageParam, allPageParams) =>
+          currentPageParam.pageNumber > 1
+            ? ({
+              pageNumber: currentPageParam.pageNumber - 1,
+            })
+            : undefined,
       },
     }),
     // streaming update through websocket
@@ -82,7 +97,10 @@ const postApi = appApi.injectEndpoints({
           );
         } catch {}
       },
-      invalidatesTags: (result, error) => invalidatesListTag("Post", error),
+      invalidatesTags: (result, error) => [
+        ...invalidatesListTag("Post", error),
+        ...invalidatesCountTag("Post", error),
+      ],
     }),
     updatePost: builder.mutation<Post, Partial<Post> & Pick<Post, "id">>({
       query: (body) => ({

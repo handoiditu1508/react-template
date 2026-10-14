@@ -16,7 +16,9 @@ type OwnProps = {
 
 type DraggableListItemProps = OwnProps & Omit<ListItemProps, keyof OwnProps>;
 
-const DraggableListItem = styled(({ dragging, selected, disableHoverEffect, text, onRemove, onClick, ...props }: DraggableListItemProps) => {
+const DraggableListItem = styled(({
+  dragging, selected, disableHoverEffect, text, onRemove, onClick, ...props
+}: DraggableListItemProps) => {
   return (
     <ListItem
       draggable
@@ -47,7 +49,7 @@ const DraggableListItem = styled(({ dragging, selected, disableHoverEffect, text
     </ListItem>
   );
 })(({ theme, dragging, disableHoverEffect }) => ({
-  borderBottom: theme.vars.shape.smallBorder,
+  borderBottom: theme.vars.border.smallBorder,
   opacity: dragging ? 0.5 : undefined,
   ".MuiListItemSecondaryAction-root": {
     ".MuiIconButton-root": {

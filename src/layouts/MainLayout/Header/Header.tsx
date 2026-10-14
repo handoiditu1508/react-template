@@ -40,7 +40,9 @@ const languages: { code: string; name: string; }[] = [
 export default function Header({ ref }: { ref?: React.Ref<HTMLDivElement>; }) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
-  const { sidebarOpen, setSidebarOpen, sidebarState, miniSidebarTransition, permanentSidebarTransition } = useContext(SidebarContext);
+  const {
+    sidebarOpen, setSidebarOpen, sidebarState, miniSidebarTransition, permanentSidebarTransition,
+  } = useContext(SidebarContext);
   const { mdAndDown } = useContext(BreakpointsContext);
   const { mobile } = useContext(InfoContext);
   const hideHeaderTrigger = useScrollTrigger({ threshold: 250 });
@@ -112,7 +114,7 @@ export default function Header({ ref }: { ref?: React.Ref<HTMLDivElement>; }) {
                     },
                   },
                 }}>
-                  <CustomLink to="/privacy-policy">{t("Privacy Policy")}</CustomLink>
+                  <CustomLink to="/privacy-policy">{t("privacy_policy")}</CustomLink>
                 </Box>}
                 <Box display="flex" justifyContent="flex-end" flexGrow={1}>
                   <IconButton color="primary" edge="end" aria-label="settings" onClick={() => setSettingsDrawerOpen(!settingsDrawerOpen)}><SettingsIcon /></IconButton>
@@ -127,7 +129,7 @@ export default function Header({ ref }: { ref?: React.Ref<HTMLDivElement>; }) {
           ...theme.typography.h6,
           paddingY: 1,
           textAlign: "center",
-          borderBottom: theme.vars.shape.smallBorder,
+          borderBottom: theme.vars.border.smallBorder,
           borderColor: theme.vars.palette.divider,
         }}>
           Settings
@@ -150,7 +152,9 @@ export default function Header({ ref }: { ref?: React.Ref<HTMLDivElement>; }) {
 
           <p className="title">Language</p>
           <Select value={i18n.resolvedLanguage || languages[0].code} fullWidth size="small" onChange={handleChangeLanguage}>
-            {languages.map((language) => <MenuItem key={language.code} value={language.code}>{language.name}</MenuItem>)}
+            {languages.map((language) => (
+              <MenuItem key={language.code} value={language.code}>{language.name}</MenuItem>
+            ))}
           </Select>
         </Box>
       </Drawer>

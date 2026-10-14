@@ -5,6 +5,7 @@ import { createHashRouter } from "react-router-dom";
 import mainRoutes from "./mainRoutes";
 
 const MainLayout = React.lazy(() => import("@/layouts/MainLayout"));
+const NotFoundPage = React.lazy(() => import("./NotFoundPage"));
 
 const router = createHashRouter([
   {
@@ -16,11 +17,7 @@ const router = createHashRouter([
           ...mainRoutes,
           {
             path: "*",
-            element: (
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            ),
+            element: <NotFoundPage />,
           },
         ],
       },

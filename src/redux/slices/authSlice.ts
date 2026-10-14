@@ -66,6 +66,24 @@ const authSlice = createSlice({
       state.expiration = null;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        authApi.endpoints.refreshToken.matchFulfilled,
+        (state, action: PayloadAction<LoginResponse>) => {
+          const newAction = authSlice.actions.setAuthState(action.payload);
+          authSlice.caseReducers.setAuthState(state, newAction);
+        }
+      )
+      .addMatcher(
+        authApi.endpoints.refreshToken.matchRejected,
+        (state, action) => {
+          if (action.payload?.status === 401) {
+            authSlice.caseReducers.clearAuthState(state);
+          }
+        }
+      );
+  },
 });
 
 export const {
@@ -74,9 +92,11 @@ export const {
   clearAuthState,
 } = authSlice.actions;
 
-export const selectIsSignedIn = (state: RootState): boolean => !!state.auth.expiration;
-export const selectIsTokenExpired = (state: RootState): boolean => !!state.auth.expiration && state.auth.expiration <= Date.now();
-export const selectExpiration = (state: RootState) => state.auth.expiration;
-export const selectAuthUser = (state: RootState) => state.auth.user;
+export const authSelectors = {
+  signedIn: (state: RootState): boolean => !!state.auth.expiration,
+  tokenExpired: (state: RootState): boolean => !!state.auth.expiration && state.auth.expiration <= Date.now(),
+  expiration: (state: RootState) => state.auth.expiration,
+  user: (state: RootState) => state.auth.user,
+};
 
 export default authSlice;
